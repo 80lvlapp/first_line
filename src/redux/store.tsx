@@ -1,16 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit'
 import appSlice from '../redux/appSlice'
 import auth from '../redux/authSlice'
-import schools from '../redux/schoolsSlice'
 
 
-
+import { api } from './apiSlice'
 
 export const store = configureStore({
   reducer: {
     app: appSlice,
     auth,
-    schools
+    [api.reducerPath]: api.reducer,
   }
 })
 
