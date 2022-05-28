@@ -6,21 +6,21 @@ import Tournaments from "./components/Tournaments";
 import TournamentСategories from "./components/TournamentСategories";
 import AthletesRating from "./components/AthletesRating";
 import SignIn from "./components/SignIn";
-
+import SchoolEditing from "./components/Administration/SchoolEditing";
 
 
 function App() {
   return (
     <>
       <Drawer />
-     
         <Routes>
           <Route path="/" element={<Schools />} />
           <Route path="/AthletesRating" element={<AthletesRating />} />
+          <Route path="/SchoolEditing" element={<SchoolEditing />} />
           <Route path="/Tournaments" element={<Tournaments />} />
           <Route path="/SignIn" element={<SignIn />} />
           <Route path="/TournamentСategories" element={<TournamentСategories />}
-          />
+    />
         </Routes>
     </>
   );
