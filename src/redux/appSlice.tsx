@@ -25,6 +25,7 @@ export const appSlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload
     },
+    
   },
 })
 
