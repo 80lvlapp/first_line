@@ -15,16 +15,14 @@ import ListItem from '@mui/material/ListItem';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import Button from '@mui/material/Button';
 import GlobalStyles from '@mui/material/GlobalStyles';
 import Box from '@mui/material/Box';
 import Avatar from '@mui/material/Avatar';
-//import stringAvatar from '@mui/material/stringAvatar';
 
 import {
     Link,
-  } from "react-router-dom";
+} from "react-router-dom";
 
 
 const drawerWidth = 240;
@@ -115,12 +113,12 @@ export default function PersistentDrawerLeft() {
                     </IconButton>
 
                     <Typography
-                        component={Link} 
+                        component={Link}
                         to={"/"}
                         variant="h6"
                         color="inherit"
                         noWrap
-                        sx={{ flexGrow: 1 }}    
+                        sx={{ flexGrow: 1 }}
                     >
                         First line
                     </Typography>
@@ -151,14 +149,12 @@ export default function PersistentDrawerLeft() {
                 </DrawerHeader>
                 <Divider />
                 <List>
-                    {['Menu 1', 'Вход админа'].map((text, index) => (
-                        <ListItem button key={text}>
-                            <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItem>
-                    ))}
+
+                    <ListItem onClick={handleDrawerClose} component={Link} to={"/SchoolEditing"} button key={'SchoolEditing'}>
+                        <ListItemIcon> <InboxIcon /></ListItemIcon>
+                        <ListItemText primary={"Школы"} />
+                    </ListItem>
+
                 </List>
 
             </Drawer>

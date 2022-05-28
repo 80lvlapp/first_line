@@ -9,7 +9,7 @@ export const api = createApi({
   
   endpoints: (builder) => ({
     getSchools: builder.query<School[], String>({
-      query: () => `schools`,
+      query: () => `rest-schools`,
     }),
     
   }),
