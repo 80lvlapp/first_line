@@ -6,10 +6,12 @@ import { School } from './types'
 export const api = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://virtserver.swaggerhub.com/80lvlapp/FirstLine/1.0.0/' }),
+  
   endpoints: (builder) => ({
     getSchools: builder.query<School[], String>({
       query: () => `schools`,
     }),
+    
   }),
 })
 
