@@ -27,9 +27,8 @@ import {
 
 const drawerWidth = 240;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{
-    open?: boolean;
-}>(({ theme, open }) => ({
+const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })<{open?: boolean;}>
+(({ theme, open }) => ({
     flexGrow: 1,
     padding: theme.spacing(3),
     transition: theme.transitions.create('margin', {
@@ -150,7 +149,7 @@ export default function PersistentDrawerLeft() {
                 <Divider />
                 <List>
 
-                    <ListItem onClick={handleDrawerClose} component={Link} to={"/SchoolEditing"} button key={'SchoolEditing'}>
+                    <ListItem onClick={handleDrawerClose} component={Link} to={"/SchoolTable"} button key={'SchoolTable'}>
                         <ListItemIcon> <InboxIcon /></ListItemIcon>
                         <ListItemText primary={"Школы"} />
                     </ListItem>
