@@ -38,7 +38,7 @@ const rows = [
 ];
 
 
-export default function SchoolEditing() {
+export default function SchoolTable() {
   return (
     <div style={{ height: 400, width: '100%' }}>
 
