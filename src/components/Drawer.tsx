@@ -87,7 +87,7 @@ export default function PersistentDrawerLeft() {
     };
 
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{ display: 'flex'}}>
             <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
             <CssBaseline />
             <AppBar
@@ -159,7 +159,7 @@ export default function PersistentDrawerLeft() {
             </Drawer>
 
             <Main open={open}>
-                <DrawerHeader />
+                {/* <DrawerHeader /> */}
             </Main>
         </Box>
     );
