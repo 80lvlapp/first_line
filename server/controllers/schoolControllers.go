@@ -4,11 +4,13 @@ import (
 	"encoding/json"
 	"first-line/models"
 	u "first-line/utils"
+	
 	"net/http"
+
 	"github.com/gorilla/mux"
 )
 
-var CreateSchool = func(w http.ResponseWriter, r *http.Request) {
+func CreateSchool(w http.ResponseWriter, r *http.Request) {
 	school := &models.School{}
 	err := json.NewDecoder(r.Body).Decode(school)
 	if err != nil {
@@ -19,38 +21,50 @@ var CreateSchool = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
-var UpdateSchool = func(w http.ResponseWriter, r *http.Request) {
-	school := &models.School{}
-	err := json.NewDecoder(r.Body).Decode(school)
+func UpdateSchool(w http.ResponseWriter, r *http.Request) {
+	// school := &models.School{}
+	// err := json.NewDecoder(r.Body).Decode(school)
+	// if err != nil {
+	// 	u.Respond(w, u.Message(false, "Error while decoding request body"))
+	// 	return
+	// }
+
+	// resp := school.UpdateSchool()
+	// u.Respond(w, resp)
+	newSchool := &models.School{}
+	err := json.NewDecoder(r.Body).Decode(newSchool)
 	if err != nil {
 		u.Respond(w, u.Message(false, "Error while decoding request body"))
 		return
 	}
-	resp := school.UpdateSchool()
+	vars := mux.Vars(r)
+	id := vars["id"]
+	data := models.UpdateSchool(id, *newSchool)
+	resp := u.Message(true, "success")
+	resp["data"] = data
 	u.Respond(w, resp)
+
 }
 
-var GetSchools = func(w http.ResponseWriter, r *http.Request) {
-
-	data := models.GetSchools();
+func GetSchools(w http.ResponseWriter, r *http.Request) {
+	data := models.GetSchools()
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)
 }
 
-var DeleteSchool = func(w http.ResponseWriter, r *http.Request) {
+func DeleteSchool(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	resp := models.DeleteSchool(id);
+	resp := models.DeleteSchool(id)
 	u.Respond(w, resp)
 }
 
-var GetSchool = func(w http.ResponseWriter, r *http.Request) {
+func GetSchool(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	data := models.GetSchool(id);
+	data := models.GetSchool(id)
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)
 }
-

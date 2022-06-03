@@ -1,15 +1,15 @@
 package models
 
 import (
+	u "first-line/utils"
 	"fmt"
 	"github.com/jinzhu/gorm"
-	u "first-line/utils"
 )
 
 type School struct {
 	gorm.Model
-	Name           string `json:"name"`
-	Adress         string `json:"adress"`
+	Name   string `json:"name"`
+	Adress string `json:"adress"`
 }
 
 func (category *School) Validate() (map[string]interface{}, bool) {
@@ -29,14 +29,20 @@ func (school *School) CreateSchool() map[string]interface{} {
 	return resp
 }
 
-func (school *School) UpdateSchool() map[string]interface{} {
-	if resp, ok := school.Validate(); !ok {
-		return resp
+
+func UpdateSchool(id string, newSchool School) *School {
+	school := &School{}
+	err := GetDB().Table("schools").Where("id = ?", id).First(school).Error
+	if err != nil {
+		fmt.Println(err)
+		return nil
 	}
-	GetDB().Update(school)
-	resp := u.Message(true, "success")
-	resp["school"] = school
-	return resp
+
+	school.Adress = newSchool.Adress
+	school.Name = newSchool.Name
+	GetDB().Save(school)
+	return school
+
 }
 
 func GetSchool(id string) *School {
@@ -48,8 +54,8 @@ func GetSchool(id string) *School {
 	return school
 }
 
-func DeleteSchool(id string)  map[string]interface{}{
-	
+func DeleteSchool(id string) map[string]interface{} {
+
 	db.Delete(&School{}, id)
 	resp := u.Message(true, "success")
 	return resp
