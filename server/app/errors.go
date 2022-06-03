@@ -1,7 +1,7 @@
 package app
 
 import (
-	u "go-contacts/utils"
+	u "first-line/utils"
 	"net/http"
 )
 

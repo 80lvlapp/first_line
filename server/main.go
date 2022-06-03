@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"go-contacts/controllers"
+	"first-line/controllers"
 	"net/http"
 	"os"
 	"github.com/gorilla/mux"
@@ -15,8 +15,8 @@ func main() {
 	router := mux.NewRouter()
 
 	api := router.PathPrefix("/api/").Subrouter()
-	api.HandleFunc("/user/new", controllers.CreateAccount).Methods("POST")
-	api.HandleFunc("/user/login", controllers.Authenticate).Methods("POST")
+	// api.HandleFunc("/user/new", controllers.CreateAccount).Methods("POST")
+	// api.HandleFunc("/user/login", controllers.Authenticate).Methods("POST")
 	
 	/*
 	не используется

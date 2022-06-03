@@ -2,8 +2,8 @@ package controllers
 
 import (
 	"encoding/json"
-	"go-contacts/models"
-	u "go-contacts/utils"
+	"first-line/models"
+	u "first-line/utils"
 	"net/http"
 	"github.com/gorilla/mux"
 )

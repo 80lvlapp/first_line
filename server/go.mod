@@ -1,4 +1,4 @@
-module go-contacts
+module first-line
 
 go 1.17
 

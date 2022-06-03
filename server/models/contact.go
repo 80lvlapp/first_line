@@ -2,7 +2,7 @@ package models
 
 import (
 	"fmt"
-	u "go-contacts/utils"
+	u "first-line/utils"
 
 	"github.com/jinzhu/gorm"
 )
