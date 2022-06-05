@@ -22,15 +22,7 @@ func CreateSchool(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateSchool(w http.ResponseWriter, r *http.Request) {
-	// school := &models.School{}
-	// err := json.NewDecoder(r.Body).Decode(school)
-	// if err != nil {
-	// 	u.Respond(w, u.Message(false, "Error while decoding request body"))
-	// 	return
-	// }
 
-	// resp := school.UpdateSchool()
-	// u.Respond(w, resp)
 	newSchool := &models.School{}
 	err := json.NewDecoder(r.Body).Decode(newSchool)
 	if err != nil {
