@@ -8,16 +8,16 @@ import (
 
 type Category struct {
 	gorm.Model
-	Name           string          `json:"name"`
+	Name           string          `json:"name" gorm: "not null"`
 	ValuesCategory []ValueCategory `gorm:"polymorphic:Owner;"`
 }
 
-type ValueCategory struct {
-	ID        int
-	Name      string
-	OwnerID   int
-	OwnerType string
-}
+// type ValueCategory struct {
+// 	ID        int
+// 	Name      string
+// 	OwnerID   int
+// 	OwnerType string
+// }
 
 /*
  This struct function validate the required parameters sent through the http request body

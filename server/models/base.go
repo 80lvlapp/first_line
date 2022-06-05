@@ -29,11 +29,11 @@ func init() {
 	if err != nil {
 		fmt.Print(err)
 		fmt.Print(dbUri)
-		
+
 	}
 
 	db = conn
-	db.Debug().AutoMigrate(&Account{}, &Contact{}, &InspectionGroup{}, &Category{}, &ValueCategory{}, &School{})
+	db.Debug().AutoMigrate(&School{}, &Category{}, &ValueCategory{}, &Coach{})
 }
 
 func GetDB() *gorm.DB {

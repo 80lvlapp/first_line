@@ -7,7 +7,7 @@ import (
 	"net/http"
 )
 
-var CreateCategory = func(w http.ResponseWriter, r *http.Request) {
+func CreateCategory(w http.ResponseWriter, r *http.Request) {
 	category := &models.Category{}
 	err := json.NewDecoder(r.Body).Decode(category)
 	if err != nil {
@@ -18,7 +18,7 @@ var CreateCategory = func(w http.ResponseWriter, r *http.Request) {
 	u.Respond(w, resp)
 }
 
-var GetСategories = func(w http.ResponseWriter, r *http.Request) {
+func GetСategories(w http.ResponseWriter, r *http.Request) {
 	data := models.GetCategorys()
 	resp := u.Message(true, "success")
 	resp["data"] = data
