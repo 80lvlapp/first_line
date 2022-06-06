@@ -1,9 +1,9 @@
 package models
 
 import (
+	u "first-line/utils"
 	"fmt"
 	"github.com/jinzhu/gorm"
-	u "first-line/utils"
 )
 
 type InspectionGroup struct {
@@ -23,7 +23,6 @@ func (inspectionGroup *InspectionGroup) Validate() (map[string]interface{}, bool
 		return u.Message(false, "Contact name should be on the payload"), false
 	}
 
-	
 	if inspectionGroup.UserId <= 0 {
 		return u.Message(false, "User is not recognized"), false
 	}
@@ -32,7 +31,7 @@ func (inspectionGroup *InspectionGroup) Validate() (map[string]interface{}, bool
 	return u.Message(true, "success"), true
 }
 
-func (inspectionGroup *InspectionGroup) Create() (map[string]interface{}) {
+func (inspectionGroup *InspectionGroup) Create() map[string]interface{} {
 
 	if resp, ok := inspectionGroup.Validate(); !ok {
 		return resp
@@ -45,7 +44,7 @@ func (inspectionGroup *InspectionGroup) Create() (map[string]interface{}) {
 	return resp
 }
 
-func GetInspectionGroup(id uint) (*InspectionGroup) {
+func GetInspectionGroup(id uint) *InspectionGroup {
 
 	inspectionGroup := &InspectionGroup{}
 	err := GetDB().Table("inspection_groups").Where("id = ?", id).First(inspectionGroup).Error
@@ -55,7 +54,7 @@ func GetInspectionGroup(id uint) (*InspectionGroup) {
 	return inspectionGroup
 }
 
-func GetInspectionGroups(user uint) ([]*InspectionGroup) {
+func GetInspectionGroups(user uint) []*InspectionGroup {
 
 	inspectionGroup := make([]*InspectionGroup, 0)
 	err := GetDB().Table("inspection_groups").Where("user_id = ?", user).Find(&inspectionGroup).Error

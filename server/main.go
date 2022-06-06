@@ -58,6 +58,13 @@ func main() {
 	api.HandleFunc("/value-category/{id}", controllers.UpdateValueCategory).Methods("PUT")
 	api.HandleFunc("/value-category/{id}", controllers.GetValueCategory).Methods("GET")
 
+	//InfoSportsman
+	api.HandleFunc("/info-sportsman", controllers.CreateInfoSportsman).Methods("POST")
+	api.HandleFunc("/info-sportsman", controllers.GetInfoSportsmen).Methods("GET")
+	//api.HandleFunc("/value-category/{id}", controllers.DeleteValueCategory).Methods("DELETE")
+	//api.HandleFunc("/value-category/{id}", controllers.UpdateValueCategory).Methods("PUT")
+	//api.HandleFunc("/value-category/{id}", controllers.GetValueCategory).Methods("GET")
+
 	router.Use(accessControlMiddleware)
 
 	port := os.Getenv("PORT")
