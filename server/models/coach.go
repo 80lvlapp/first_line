@@ -12,8 +12,8 @@ type Coach struct {
 	Name string `json:"name" gorm:"not null"`
 }
 
-func (сoach *Coach) Validate() (map[string]interface{}, bool) {
-	if сoach.Name == "" {
+func (item *Coach) Validate() (map[string]interface{}, bool) {
+	if item.Name == "" {
 		return u.Message(false, "Coach name should be on the payload"), false
 	}
 

@@ -51,6 +51,13 @@ func main() {
 	api.HandleFunc("/coach/{id}", controllers.UpdateCoach).Methods("PUT")
 	api.HandleFunc("/coach/{id}", controllers.GetCoach).Methods("GET")
 
+	//Sportsman
+	api.HandleFunc("/sportsmen", controllers.GetSportsmen).Methods("GET")
+	api.HandleFunc("/sportsmen", controllers.CreateSportsman).Methods("POST")
+	api.HandleFunc("/sportsmen/{id}", controllers.DeleteSportsman).Methods("DELETE")
+	api.HandleFunc("/sportsmen/{id}", controllers.UpdateSportsman).Methods("PUT")
+	api.HandleFunc("/sportsmen/{id}", controllers.GetSportsman).Methods("GET")
+
 	api.HandleFunc("/category", controllers.CreateCategory).Methods("POST")
 	api.HandleFunc("/category", controllers.GetСategories).Methods("GET")
 
