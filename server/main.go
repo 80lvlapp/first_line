@@ -12,30 +12,9 @@ const FSPATH = "./webClient/build/static/index.html"
 
 func main() {
 
-	//infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
-	//errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime)
-
 	router := mux.NewRouter()
 
 	api := router.PathPrefix("/api/").Subrouter()
-	// api.HandleFunc("/user/new", controllers.CreateAccount).Methods("POST")
-	// api.HandleFunc("/user/login", controllers.Authenticate).Methods("POST")
-
-	/*
-		не используется
-		api.HandleFunc("/contacts/new", controllers.CreateContact).Methods("POST")
-		api.HandleFunc("/me/contacts", controllers.GetContactsFor).Methods("GET")
-		api.HandleFunc("/inspectionGroup/new", controllers.CreateInspectionGroup).Methods("POST")
-		api.HandleFunc("/me/inspectionGroup", controllers.GetInspectionGroupsFor).Methods("GET")
-		api.HandleFunc("/categories/new", controllers.CreateCategory).Methods("POST")
-		api.HandleFunc("/me/categories", controllers.GetСategories).Methods("GET")
-	*/
-
-	/*
-		Доделать
-		api.HandleFunc("/categories/new", controllers.CreateCategory).Methods("POST")
-		api.HandleFunc("/me/categories", controllers.GetСategories).Methods("GET")
-	*/
 
 	//School
 	api.HandleFunc("/rest-schools", controllers.GetSchools).Methods("GET")
@@ -65,8 +44,19 @@ func main() {
 	api.HandleFunc("/type-of-tournaments/{id}", controllers.UpdateTypeOfTournament).Methods("PUT")
 	api.HandleFunc("/type-of-tournaments/{id}", controllers.GetTypeOfTournaments).Methods("GET")
 
+	//Category
 	api.HandleFunc("/category", controllers.CreateCategory).Methods("POST")
-	api.HandleFunc("/category", controllers.GetСategories).Methods("GET")
+	api.HandleFunc("/category", controllers.GetCategories).Methods("GET")
+	api.HandleFunc("/category/{id}", controllers.DeleteCategory).Methods("DELETE")
+	api.HandleFunc("/category/{id}", controllers.UpdateCategory).Methods("PUT")
+	api.HandleFunc("/category/{id}", controllers.GetCategory).Methods("GET")
+
+	//ValueCategory
+	api.HandleFunc("/value-category", controllers.CreateValueCategory).Methods("POST")
+	api.HandleFunc("/value-category", controllers.GetValueCategores).Methods("GET")
+	api.HandleFunc("/value-category/{id}", controllers.DeleteValueCategory).Methods("DELETE")
+	api.HandleFunc("/value-category/{id}", controllers.UpdateValueCategory).Methods("PUT")
+	api.HandleFunc("/value-category/{id}", controllers.GetValueCategory).Methods("GET")
 
 	router.Use(accessControlMiddleware)
 
