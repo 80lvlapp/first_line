@@ -2,6 +2,7 @@ package main
 
 import (
 	"first-line/controllers"
+	"first-line/routers"
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
@@ -52,18 +53,10 @@ func main() {
 	api.HandleFunc("/category/{id}", controllers.GetCategory).Methods("GET")
 
 	//ValueCategory
-	api.HandleFunc("/value-category", controllers.CreateValueCategory).Methods("POST")
-	api.HandleFunc("/value-category", controllers.GetValueCategores).Methods("GET")
-	api.HandleFunc("/value-category/{id}", controllers.DeleteValueCategory).Methods("DELETE")
-	api.HandleFunc("/value-category/{id}", controllers.UpdateValueCategory).Methods("PUT")
-	api.HandleFunc("/value-category/{id}", controllers.GetValueCategory).Methods("GET")
+	routers.InitValueCategoryRouter(api)
 
 	//InfoSportsman
-	api.HandleFunc("/info-sportsman", controllers.CreateInfoSportsman).Methods("POST")
-	api.HandleFunc("/info-sportsman", controllers.GetInfoSportsmen).Methods("GET")
-	//api.HandleFunc("/value-category/{id}", controllers.DeleteValueCategory).Methods("DELETE")
-	//api.HandleFunc("/value-category/{id}", controllers.UpdateValueCategory).Methods("PUT")
-	//api.HandleFunc("/value-category/{id}", controllers.GetValueCategory).Methods("GET")
+	routers.InitInfoSporsmanRouter(api)
 
 	router.Use(accessControlMiddleware)
 
