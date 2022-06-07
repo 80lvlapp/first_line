@@ -37,6 +37,9 @@ func main() {
 	//InfoSportsman
 	routers.InitInfoSporsmanRouter(api)
 
+	//Tournament
+	routers.InitTournamentRouter(api)
+
 	router.Use(accessControlMiddleware)
 
 	port := os.Getenv("PORT")
