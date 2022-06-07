@@ -40,6 +40,9 @@ func main() {
 	//Tournament
 	routers.InitTournamentRouter(api)
 
+	//InfoScoreScale
+	routers.InitInfoScoreScaleRouter(api)
+
 	router.Use(accessControlMiddleware)
 
 	port := os.Getenv("PORT")
