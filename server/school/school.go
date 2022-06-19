@@ -1,9 +1,10 @@
-package models
+package school
 
 import (
 	u "first-line/utils"
 	"fmt"
 
+	db "first-line/models"
 	"github.com/jinzhu/gorm"
 )
 
@@ -27,14 +28,14 @@ func (school *School) CreateSchool() map[string]interface{} {
 		return resp
 	}
 
-	GetDB().Create(school)
+	db.GetDB().Create(school)
 	resp["school"] = school
 	return resp
 }
 
-func UpdateSchool(id string, newSchool School) *School {
+func UpdateSchoolDb(id string, newSchool School) *School {
 	school := &School{}
-	err := GetDB().Table("schools").Where("id = ?", id).First(school).Error
+	err := db.GetDB().Table("schools").Where("id = ?", id).First(school).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -42,31 +43,31 @@ func UpdateSchool(id string, newSchool School) *School {
 
 	school.Adress = newSchool.Adress
 	school.Name = newSchool.Name
-	GetDB().Save(school)
+	db.GetDB().Save(school)
 	return school
 
 }
 
-func GetSchool(id string) *School {
+func GetSchoolDb(id string) *School {
 	school := &School{}
-	err := GetDB().Table("schools").Where("id = ?", id).First(school).Error
+	err := db.GetDB().Table("schools").Where("id = ?", id).First(school).Error
 	if err != nil {
 		return nil
 	}
 	return school
 }
 
-func DeleteSchool(id string) map[string]interface{} {
+func DeleteSchoolDb(id string) map[string]interface{} {
 
-	db.Delete(&School{}, id)
+	db.GetDB().Delete(&School{}, id)
 	resp := u.Message(true, "success")
 	return resp
 
 }
 
-func GetSchools() []*School {
+func GetSchoolsDb() []*School {
 	school := make([]*School, 0)
-	err := GetDB().Table("schools").Find(&school).Error
+	err := db.GetDB().Table("schools").Find(&school).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil

@@ -2,13 +2,12 @@ package main
 
 import (
 	"first-line/routers"
+	school "first-line/school"
 	"fmt"
 	"github.com/gorilla/mux"
 	"net/http"
 	"os"
 )
-
-const FSPATH = "./webClient/build/static/index.html"
 
 func main() {
 
@@ -17,7 +16,7 @@ func main() {
 	api := router.PathPrefix("/api/").Subrouter()
 
 	//School
-	routers.InitSchoolRouter(api)
+	school.InitSchoolRouter(api)
 
 	//Coach
 	routers.InitCoachRouter(api)

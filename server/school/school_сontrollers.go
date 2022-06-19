@@ -1,17 +1,16 @@
-package controllers
+package school
 
 import (
 	"encoding/json"
-	"first-line/models"
 	u "first-line/utils"
-	
+
 	"net/http"
 
 	"github.com/gorilla/mux"
 )
 
 func CreateSchool(w http.ResponseWriter, r *http.Request) {
-	school := &models.School{}
+	school := &School{}
 	err := json.NewDecoder(r.Body).Decode(school)
 	if err != nil {
 		u.Respond(w, u.Message(false, "Error while decoding request body"))
@@ -23,7 +22,7 @@ func CreateSchool(w http.ResponseWriter, r *http.Request) {
 
 func UpdateSchool(w http.ResponseWriter, r *http.Request) {
 
-	newSchool := &models.School{}
+	newSchool := &School{}
 	err := json.NewDecoder(r.Body).Decode(newSchool)
 	if err != nil {
 		u.Respond(w, u.Message(false, "Error while decoding request body"))
@@ -31,7 +30,7 @@ func UpdateSchool(w http.ResponseWriter, r *http.Request) {
 	}
 	vars := mux.Vars(r)
 	id := vars["id"]
-	data := models.UpdateSchool(id, *newSchool)
+	data := UpdateSchoolDb(id, *newSchool)
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)
@@ -39,7 +38,7 @@ func UpdateSchool(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetSchools(w http.ResponseWriter, r *http.Request) {
-	data := models.GetSchools()
+	data := GetSchoolsDb()
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)
@@ -48,14 +47,14 @@ func GetSchools(w http.ResponseWriter, r *http.Request) {
 func DeleteSchool(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	resp := models.DeleteSchool(id)
+	resp := DeleteSchoolDb(id)
 	u.Respond(w, resp)
 }
 
 func GetSchool(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
-	data := models.GetSchool(id)
+	data := GetSchoolDb(id)
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)

@@ -1,6 +1,7 @@
 package models
 
 import (
+	school "first-line/school"
 	u "first-line/utils"
 	"fmt"
 	"time"
@@ -13,7 +14,7 @@ type InfoScoreScale struct {
 	PlaceFrom        uint             `json:"place_from" gorm:"not null;"`
 	PlaceTo          uint             `json:"place_to" gorm:"not null;"`
 	NumberOfPoints   uint             `json:"number_of_points" gorm:"not null;"`
-	School           School           `json:"school" gorm:"foreignkey:IDSportSchool"`
+	School           school.School    `json:"school" gorm:"foreignkey:IDSportSchool"`
 	TypeTournament   TypeOfTournament `json:"type_tournament" gorm:"foreignkey:IDTypeTournament"`
 }
 

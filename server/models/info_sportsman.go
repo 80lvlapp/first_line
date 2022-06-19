@@ -1,20 +1,21 @@
 package models
 
 import (
+	school "first-line/school"
 	u "first-line/utils"
 	"fmt"
 	"time"
 )
 
 type InfoSportsman struct {
-	Period        time.Time `json:"orderedAt" gorm:"not null;"`
-	IDSportsman   uint      `json:"id_sportsman" gorm:"not null;"`
-	IDCoach       uint      `json:"id_coach" gorm:"not null;"`
-	IDSportSchool uint      `json:"id_sport_school" gorm:"not null;"`
-	Insurance     bool      `json:"insurance" gorm:"default: false;not null"`
-	Sportsman     Sportsman `json:"sportsman" gorm:"foreignkey:IDSportsman"`
-	Coach         Coach     `json:"coach" gorm:"foreignkey:IDCoach"`
-	School        School    `json:"school" gorm:"foreignkey:IDSportSchool"`
+	Period        time.Time     `json:"orderedAt" gorm:"not null;"`
+	IDSportsman   uint          `json:"id_sportsman" gorm:"not null;"`
+	IDCoach       uint          `json:"id_coach" gorm:"not null;"`
+	IDSportSchool uint          `json:"id_sport_school" gorm:"not null;"`
+	Insurance     bool          `json:"insurance" gorm:"default: false;not null"`
+	Sportsman     Sportsman     `json:"sportsman" gorm:"foreignkey:IDSportsman"`
+	Coach         Coach         `json:"coach" gorm:"foreignkey:IDCoach"`
+	School        school.School `json:"school" gorm:"foreignkey:IDSportSchool"`
 }
 
 func (item *InfoSportsman) Validate() (map[string]interface{}, bool) {

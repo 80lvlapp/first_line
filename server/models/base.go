@@ -1,6 +1,7 @@
 package models
 
 import (
+	school "first-line/school"
 	"fmt"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -33,7 +34,7 @@ func init() {
 	}
 
 	db = conn
-	db.AutoMigrate(&School{}, &Category{}, &ValueCategory{}, &Coach{}, &Sportsman{}, &Sportsman{}, &TypeOfTournament{}, &InfoSportsman{}, &Tournament{}, &InfoScoreScale{})
+	db.AutoMigrate(&school.School{}, &Category{}, &ValueCategory{}, &Coach{}, &Sportsman{}, &Sportsman{}, &TypeOfTournament{}, &InfoSportsman{}, &Tournament{}, &InfoScoreScale{})
 }
 
 func GetDB() *gorm.DB {
