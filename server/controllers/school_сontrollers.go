@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"first-line/models"
 	u "first-line/utils"
-	
+	"fmt"
 	"net/http"
 
 	"github.com/gorilla/mux"
@@ -39,7 +39,19 @@ func UpdateSchool(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetSchools(w http.ResponseWriter, r *http.Request) {
-	data := models.GetSchools()
+	queries := mux.Vars(r)
+	fmt.Println(queries)
+	data := models.GetSchools("", "")
+	resp := u.Message(true, "success")
+	resp["data"] = data
+	u.Respond(w, resp)
+}
+
+func GetSchoolsLikeName(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	name := vars["name"]
+	fmt.Println(name)
+	data := models.GetSchools(name, "")
 	resp := u.Message(true, "success")
 	resp["data"] = data
 	u.Respond(w, resp)

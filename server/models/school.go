@@ -64,9 +64,20 @@ func DeleteSchool(id string) map[string]interface{} {
 
 }
 
-func GetSchools() []*School {
+func GetSchools(name string, address string) []*School {
+	fmt.Println(name)
+	fmt.Println(address)
+
 	school := make([]*School, 0)
-	err := GetDB().Table("schools").Find(&school).Error
+	var err error
+	if name != "" && address != "" {
+		err = GetDB().Table("schools").Where("name LIKE", name).Where("address LIKE", address).Find(&school).Error
+	} else if name != "" && address == "" {
+		err = GetDB().Table("schools").Where("name LIKE", name).Find(&school).Error
+	} else {
+		err = GetDB().Table("schools").Find(&school).Error
+	}
+	//err := GetDB().Table("schools").Find(&school).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil
