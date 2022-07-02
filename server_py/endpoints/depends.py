@@ -3,6 +3,7 @@ from repositories.coaches import Repository as CoachesRepository
 from repositories.sportsman import Repository as SportsmanRepository
 from repositories.school_repository import SchoolRepository
 from repositories.type_of_tournaments_repository import TypeOfTournamentsRepository
+from repositories.tournament_repository import TournamentRepository
 from db.base import database
 
 
@@ -24,3 +25,7 @@ def getSchoolRepository() -> SchoolRepository:
 
 def getTypeOfTournamentsRepository() -> TypeOfTournamentsRepository:
     return TypeOfTournamentsRepository(database)
+
+
+def getTournamentRepository() -> TournamentRepository:
+    return TournamentRepository(database)
