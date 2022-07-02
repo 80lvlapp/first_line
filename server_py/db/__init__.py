@@ -4,6 +4,7 @@ from .sportsman import sportsman
 from .school import schools
 from .type_of_tournaments import type_of_tournaments
 from .tournament import tournament
+from .value_categories import value_categories
 from .base import metadata, engine
 
 metadata.create_all(bind=engine)

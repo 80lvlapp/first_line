@@ -4,6 +4,7 @@ from fastapi import FastAPI
 
 from endpoints import categories, coaches, sportsman, school_endpoints, type_of_tournament_endpoints
 from endpoints import tournament_endpoints
+from endpoints import value_categories_endpoints
 from db.base import database
 
 # Initialize the app
@@ -15,6 +16,7 @@ app.include_router(sportsman.router, prefix="/api/sportsmen", tags=["sportsman"]
 app.include_router(school_endpoints.router, prefix="/api/rest-schools", tags=["schools"])
 app.include_router(type_of_tournament_endpoints.router, prefix="/api/type-of-tournaments", tags=["type-of-tournaments"])
 app.include_router(tournament_endpoints.router, prefix="/api/tournaments", tags=["tournaments"])
+app.include_router(value_categories_endpoints.router, prefix="/api/value-category", tags=["value-category"])
 
 
 @app.get("/")

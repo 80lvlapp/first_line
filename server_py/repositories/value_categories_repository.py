@@ -1,15 +1,14 @@
 from .base import BaseRepository
-from models.tournament_model import TournamentModel, TournamentModelIn
+from models.value_categories_model import ValueCategoriesModel, ValueCategoriesModelIn
 
 from typing import List, Optional
 from db.value_categories import value_categories
 
 
+class ValueCategoriesRepository(BaseRepository):
 
-class TournamentRepository(BaseRepository):
-
-    async def create(self, param: TournamentModelIn) -> TournamentModel:
-        element = TournamentModel(
+    async def create(self, param: ValueCategoriesModelIn) -> ValueCategoriesModel:
+        element = ValueCategoriesModel(
             id=0,
             category_id=param.category_id,
             name=param.name,
@@ -20,8 +19,8 @@ class TournamentRepository(BaseRepository):
         element.id = await  self.database.execute(query=query)
         return element
 
-    async def update(self, id: int, param: TournamentModelIn) -> TournamentModel:
-        element = TournamentModel(
+    async def update(self, id: int, param: ValueCategoriesModelIn) -> ValueCategoriesModel:
+        element = ValueCategoriesModel(
             id=id,
             category_id=param.category_id,
             name=param.name,
@@ -36,14 +35,13 @@ class TournamentRepository(BaseRepository):
         query = value_categories.delete().where(value_categories.c.id == id)
         return await self.database.execute(query=query)
 
-    async def get_all(self) -> List[TournamentModel]:
+    async def get_all(self) -> List[ValueCategoriesModel]:
         query = value_categories.select()
         return await self.database.fetch_all(query=query)
 
-
-    async def get_by_id(self, id: int) -> Optional[TournamentModel]:
+    async def get_by_id(self, id: int) -> Optional[ValueCategoriesModel]:
         query = value_categories.select().where(value_categories.c.id == id)
-        element = await self.database.fetch_one(query=query)
+        element = await  self.database.fetch_one(query=query)
         if element is None:
             return None
-        return TournamentModel.parse_obj(element)
+        return ValueCategoriesModel.parse_obj(element)

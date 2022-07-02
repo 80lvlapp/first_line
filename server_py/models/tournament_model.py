@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from .type_of_tournaments_model import TypeOfTournamentsModel
+
 
 
 class TournamentModel(BaseModel):
