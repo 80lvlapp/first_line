@@ -1,9 +1,11 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { useGetRaitingQuery } from "../redux/apiSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
-import {Styles} from '../components/AppStyles';
+import { Styles } from "../components/AppStyles";
+import MailIcon from "@mui/icons-material/Image";
+import CircleIcon from "@mui/icons-material/Circle";
 
 import {
   InputBase,
@@ -15,10 +17,11 @@ import {
   Avatar,
   Paper,
   IconButton,
+  Badge,
 } from "@mui/material";
+import { flexbox } from "@mui/system";
 
 export default function AthletesRating() {
-  
   const location = useLocation();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
@@ -30,7 +33,10 @@ export default function AthletesRating() {
   };
 
   const itemIncludes = (item: any) => {
-    return item.sportsman.name.trim().toLowerCase().includes(valueSearchSportsman.toLowerCase());
+    return item.sportsman.name
+      .trim()
+      .toLowerCase()
+      .includes(valueSearchSportsman.toLowerCase());
   };
 
   const { data, error, isLoading } = useGetRaitingQuery({
@@ -51,10 +57,7 @@ export default function AthletesRating() {
         overflow: "hidden",
       }}
     >
-      <Paper
-        component="form"
-        sx={Styles.paperStyles}
-      >
+      <Paper component="form" sx={Styles.paperStyles}>
         <InputBase
           sx={{ ml: 1, flex: 1 }}
           placeholder="Поиск спортсмена"
@@ -99,12 +102,77 @@ export default function AthletesRating() {
                   // openRaitingSchool(item);
                 }}
               >
-                <ListItemAvatar>
+                <div>
+                  <Badge badgeContent={item.place} color="primary"></Badge>
+                </div>
+                {/* <ListItemAvatar>
                   <Avatar>
                     <ImageIcon />
                   </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={item.sportsman.name}/>
+                </ListItemAvatar> */}
+                <div style={{ marginLeft: 20, maxWidth: "200px" }}>
+                  <ListItemText primary={item.sportsman.name} />
+                </div>
+
+                <div
+                  style={{
+                    width: "40px",
+                    height: "20px",
+                    backgroundColor: "rgba(220, 230, 218, 1)",
+                    marginLeft: "250px",
+                    position: "absolute",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <div style={{ ...styles.triangle, ...styles.arrowUp }} />
+
+                  <div style={{
+                      
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}>
+                    <span
+                      
+                    >
+                      {item.сhangingPosition}
+                    </span>
+                  </div>
+                  {/* <div> {item.сhangingPosition} </div> */}
+                </div>
+
+                <div
+                  style={{
+                    width: "40px",
+                    height: "20px",
+                    backgroundColor: "rgba(220, 230, 218, 1)",
+                    marginLeft: "300px",
+                    position: "absolute",
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+
+                  <div style={{
+                      
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                      }}>
+                    <span
+                      
+                    >
+                      {item.points}
+                    </span>
+                  </div>
+                </div>
+
+
+
+               
               </ListItemButton>
             ))}
         </List>
@@ -112,6 +180,36 @@ export default function AthletesRating() {
     </div>
   );
 }
+
+const styles = {
+  triangle: {
+    width: 0,
+    height: 0,
+    backgroundColor: "transparent",
+    borderStyle: "solid",
+    marginTop: "0px",
+  },
+  arrowUp: {
+    borderTopWidth: 0,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderLeftWidth: 10,
+    borderTopColor: "transparent",
+    borderRightColor: "transparent",
+    borderBottomColor: "#007F00",
+    borderLeftColor: "transparent",
+  },
+  arrowDown: {
+    borderTopWidth: 30,
+    borderRightWidth: 30,
+    borderBottomWidth: 0,
+    borderLeftWidth: 30,
+    borderTopColor: "tomato",
+    borderRightColor: "transparent",
+    borderBottomColor: "transparent",
+    borderLeftColor: "transparent",
+  },
+};
 
 interface CustomizedState {
   id: string;
