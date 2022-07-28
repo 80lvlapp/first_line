@@ -5,7 +5,7 @@ from repositories.school_repository import SchoolRepository
 from repositories.type_of_tournaments_repository import TypeOfTournamentsRepository
 from repositories.tournament_repository import TournamentRepository
 from repositories.value_categories_repository import ValueCategoriesRepository
-from db.base import database
+from db.base1 import database
 
 
 def getCategoriesRepository() -> CategoriesRepository:

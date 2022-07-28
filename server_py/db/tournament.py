@@ -1,5 +1,5 @@
 import sqlalchemy
-from .base import metadata
+from .base1 import metadata
 from .type_of_tournaments import type_of_tournaments
 
 tournament = sqlalchemy.Table(
