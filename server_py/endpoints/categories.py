@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from models.categories import CategoriesModel, CategoriesModelIn
+from schemas.categories import CategoriesModel, CategoriesModelIn
 from repositories.categories import CategoriesRepository
 from .depends import getCategoriesRepository
 from repositories.categories import CategoriesRepository

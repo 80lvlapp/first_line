@@ -1,5 +1,5 @@
-from .base import BaseRepository
-from models.categories import CategoriesModel, CategoriesModelIn
+
+from schemas.categories import CategoriesModel, CategoriesModelIn
 from typing import List, Optional
 from db.categories import categories
 

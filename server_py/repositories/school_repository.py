@@ -1,5 +1,5 @@
 from .base import BaseRepository
-from models.school_model import SchoolModel, SchoolModelIn
+from schemas.school_model import SchoolModel, SchoolModelIn
 from typing import List, Optional
 from db.school import schools
 

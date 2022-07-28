@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from models.tournament_model import TournamentModel, TournamentModelIn
+from schemas.tournament_model import TournamentModel, TournamentModelIn
 from .depends import getTournamentRepository
 from repositories.tournament_repository import TournamentRepository
 

@@ -1,5 +1,5 @@
 from .base import BaseRepository
-from models.value_categories_model import ValueCategoriesModel, ValueCategoriesModelIn
+from schemas.value_categories_model import ValueCategoriesModel, ValueCategoriesModelIn
 
 from typing import List, Optional
 from db.value_categories import value_categories

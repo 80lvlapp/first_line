@@ -1,6 +1,6 @@
 import enums.sex_enum
 from .base import BaseRepository
-from models.sportsman import SportsmanModel, SportsmanModelIn
+from schemas.sportsman import SportsmanModel, SportsmanModelIn
 from typing import List, Optional
 from db.sportsman import sportsman
 from datetime import timezone

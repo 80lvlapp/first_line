@@ -2,7 +2,7 @@
 
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from models.school_model import SchoolModel, SchoolModelIn
+from schemas.school_model import SchoolModel, SchoolModelIn
 from .depends import getSchoolRepository
 from repositories.school_repository import SchoolRepository
 

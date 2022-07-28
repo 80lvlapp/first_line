@@ -1,5 +1,5 @@
 from .base import BaseRepository
-from models.coach import CoachModel,  CoachModelIn
+from schemas.coach import CoachModel,  CoachModelIn
 from typing import List, Optional
 from db.coach import coaches
 

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException, status
 from typing import List
-from models.sportsman import SportsmanModel, SportsmanModelIn
+from schemas.sportsman import SportsmanModel, SportsmanModelIn
 from .depends import getSportsmanRepository
 from repositories.coaches import Repository
 

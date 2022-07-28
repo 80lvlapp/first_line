@@ -1,5 +1,5 @@
 from .base import BaseRepository
-from models.tournament_model import TournamentModel, TournamentModelIn
+from schemas.tournament_model import TournamentModel, TournamentModelIn
 
 from typing import List, Optional
 from db.value_categories import value_categories
