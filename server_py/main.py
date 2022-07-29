@@ -2,7 +2,7 @@ import uvicorn
 from fastapi import FastAPI
 from db.database import engine
 from db import models
-from routers import categories_router
+from routers import categories_router, coach_router
 
 app = FastAPI(title="First-line")
 
@@ -13,6 +13,7 @@ async def index():
 
 
 app.include_router(categories_router.router)
+app.include_router(coach_router.router)
 
 models.Base.metadata.create_all(engine)
 

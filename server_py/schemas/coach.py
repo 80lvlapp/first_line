@@ -6,5 +6,9 @@ class CoachModel(BaseModel):
     name: str
 
 
-class CoachModelIn(BaseModel):
+class CoachModeDisplay(BaseModel):
+    id: int
     name: str
+
+    class Config():
+        orm_mode = True

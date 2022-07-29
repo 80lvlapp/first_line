@@ -1,44 +1,36 @@
-from .base import BaseRepository
-from schemas.coach import CoachModel,  CoachModelIn
-from typing import List, Optional
-from db.coach import coaches
+from sqlalchemy.orm.session import Session
+from db.models import CoachDb
+from schemas.coach import CoachModel, CoachModeDisplay
 
 
-class Repository(BaseRepository):
+def create(db: Session, request: CoachModel):
+    element = CoachDb(
+        name=request.name
+    )
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
 
-    async def create(self, param: CoachModelIn) -> CoachModel:
-        element = CoachModel(
-            id=0,
-            name=param.name
-        )
-        values = {**param.dict()}
-        values.pop("id", None)
-        query = coaches.insert().values(**values)
-        element.id = await  self.database.execute(query=query)
-        return element
 
-    async def update(self, id: int, param: CoachModelIn) -> CoachModel:
-        element = CoachModel(
-            id=id,
-            name=param.name
-        )
-        values = {**element.dict()}
-        values.pop("id", None)
-        query = coaches.update().where(coaches.c.id == id).values(**values)
-        await self.database.execute(query=query)
-        return element
+def get_all_elements(db: Session) -> list[CoachModeDisplay]:
+    return db.query(CoachDb).all()
 
-    async def delete(self, id: int):
-        query = coaches.delete().where(coaches.c.id == id)
-        return await self.database.execute(query=query)
 
-    async def get_all(self) -> List[CoachModel]:
-        query = coaches.select()
-        return await self.database.fetch_all(query=query)
+def get_element_by_id(id: int, db: Session) -> CoachModeDisplay:
+    return db.query(CoachDb).filter(CoachDb.id == id).first()
 
-    async def get_by_id(self, id: int) -> Optional[CoachModel]:
-        query = coaches.select().where(coaches.c.id == id)
-        element = await  self.database.fetch_one(query=query)
-        if element is None:
-            return None
-        return CoachModel.parse_obj(element)
+
+def update_element(id: int, request: CoachModeDisplay, db: Session) -> CoachModeDisplay:
+    element = db.query(CoachDb).get(id)
+    element.name = request.name
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
+
+
+def delete_element(id: int, db: Session) -> None:
+    element = db.query(CoachDb).get(id)
+    db.delete(element)
+    db.commit()
