@@ -7,6 +7,10 @@ class SchoolModel(BaseModel):
     address: str
 
 
-class SchoolModelIn(BaseModel):
+class SchoolModelDisplay(BaseModel):
+    id: int
     name: str
     address: str
+
+    class Config():
+        orm_mode = True
