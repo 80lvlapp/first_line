@@ -39,3 +39,9 @@ async def update_element(id: int, request: CategoriesModel, db: Session = Depend
     if element is None:
         raise HTTPException(status_code=400, detail="ERROR")
     return element
+
+
+@router.delete("/{id}")
+async def delete_element(id: int, db: Session = Depends(get_db)):
+    categories.delete_element(id=id, db=db)
+    return {"ok"}

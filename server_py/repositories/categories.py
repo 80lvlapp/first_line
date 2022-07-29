@@ -29,3 +29,8 @@ def update_element(id: int, request: CategoriesModeDisplay, db: Session) -> Cate
     db.commit()
     db.refresh(element)
     return element
+
+def delete_element(id: int, db: Session)->None:
+    element = db.query(CategoriesDb).get(id)
+    db.delete(element)
+    db.commit()
