@@ -20,3 +20,12 @@ def get_all_elements(db: Session) -> list[CategoriesModeDisplay]:
 
 def get_element_by_id(id: int, db: Session) -> CategoriesModeDisplay:
     return db.query(CategoriesDb).filter(CategoriesDb.id == id).first()
+
+
+def update_element(id: int, request: CategoriesModeDisplay, db: Session) -> CategoriesModeDisplay:
+    element = db.query(CategoriesDb).get(id)
+    element.name = request.name
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
