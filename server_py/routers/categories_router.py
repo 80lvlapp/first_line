@@ -23,3 +23,11 @@ async def get_all_elements(db: Session = Depends(get_db)):
     if elements_list is None:
         raise HTTPException(status_code=400, detail="ERROR")
     return elements_list
+
+
+@router.get("/{id}", response_model=CategoriesModeDisplay)
+async def get_element_by_id(id: int, db: Session = Depends(get_db)):
+    element = categories.get_element_by_id(id=id, db=db)
+    if element is None:
+        raise HTTPException(status_code=400, detail="ERROR")
+    return element

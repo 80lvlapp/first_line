@@ -15,7 +15,7 @@ async def get_all(categories: CategoriesRepository = Depends(getCategoriesReposi
 
 @router.get("/{id}", response_model=CategoriesModel)
 async def get_element_by_id(id: int, categories: CategoriesRepository = Depends(getCategoriesRepository)):
-    element = await categories.getById(id=id)
+    element = await categories.(id=id)
     if element is None:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Category not found")
     return element

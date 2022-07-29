@@ -16,3 +16,7 @@ def create(db: Session, request: CategoriesModel):
 
 def get_all_elements(db: Session) -> list[CategoriesModeDisplay]:
     return db.query(CategoriesDb).all()
+
+
+def get_element_by_id(id: int, db: Session) -> CategoriesModeDisplay:
+    return db.query(CategoriesDb).filter(CategoriesDb.id == id).first()
