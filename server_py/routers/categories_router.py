@@ -15,3 +15,11 @@ async def create_element(request: CategoriesModel, db: Session = Depends(get_db)
     if element is None:
         raise HTTPException(status_code=400, detail="ERROR")
     return element
+
+
+@router.get("/", response_model=list[CategoriesModeDisplay])
+async def get_all_elements(db: Session = Depends(get_db)):
+    elements_list = categories.get_all_elements(db=db)
+    if elements_list is None:
+        raise HTTPException(status_code=400, detail="ERROR")
+    return elements_list
