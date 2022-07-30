@@ -1,16 +1,20 @@
 from pydantic import BaseModel
 from datetime import date
-from enums.sex_enum import Sex
+from db.models import SexEnum
 
 
 class SportsmanModel(BaseModel):
     id: int
     name: str
-    # date_birth: date
-    #sex: Sex
+    date_birth: date
+    sex: SexEnum
 
 
-class SportsmanModelIn(BaseModel):
+class SportsmanModelDisplay(BaseModel):
+    id: int
     name: str
-    # date_birth: date
-    #sex: Sex
+    date_birth: date
+    sex: SexEnum
+
+    class Config():
+        orm_mode = True

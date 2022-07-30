@@ -31,6 +31,5 @@ class SportsmanDb(Base):
     __tablename__ = "sportsmen"
     id = Column(Integer, primary_key=True, autoincrement=True, index=True)
     name = Column(String(50), nullable=False)
-    address = Column(String(100), nullable=True)
     date_birth = Column(Date, nullable=True)
     sex = Column(Enum(SexEnum), default=SexEnum.male)

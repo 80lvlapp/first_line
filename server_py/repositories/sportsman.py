@@ -1,50 +1,40 @@
-import enums.sex_enum
-from .base import BaseRepository
-from schemas.sportsman import SportsmanModel, SportsmanModelIn
-from typing import List, Optional
-from db.sportsman import sportsman
-from datetime import timezone
+from sqlalchemy.orm.session import Session
+from db.models import SportsmanDb
+from schemas.sportsman import SportsmanModelDisplay
 
 
-class Repository(BaseRepository):
+def create(db: Session, request: SportsmanModelDisplay):
+    element = SportsmanDb(
+        name=request.name,
+        date_birth=request.date_birth,
+        sex=request.sex
+    )
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
 
-    async def create(self, param: SportsmanModelIn) -> SportsmanModel:
-        element = SportsmanModel(
-            id=0,
-            name=param.name,
-            # date_birth=timezone.fromutc(param.date_birth).date(),
-            # sex=param.sex == "Male" if enums.sex_enum.Sex.male else enums.sex_enum.Sex.female
-        )
-        values = {**param.dict()}
-        values.pop("id", None)
-        query = sportsman.insert().values(**values)
-        element.id = await  self.database.execute(query=query)
-        return element
 
-    async def update(self, id: int, param: SportsmanModelIn) -> SportsmanModel:
-        element = SportsmanModel(
-            id=id,
-            name=param.name,
-            # date_birth=timezone.fromutc(param.date_birth).date(),
-            # sex=param.sex == "Male" if enums.sex_enum.Sex.male else enums.sex_enum.Sex.female
-        )
-        values = {**element.dict()}
-        values.pop("id", None)
-        query = sportsman.update().where(sportsman.c.id == id).values(**values)
-        await self.database.execute(query=query)
-        return element
+def get_all_elements(db: Session) -> list[SportsmanModelDisplay]:
+    return db.query(SportsmanDb).all()
 
-    async def delete(self, id: int):
-        query = sportsman.delete().where(sportsman.c.id == id)
-        return await self.database.execute(query=query)
 
-    async def get_all(self) -> List[SportsmanModel]:
-        query = sportsman.select()
-        return await self.database.fetch_all(query=query)
+def get_element_by_id(id: int, db: Session) -> SportsmanModelDisplay:
+    return db.query(SportsmanDb).filter(SportsmanDb.id == id).first()
 
-    async def get_by_id(self, id: int) -> Optional[SportsmanModel]:
-        query = sportsman.select().where(sportsman.c.id == id)
-        element = await  self.database.fetch_one(query=query)
-        if element is None:
-            return None
-        return SportsmanModel.parse_obj(element)
+
+def update_element(id: int, request: SportsmanModelDisplay, db: Session) -> SportsmanModelDisplay:
+    element = db.query(SportsmanDb).get(id)
+    element.name = request.name
+    element.date_birth = request.date_birth
+    element.sex = request.sex
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
+
+
+def delete_element(id: int, db: Session) -> None:
+    element = db.query(SportsmanDb).get(id)
+    db.delete(element)
+    db.commit()
