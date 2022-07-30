@@ -33,3 +33,9 @@ class SportsmanDb(Base):
     name = Column(String(50), nullable=False)
     date_birth = Column(Date, nullable=True)
     sex = Column(Enum(SexEnum), default=SexEnum.male)
+
+
+class TypeOfTournamentsDb(Base):
+    __tablename__ = "type_of_tournaments"
+    id = Column(Integer, primary_key=True, autoincrement=True, index=True)
+    name = Column(String(50), nullable=False)

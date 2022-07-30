@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from db.database import engine
 from db import models
 from routers import categories_router, coach_router, school_router, sportsman_router
+from routers import type_of_tournaments_router
 
 app = FastAPI(title="First-line")
 
@@ -16,11 +17,10 @@ app.include_router(categories_router.router)
 app.include_router(coach_router.router)
 app.include_router(school_router.router)
 app.include_router(sportsman_router.router)
+app.include_router(type_of_tournaments_router.router)
 
 models.Base.metadata.create_all(engine)
 
-# app.include_router(sportsman.router, prefix="/api/sportsmen", tags=["sportsman"])
-# app.include_router(type_of_tournament_endpoints.router, prefix="/api/type-of-tournaments", tags=["type-of-tournaments"])
 # app.include_router(tournament_endpoints.router, prefix="/api/tournaments", tags=["tournaments"])
 # app.include_router(value_categories_endpoints.router, prefix="/api/value-category", tags=["value-category"])
 
