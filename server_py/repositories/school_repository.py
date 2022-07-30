@@ -1,46 +1,38 @@
-from .base import BaseRepository
-from schemas.school_model import SchoolModel, SchoolModelIn
-from typing import List, Optional
-from db.school import schools
+from sqlalchemy.orm.session import Session
+from db.models import SchoolDb
+from schemas.school_model import SchoolModelDisplay
 
 
-class SchoolRepository(BaseRepository):
+def create(db: Session, request: SchoolModelDisplay):
+    element = SchoolDb(
+        name=request.name,
+        address=request.address
+    )
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
 
-    async def create(self, param: SchoolModelIn) -> SchoolModel:
-        element = SchoolModel(
-            id=0,
-            name=param.name,
-            address=param.address
-        )
-        values = {**param.dict()}
-        values.pop("id", None)
-        query = schools.insert().values(**values)
-        element.id = await  self.database.execute(query=query)
-        return element
 
-    async def update(self, id: int, param: SchoolModelIn) -> SchoolModel:
-        element = SchoolModel(
-            id=id,
-            name=param.name,
-            address=param.address
-        )
-        values = {**element.dict()}
-        values.pop("id", None)
-        query = schools.update().where(schools.c.id == id).values(**values)
-        await self.database.execute(query=query)
-        return element
+def get_all_elements(db: Session) -> list[SchoolModelDisplay]:
+    return db.query(SchoolDb).all()
 
-    async def delete(self, id: int):
-        query = schools.delete().where(schools.c.id == id)
-        return await self.database.execute(query=query)
 
-    async def get_all(self) -> List[SchoolModel]:
-        query = schools.select()
-        return await self.database.fetch_all(query=query)
+def get_element_by_id(id: int, db: Session) -> SchoolModelDisplay:
+    return db.query(SchoolDb).filter(SchoolDb.id == id).first()
 
-    async def get_by_id(self, id: int) -> Optional[SchoolModel]:
-        query = schools.select().where(schools.c.id == id)
-        element = await  self.database.fetch_one(query=query)
-        if element is None:
-            return None
-        return SchoolModel.parse_obj(element)
+
+def update_element(id: int, request: SchoolModelDisplay, db: Session) -> SchoolModelDisplay:
+    element = db.query(SchoolDb).get(id)
+    element.name = request.name
+    element.address = request.address
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
+
+
+def delete_element(id: int, db: Session) -> None:
+    element = db.query(SchoolDb).get(id)
+    db.delete(element)
+    db.commit()
