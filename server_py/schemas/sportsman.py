@@ -16,5 +16,5 @@ class SportsmanModelDisplay(BaseModel):
     date_birth: date
     sex: SexEnum
 
-    class Config():
+    class Config:
         orm_mode = True

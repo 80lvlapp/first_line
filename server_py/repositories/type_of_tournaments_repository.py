@@ -1,5 +1,5 @@
 from sqlalchemy.orm.session import Session
-from schemas.type_of_tournaments_model import TypeOfTournamentsModelIn
+from schemas.type_tournaments import TypeOfTournamentsModelIn
 from db.models import TypeOfTournamentsDb
 
 

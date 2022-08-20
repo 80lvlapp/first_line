@@ -10,5 +10,5 @@ class CategoriesModeDisplay(BaseModel):
     id: int
     name: str
 
-    class Config():
+    class Config:
         orm_mode = True

@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from schemas.type_of_tournaments_model import TypeOfTournamentsModelIn
+from schemas.type_tournaments import TypeOfTournamentsModelIn
 from repositories import type_of_tournaments_repository
 
 from db.database import get_db

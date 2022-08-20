@@ -12,5 +12,5 @@ class SchoolModelDisplay(BaseModel):
     name: str
     address: str
 
-    class Config():
+    class Config:
         orm_mode = True

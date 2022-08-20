@@ -1,49 +1,38 @@
-from .base import BaseRepository
-from schemas.tournament_model import TournamentModel, TournamentModelIn
-
-from typing import List, Optional
-from db.value_categories import value_categories
+from sqlalchemy.orm.session import Session
+from schemas.tournament_model import TournamentModelIn, TournamentModelDisplay
+from db.models import TournamentsDb
 
 
-
-class TournamentRepository(BaseRepository):
-
-    async def create(self, param: TournamentModelIn) -> TournamentModel:
-        element = TournamentModel(
-            id=0,
-            category_id=param.category_id,
-            name=param.name,
-        )
-        values = {**param.dict()}
-        values.pop("id", None)
-        query = value_categories.insert().values(**values)
-        element.id = await  self.database.execute(query=query)
-        return element
-
-    async def update(self, id: int, param: TournamentModelIn) -> TournamentModel:
-        element = TournamentModel(
-            id=id,
-            category_id=param.category_id,
-            name=param.name,
-        )
-        values = {**element.dict()}
-        values.pop("id", None)
-        query = value_categories.update().where(value_categories.c.id == id).values(**values)
-        await self.database.execute(query=query)
-        return element
-
-    async def delete(self, id: int):
-        query = value_categories.delete().where(value_categories.c.id == id)
-        return await self.database.execute(query=query)
-
-    async def get_all(self) -> List[TournamentModel]:
-        query = value_categories.select()
-        return await self.database.fetch_all(query=query)
+def create(db: Session, request: TournamentModelIn) -> TournamentModelDisplay:
+    element = TournamentsDb(
+        name=request.name,
+        id_type_tournament=request.id_type_tournament,
+        venue=request.venue
+    )
+    db.add(element)
+    db.commit()
+    db.refresh(element)
+    return element
 
 
-    async def get_by_id(self, id: int) -> Optional[TournamentModel]:
-        query = value_categories.select().where(value_categories.c.id == id)
-        element = await self.database.fetch_one(query=query)
-        if element is None:
-            return None
-        return TournamentModel.parse_obj(element)
+def get_all_elements(db: Session) -> list[TournamentModelDisplay]:
+    return db.query(TournamentsDb).all()
+
+
+# def get_element_by_id(id: int, db: Session) -> TypeOfTournamentsModelIn:
+#     return db.query(TournamentsDb).filter(TournamentsDb.id == id).first()
+#
+#
+# def update_element(id: int, request: TypeOfTournamentsModelIn, db: Session) -> TypeOfTournamentsModelIn:
+#     element = db.query(TournamentsDb).get(id)
+#     element.name = request.name
+#     db.add(element)
+#     db.commit()
+#     db.refresh(element)
+#     return element
+#
+#
+# def delete_element(id: int, db: Session) -> None:
+#     element = db.query(TournamentsDb).get(id)
+#     db.delete(element)
+#     db.commit()
