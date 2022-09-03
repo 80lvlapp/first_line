@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "api.apps.ApiConfig",
     "api.category.apps.CategoryConfig",
+    "api.coache.apps.CoacheConfig",
 
 ]
 

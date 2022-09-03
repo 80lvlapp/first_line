@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path
 
 from api.category.views import CategoryViewSet
+from api.coache.views import CoacheViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -25,4 +26,9 @@ urlpatterns = [
          CategoryViewSet.as_view({'get': "list", "post": "create"})),
     path('api/v1/category/<int:pk>',
          CategoryViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
+
+    path("api/v1/coach",
+         CoacheViewSet.as_view({'get': "list", "post": "create"})),
+    path('api/v1/coach/<int:pk>',
+         CoacheViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
 ]

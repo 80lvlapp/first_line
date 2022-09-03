@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import CoacheModel
 
-# Register your models here.
+
+@admin.register(CoacheModel)
+class CoacheAdmin(admin.ModelAdmin):
+    list_display = ["id", 'name']
