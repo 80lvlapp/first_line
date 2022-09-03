@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import SportsmanInfoModel
 
-# Register your models here.
+
+@admin.register(SportsmanInfoModel)
+class ScoreScaleAdmin(admin.ModelAdmin):
+    list_display = ['period', "sport_school", "sportsman", "coache"]
