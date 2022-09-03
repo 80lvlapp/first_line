@@ -18,6 +18,8 @@ from django.urls import path
 
 from api.category.views import CategoryViewSet
 from api.coache.views import CoacheViewSet
+from api.sport_school.views import SportSchoolViewSet
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -31,4 +33,9 @@ urlpatterns = [
          CoacheViewSet.as_view({'get': "list", "post": "create"})),
     path('api/v1/coach/<int:pk>',
          CoacheViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
+
+    path("api/v1/schools",
+         SportSchoolViewSet.as_view({'get': "list", "post": "create"})),
+    path('api/v1/schools/<int:pk>',
+         SportSchoolViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),         
 ]
