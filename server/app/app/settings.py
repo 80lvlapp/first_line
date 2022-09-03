@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "api.coache.apps.CoacheConfig",
     "api.sport_school.apps.SportSchoolConfig",
     "api.type_of_tournament.apps.TypeOfTournamentConfig",
+    "api.category_value.apps.CategoryValueConfig",
 
 ]
 

@@ -1,3 +1,7 @@
 from django.contrib import admin
+from .models import CategoryValueModel
 
-# Register your models here.
+
+@admin.register(CategoryValueModel)
+class CategoryAdmin(admin.ModelAdmin):
+    list_display = ['name', "category"]
