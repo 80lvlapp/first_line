@@ -6,7 +6,7 @@ class TournamentModel(models.Model):
     name = models.CharField(max_length=50, db_index=True)
     date_tournament = models.DateField()
     venue = models.CharField(max_length=100)
-    type_of_tornament = models.ForeignKey(TypeOfTournamentModel, on_delete=models.CASCADE)
+    type_of_tornament = models.ForeignKey(TypeOfTournamentModel, on_delete=models.RESTRICT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
