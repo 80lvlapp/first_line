@@ -1,10 +1,9 @@
-package school
+package models
 
 import (
 	u "first-line/utils"
 	"fmt"
 
-	db "first-line/models"
 	"github.com/jinzhu/gorm"
 )
 
@@ -28,14 +27,14 @@ func (school *School) CreateSchool() map[string]interface{} {
 		return resp
 	}
 
-	db.GetDB().Create(school)
+	GetDB().Create(school)
 	resp["school"] = school
 	return resp
 }
 
-func UpdateSchoolDb(id string, newSchool School) *School {
+func UpdateSchool(id string, newSchool School) *School {
 	school := &School{}
-	err := db.GetDB().Table("schools").Where("id = ?", id).First(school).Error
+	err := GetDB().Table("schools").Where("id = ?", id).First(school).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil
@@ -43,31 +42,42 @@ func UpdateSchoolDb(id string, newSchool School) *School {
 
 	school.Adress = newSchool.Adress
 	school.Name = newSchool.Name
-	db.GetDB().Save(school)
+	GetDB().Save(school)
 	return school
 
 }
 
-func GetSchoolDb(id string) *School {
+func GetSchool(id string) *School {
 	school := &School{}
-	err := db.GetDB().Table("schools").Where("id = ?", id).First(school).Error
+	err := GetDB().Table("schools").Where("id = ?", id).First(school).Error
 	if err != nil {
 		return nil
 	}
 	return school
 }
 
-func DeleteSchoolDb(id string) map[string]interface{} {
+func DeleteSchool(id string) map[string]interface{} {
 
-	db.GetDB().Delete(&School{}, id)
+	db.Delete(&School{}, id)
 	resp := u.Message(true, "success")
 	return resp
 
 }
 
-func GetSchoolsDb() []*School {
+func GetSchools(name string, address string) []*School {
+	fmt.Println(name)
+	fmt.Println(address)
+
 	school := make([]*School, 0)
-	err := db.GetDB().Table("schools").Find(&school).Error
+	var err error
+	if name != "" && address != "" {
+		err = GetDB().Table("schools").Where("name LIKE", name).Where("address LIKE", address).Find(&school).Error
+	} else if name != "" && address == "" {
+		err = GetDB().Table("schools").Where("name LIKE", name).Find(&school).Error
+	} else {
+		err = GetDB().Table("schools").Find(&school).Error
+	}
+	//err := GetDB().Table("schools").Find(&school).Error
 	if err != nil {
 		fmt.Println(err)
 		return nil
