@@ -3,5 +3,5 @@ from .models import SportsmanModel
 
 
 @admin.register(SportsmanModel)
-class CoacheAdmin(admin.ModelAdmin):
+class SportsmanAdmin(admin.ModelAdmin):
     list_display = ['id', 'name', 'gender', 'date_birth']

@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     "api.type_of_tournament.apps.TypeOfTournamentConfig",
     "api.category_value.apps.CategoryValueConfig",
     "api.sportsman.apps.SportsmanConfig",
+    "api.tournament.apps.TournamentConfig",
 
 ]
 

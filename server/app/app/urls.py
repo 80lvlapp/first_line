@@ -22,6 +22,7 @@ from api.sport_school.views import SportSchoolViewSet
 from api.type_of_tournament.views import TypeOfTournamentViewSet
 from api.category_value.views import CategoryValueViewSet
 from api.sportsman.views import SportsmanViewSet
+from api.tournament.views import TournamentViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -55,4 +56,9 @@ urlpatterns = [
          SportsmanViewSet.as_view({'get': "list", "post": "create"})),
     path('api/v1/sportsmen/<int:pk>',
          SportsmanViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
+
+    path("api/v1/tournaments",
+         TournamentViewSet.as_view({'get': "list", "post": "create"})),
+    path('api/v1/tournaments/<int:pk>',
+         TournamentViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
 ]
