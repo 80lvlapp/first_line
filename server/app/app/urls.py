@@ -19,6 +19,7 @@ from django.urls import path
 from api.category.views import CategoryViewSet
 from api.coache.views import CoacheViewSet
 from api.sport_school.views import SportSchoolViewSet
+from api.type_of_tournament.views import TypeOfTournamentViewSet
 
 
 urlpatterns = [
@@ -37,5 +38,10 @@ urlpatterns = [
     path("api/v1/schools",
          SportSchoolViewSet.as_view({'get': "list", "post": "create"})),
     path('api/v1/schools/<int:pk>',
-         SportSchoolViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),         
+         SportSchoolViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
+
+    path("api/v1/type-of-tournaments",
+         TypeOfTournamentViewSet.as_view({'get': "list", "post": "create"})),
+    path('api/v1/type-of-tournaments/<int:pk>',
+         TypeOfTournamentViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
 ]
