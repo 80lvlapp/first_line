@@ -5,8 +5,10 @@ export const Styles = {
     display: "flex",
     alignItems: "center",
     width: "100%",
-    maxWidth: 360,
+    maxWidth: "600px",
     marginTop: "40px",
+    //marginLeft: "20px",
     marginLeft: "20px",
+    marginRight:"20px", 
   },
 };

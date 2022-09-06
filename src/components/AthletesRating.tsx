@@ -57,23 +57,25 @@ export default function AthletesRating() {
         overflow: "hidden",
       }}
     >
-      <Paper component="form" sx={Styles.paperStyles}>
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Поиск спортсмена"
-          // value = {valueSearchSchool}
-          onChange={changeValueSearch}
-          inputProps={{ "aria-label": "search google maps" }}
-        />
-        <IconButton
-          type="submit"
-          sx={{ p: "10px" }}
-          aria-label="search"
-          disabled={true}
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Paper component="form" sx={{...Styles.paperStyles}}>
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Поиск спортсмена"
+            // value = {valueSearchSchool}
+            onChange={changeValueSearch}
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+          <IconButton
+            type="submit"
+            sx={{ p: "10px" }}
+            aria-label="search"
+            disabled={true}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </div>
 
       {error ? (
         <>Oh no, there was an error</>
@@ -90,90 +92,79 @@ export default function AthletesRating() {
           {data
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <ListItemButton
-                key={item.sportsman.id}
-                sx={{
-                  marginLeft: "20px",
-                  marginTop: "10px",
-                  background: "#FFFFFF",
-                  borderRadius: "10px",
-                }}
-                onClick={(event) => {
-                  // openRaitingSchool(item);
-                }}
-              >
-                <div>
-                  <Badge badgeContent={item.place} color="primary"></Badge>
-                </div>
-                {/* <ListItemAvatar>
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <ListItemButton
+                  key={item.sportsman.id}
+                  sx={{
+                    marginLeft: "20px",
+                    marginTop: "10px",
+                    background: "#FFFFFF",
+                    borderRadius: "10px",
+                    maxWidth: "600px",
+                  }}
+                  onClick={(event) => {
+                    // openRaitingSchool(item);
+                  }}
+                >
+                  <div>
+                    <Badge badgeContent={item.place} color="primary"></Badge>
+                  </div>
+                  {/* <ListItemAvatar>
                   <Avatar>
                     <ImageIcon />
                   </Avatar>
                 </ListItemAvatar> */}
-                <div style={{ marginLeft: 20, maxWidth: "200px" }}>
-                  <ListItemText primary={item.sportsman.name} />
-                </div>
+                  <div style={{ marginLeft: 20, maxWidth: "200px" }}>
+                    <ListItemText primary={item.sportsman.name} />
+                  </div>
 
-                <div
-                  style={{
-                    width: "40px",
-                    height: "20px",
-                    backgroundColor: "rgba(220, 230, 218, 1)",
-                    marginLeft: "250px",
-                    position: "absolute",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  <div style={{ ...styles.triangle, ...styles.arrowUp }} />
+                  <div style={styles.containerTriangle}>
+                    <div
+                      style={
+                        item.сhangingPosition === 0
+                          ? {}
+                          : item.сhangingPosition > 0
+                          ? { ...styles.triangle, ...styles.arrowUp }
+                          : { ...styles.triangle, ...styles.arrowDown }
+                      }
+                    />
 
-                  <div style={{
-                      
+                    <div
+                      style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                      }}>
-                    <span
-                      
+                      }}
                     >
-                      {item.сhangingPosition}
-                    </span>
+                      <span>{item.сhangingPosition}</span>
+                    </div>
+                    {/* <div> {item.сhangingPosition} </div> */}
                   </div>
-                  {/* <div> {item.сhangingPosition} </div> */}
-                </div>
 
-                <div
-                  style={{
-                    width: "40px",
-                    height: "20px",
-                    backgroundColor: "rgba(220, 230, 218, 1)",
-                    marginLeft: "300px",
-                    position: "absolute",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-
-                  <div style={{
-                      
+                  <div
+                    style={{
+                      width: "40px",
+                      height: "20px",
+                      backgroundColor: "rgba(220, 230, 218, 1)",
+                      marginLeft: "300px",
+                      position: "absolute",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                    }}
+                  >
+                    <div
+                      style={{
                         display: "flex",
                         alignItems: "center",
                         justifyContent: "center",
-                      }}>
-                    <span
-                      
+                      }}
                     >
-                      {item.points}
-                    </span>
+                      <span>{item.points}</span>
+                    </div>
                   </div>
-                </div>
-
-
-
-               
-              </ListItemButton>
+                </ListItemButton>
+              </div>
             ))}
         </List>
       ) : null}
@@ -200,16 +191,26 @@ const styles = {
     borderLeftColor: "transparent",
   },
   arrowDown: {
-    borderTopWidth: 30,
-    borderRightWidth: 30,
-    borderBottomWidth: 0,
-    borderLeftWidth: 30,
-    borderTopColor: "tomato",
+    borderTopWidth: 0,
+    borderRightWidth: 10,
+    borderBottomWidth: 10,
+    borderLeftWidth: 10,
+    borderTopColor: "transparent",
     borderRightColor: "transparent",
-    borderBottomColor: "transparent",
+    borderBottomColor: "tomato",
     borderLeftColor: "transparent",
   },
-};
+  containerTriangle: {
+    width: "40px",
+    height: "20px",
+    backgroundColor: "rgba(220, 230, 218, 1)",
+    marginLeft: "250px",
+    position: "absolute",
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+} as const;
 
 interface CustomizedState {
   id: string;

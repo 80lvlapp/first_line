@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
-import {Navigate, useNavigate} from 'react-router-dom';
-import {Styles} from '../components/AppStyles';
+import { Navigate, useNavigate } from "react-router-dom";
+import { Styles } from "../components/AppStyles";
 //import { useAppContext } from "../context/AppContext";
 import {
   InputBase,
@@ -34,8 +34,7 @@ export default function Home() {
     console.log(item);
 
     navigate("/AthletesRating", { state: { id: item.id } });
-  
-  }
+  };
 
   return (
     <div
@@ -47,26 +46,25 @@ export default function Home() {
         overflow: "hidden",
       }}
     >
-      <Paper
-        component="form"
-        sx={Styles.paperStyles}
-      >
-        <InputBase
-          sx={{ ml: 1, flex: 1 }}
-          placeholder="Поиск школы"
-          // value = {valueSearchSchool}
-          onChange={changeValueSearch}
-          inputProps={{ "aria-label": "search google maps" }}
-        />
-        <IconButton
-          type="submit"
-          sx={{ p: "10px" }}
-          aria-label="search"
-          disabled={true}
-        >
-          <SearchIcon />
-        </IconButton>
-      </Paper>
+      <div style={{ display: "flex", justifyContent: "center" }}>
+        <Paper component="form" sx={Styles.paperStyles}>
+          <InputBase
+            sx={{ ml: 1, flex: 1 }}
+            placeholder="Поиск школы"
+            // value = {valueSearchSchool}
+            onChange={changeValueSearch}
+            inputProps={{ "aria-label": "search google maps" }}
+          />
+          <IconButton
+            type="submit"
+            sx={{ p: "10px" }}
+            aria-label="search"
+            disabled={true}
+          >
+            <SearchIcon />
+          </IconButton>
+        </Paper>
+      </div>
 
       {error ? (
         <>Oh no, there was an error</>
@@ -83,23 +81,28 @@ export default function Home() {
           {data
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <ListItemButton
-                key={item.id}
-                sx={{
-                  marginLeft: "20px",
-                  marginTop: "10px",
-                  background: "#FFFFFF",
-                  borderRadius: "10px",
-                }}
-                onClick = {(event) => {openRaitingSchool(item)}}
-              >
-                <ListItemAvatar>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
-                </ListItemAvatar>
-                <ListItemText primary={item.name} secondary={item.adress} />
-              </ListItemButton>
+              <div style = {{display: 'flex', justifyContent:'center'}}>
+                <ListItemButton
+                  key={item.id}
+                  sx={{
+                    marginLeft: "20px",
+                    marginTop: "10px",
+                    background: "#FFFFFF",
+                    borderRadius: "10px",
+                    maxWidth: "600px"
+                  }}
+                  onClick={(event) => {
+                    openRaitingSchool(item);
+                  }}
+                >
+                  <ListItemAvatar>
+                    <Avatar>
+                      <ImageIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary={item.name} secondary={item.adress} />
+                </ListItemButton>
+              </div>
             ))}
         </List>
       ) : null}
