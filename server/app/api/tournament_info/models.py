@@ -20,3 +20,5 @@ class TournamentInfoModel(models.Model):
     class Meta:
         db_table = "fl_tournament_info"
         unique_together = ('period', 'tournament', 'sportsman', "category_value")
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
