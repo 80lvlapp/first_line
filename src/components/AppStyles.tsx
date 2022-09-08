@@ -1,5 +1,5 @@
 
-export const Styles = {
+export const mainStyles = {
   paperStyles: {
     p: "2px 4px",
     display: "flex",
@@ -11,4 +11,14 @@ export const Styles = {
     marginLeft: "20px",
     marginRight:"20px", 
   },
+  main: {
+    flex: 1, background: "#E5E5E5", height: "100vh", overflow: "hidden"
+  },
+  listItem: {
+    marginLeft: "20px",
+    marginTop: "10px",
+    background: "#FFFFFF",
+    borderRadius: "10px",
+    maxWidth: "600px",
+  }
 };

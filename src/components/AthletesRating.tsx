@@ -3,7 +3,7 @@ import { Navigate, useNavigate, useLocation } from "react-router-dom";
 import { useGetRaitingQuery } from "../redux/apiSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
-import { Styles } from "../components/AppStyles";
+import { mainStyles } from "../components/AppStyles";
 import MailIcon from "@mui/icons-material/Image";
 import CircleIcon from "@mui/icons-material/Circle";
 
@@ -22,6 +22,7 @@ import {
 import { flexbox } from "@mui/system";
 
 export default function AthletesRating() {
+  let navigate = useNavigate();
   const location = useLocation();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
@@ -45,20 +46,19 @@ export default function AthletesRating() {
     endDate: "2022",
   });
 
+  const openRaitingSportsman = (item: any) => {
+    console.log(item);
+
+    navigate("/Sportsman", { state: { id: item.id } });
+  };
+
   console.log(data);
 
   return (
     <div
-      style={{
-        flex: 1,
-        marginTop: 0,
-        background: "#E5E5E5",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+      style={mainStyles.main}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Paper component="form" sx={{...Styles.paperStyles}}>
+        <Paper component="form" sx={{ ...mainStyles.paperStyles }}>
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Поиск спортсмена"
@@ -95,25 +95,15 @@ export default function AthletesRating() {
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <ListItemButton
                   key={item.sportsman.id}
-                  sx={{
-                    marginLeft: "20px",
-                    marginTop: "10px",
-                    background: "#FFFFFF",
-                    borderRadius: "10px",
-                    maxWidth: "600px",
-                  }}
+                  sx={mainStyles.listItem}
                   onClick={(event) => {
-                    // openRaitingSchool(item);
+                     openRaitingSportsman(item);
                   }}
                 >
                   <div>
                     <Badge badgeContent={item.place} color="primary"></Badge>
                   </div>
-                  {/* <ListItemAvatar>
-                  <Avatar>
-                    <ImageIcon />
-                  </Avatar>
-                </ListItemAvatar> */}
+                
                   <div style={{ marginLeft: 20, maxWidth: "200px" }}>
                     <ListItemText primary={item.sportsman.name} />
                   </div>
@@ -133,7 +123,7 @@ export default function AthletesRating() {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                        justifyContent: "center",
+                        justifyContent: "flex-end",
                       }}
                     >
                       <span>{item.сhangingPosition}</span>
@@ -141,22 +131,12 @@ export default function AthletesRating() {
                     {/* <div> {item.сhangingPosition} </div> */}
                   </div>
 
-                  <div
-                    style={{
-                      width: "40px",
-                      height: "20px",
-                      backgroundColor: "rgba(220, 230, 218, 1)",
-                      marginLeft: "300px",
-                      position: "absolute",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                    }}
-                  >
+                  <div style={styles.points}>
                     <div
                       style={{
                         display: "flex",
                         alignItems: "center",
+                       // position: "relative",
                         justifyContent: "center",
                       }}
                     >
@@ -204,11 +184,22 @@ const styles = {
     width: "40px",
     height: "20px",
     backgroundColor: "rgba(220, 230, 218, 1)",
-    marginLeft: "250px",
+    //marginLeft: "250px",
+    right: "70px",
     position: "absolute",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "flex-end",
+  },
+  points: {
+    width: "40px",
+    height: "20px",
+    backgroundColor: "rgba(220, 230, 218, 1)",
+    right: "10px",
+    position: "absolute",
+    display: "flex",
+    //alignItems: "flex-end",
+    justifyContent: "flex-end"
   },
 } as const;
 

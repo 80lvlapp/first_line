@@ -10,6 +10,30 @@ export interface Raiting {
   points: number
   сhangingPosition: number
 }
+
+export interface RaitingSportsman {
+
+  sportsman: Sportsman
+  place: number
+  points: number
+  tournaments: Tournaments
+}
+
+interface Tournament {
+
+  id: string
+  name: string
+
+}
+
+interface ElementTournament {
+
+  tournament: Tournament
+  points: number
+
+}
+
+interface Tournaments extends Array<ElementTournament>{}
   
 export interface Sportsman {
 
