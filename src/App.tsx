@@ -8,6 +8,7 @@ import AthletesRating from "./components/AthletesRating";
 import SignIn from "./components/SignIn";
 import SchoolTable from "./components/Administration/SchoolTable";
 import SchoolCard from "./components/Administration/SchoolCard";
+import Sportsman from "./components/Sportsman";
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
           
           <Route path="/" element={<Schools />} />
           <Route path="/AthletesRating" element={<AthletesRating />} />
+          <Route path="/Sportsman" element={<Sportsman/>} />
           
           <Route path="/SchoolTable" element={<SchoolTable />} />
           <Route path="/SchoolTable/:id" element={<SchoolCard />} />
