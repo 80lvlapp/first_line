@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { Styles } from "../components/AppStyles";
+import { mainStyles } from "../components/AppStyles";
 //import { useAppContext } from "../context/AppContext";
 import {
   InputBase,
@@ -35,19 +35,12 @@ export default function Home() {
 
     navigate("/AthletesRating", { state: { id: item.id } });
   };
+  
 
   return (
-    <div
-      style={{
-        flex: 1,
-        marginTop: 0,
-        background: "#E5E5E5",
-        height: "100vh",
-        overflow: "hidden",
-      }}
-    >
+    <div style={mainStyles.main}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Paper component="form" sx={Styles.paperStyles}>
+        <Paper component="form" sx={mainStyles.paperStyles}>
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Поиск школы"
@@ -84,13 +77,7 @@ export default function Home() {
               <div style = {{display: 'flex', justifyContent:'center'}}>
                 <ListItemButton
                   key={item.id}
-                  sx={{
-                    marginLeft: "20px",
-                    marginTop: "10px",
-                    background: "#FFFFFF",
-                    borderRadius: "10px",
-                    maxWidth: "600px"
-                  }}
+                  sx={mainStyles.listItem}
                   onClick={(event) => {
                     openRaitingSchool(item);
                   }}
