@@ -27,7 +27,7 @@ export default function Home() {
   };
 
   const itemIncludes = (item: any) => {
-    return item.name.trim().toLowerCase().includes(valueSearchSchool);
+    return item.name.trim().toLowerCase().includes(valueSearchSchool.toLowerCase());
   };
 
   const openRaitingSchool = (item: any) => {
