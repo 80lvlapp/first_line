@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
 import { useGetRaitingQuery } from "../redux/apiSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
@@ -46,13 +46,14 @@ export default function AthletesRating() {
     endDate: "2022",
   });
 
-  const openRaitingSportsman = (item: any) => {
+  const openRaitingSportsman = (idS:any, item: any) => {
+
     console.log(item);
 
-    navigate("/Sportsman", { state: { id: item.id } });
+    navigate(`/AthletesRating/${idS}/Sportsman/${item.sportsman.id}`, { state: { id: item.id } });
   };
 
-  console.log(data);
+  const { idS } = useParams<{ idS: any }>();
 
   return (
     <div
@@ -97,13 +98,13 @@ export default function AthletesRating() {
                   key={item.sportsman.id}
                   sx={mainStyles.listItem}
                   onClick={(event) => {
-                     openRaitingSportsman(item);
+                    openRaitingSportsman(idS, item);
                   }}
                 >
                   <div>
                     <Badge badgeContent={item.place} color="primary"></Badge>
                   </div>
-                
+
                   <div style={{ marginLeft: 20, maxWidth: "200px" }}>
                     <ListItemText primary={item.sportsman.name} />
                   </div>
@@ -114,8 +115,8 @@ export default function AthletesRating() {
                         item.сhangingPosition === 0
                           ? {}
                           : item.сhangingPosition > 0
-                          ? { ...styles.triangle, ...styles.arrowUp }
-                          : { ...styles.triangle, ...styles.arrowDown }
+                            ? { ...styles.triangle, ...styles.arrowUp }
+                            : { ...styles.triangle, ...styles.arrowDown }
                       }
                     />
 
@@ -136,7 +137,7 @@ export default function AthletesRating() {
                       style={{
                         display: "flex",
                         alignItems: "center",
-                       // position: "relative",
+                        // position: "relative",
                         justifyContent: "center",
                       }}
                     >
