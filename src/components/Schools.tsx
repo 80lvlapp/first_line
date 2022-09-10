@@ -31,9 +31,7 @@ export default function Home() {
   };
 
   const openRaitingSchool = (item: any) => {
-    console.log(item);
-
-    navigate("/AthletesRating", { state: { id: item.id } });
+      navigate(`/AthletesRating/${item.id}`, { state: { id: item.id } });
   };
   
 
