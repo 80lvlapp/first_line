@@ -10,6 +10,7 @@ class TournamentInfoModel(models.Model):
     sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT)
     category_value = models.ForeignKey(CategoryValueModel, on_delete=models.RESTRICT)
     points = models.IntegerField()
+    place = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
