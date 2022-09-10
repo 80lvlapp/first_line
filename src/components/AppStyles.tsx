@@ -12,7 +12,7 @@ export const mainStyles = {
     marginRight:"20px", 
   },
   main: {
-    flex: 1, background: "#E5E5E5", height: "100vh", overflow: "hidden"
+    flex: 1, background: "#E5E5E5", height: "100vh", overflow: "hidden", marginTop:40
   },
   listItem: {
     marginLeft: "20px",

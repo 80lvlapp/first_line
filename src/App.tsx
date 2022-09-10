@@ -5,9 +5,7 @@ import Schools  from "./components/Schools";
 import Tournaments from "./components/Tournaments";
 import TournamentСategories from "./components/TournamentСategories";
 import AthletesRating from "./components/AthletesRating";
-import SignIn from "./components/SignIn";
-import SchoolTable from "./components/Administration/SchoolTable";
-import SchoolCard from "./components/Administration/SchoolCard";
+
 import Sportsman from "./components/Sportsman";
 
 
@@ -21,11 +19,10 @@ function App() {
           <Route path="/AthletesRating" element={<AthletesRating />} />
           <Route path="/Sportsman" element={<Sportsman/>} />
           
-          <Route path="/SchoolTable" element={<SchoolTable />} />
-          <Route path="/SchoolTable/:id" element={<SchoolCard />} />
+        
 
           <Route path="/Tournaments" element={<Tournaments />} />
-          <Route path="/SignIn" element={<SignIn />} />
+
           <Route path="/TournamentСategories" element={<TournamentСategories />}
     />
         </Routes>
