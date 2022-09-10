@@ -79,12 +79,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 export default function PersistentDrawerLeft() {
     const theme = useTheme();
     const [open, setOpen] = React.useState(false);
-    const handleDrawerOpen = () => {
-        setOpen(true);
-    };
-    const handleDrawerClose = () => {
-        setOpen(false);
-    };
+ 
 
     return (
         <Box sx={{ display: 'flex'}}>
@@ -101,15 +96,7 @@ export default function PersistentDrawerLeft() {
                 <Toolbar sx={{
                     pr: '24px', // keep right padding when drawer closed
                 }}>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        sx={{ mr: 2, ...(open && { display: 'none' }) }}
-                    >
-                        <MenuIcon />
-                    </IconButton>
+                    
 
                     <Typography
                         component={Link}
@@ -121,46 +108,12 @@ export default function PersistentDrawerLeft() {
                     >
                         First line
                     </Typography>
-                    <Button component={Link} to={"/SignIn"} >
-                        <Avatar src="/broken-image.jpg" />
-                    </Button>
+                
 
                 </Toolbar>
 
             </AppBar>
-            <Drawer
-                sx={{
-                    width: drawerWidth,
-                    flexShrink: 0,
-                    '& .MuiDrawer-paper': {
-                        width: drawerWidth,
-                        boxSizing: 'border-box',
-                    },
-                }}
-                variant="persistent"
-                anchor="left"
-                open={open}
-            >
-                <DrawerHeader>
-                    <IconButton onClick={handleDrawerClose}>
-                        {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                    </IconButton>
-                </DrawerHeader>
-                <Divider />
-                <List>
-
-                    <ListItem onClick={handleDrawerClose} component={Link} to={"/SchoolTable"} button key={'SchoolTable'}>
-                        <ListItemIcon> <InboxIcon /></ListItemIcon>
-                        <ListItemText primary={"Школы"} />
-                    </ListItem>
-
-                </List>
-
-            </Drawer>
-
-            <Main open={open}>
-                {/* <DrawerHeader /> */}
-            </Main>
+         
         </Box>
     );
 }
