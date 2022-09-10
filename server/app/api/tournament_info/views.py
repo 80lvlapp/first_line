@@ -1,6 +1,5 @@
 from django.shortcuts import get_object_or_404
-from rest_framework import viewsets
-from rest_framework import status
+from rest_framework import viewsets, status
 from rest_framework.response import Response
 from .models import TournamentInfoModel
 from .tournament_info_serializers import TournamentInfoSerializers, TournamentInfoCreateSerializers
@@ -13,10 +12,17 @@ class TournamentInfoViewSet(viewsets.ModelViewSet):
         queryset = TournamentInfoModel.objects.all()
         startDate = request.query_params.get('startDate')
         endDate = request.query_params.get('endDate')
+        sportsmanName = request.query_params.get('sportsmanName')
+        tournamentName = request.query_params.get('tournamentName')
         if startDate is not None:
             queryset = queryset.filter(period__gte=startDate)
         if endDate is not None:
             queryset = queryset.filter(period__lte=endDate)
+        if sportsmanName is not None:
+            queryset = queryset.filter(sportsman__name=sportsmanName)
+        if tournamentName is not None:
+            queryset = queryset.filter(tournament__name=tournamentName)
+            
         serializer = TournamentInfoSerializers(queryset, many=True)
         return Response({"status": "OK", "data": serializer.data})
 
