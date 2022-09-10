@@ -9,16 +9,14 @@ from .tournament_info_serializers import TournamentInfoSerializers, TournamentIn
 class TournamentInfoViewSet(viewsets.ModelViewSet):
 
     def list(self, request, *args, **kwargs) -> Response:
+        print(f"{request.query_params}")
         queryset = TournamentInfoModel.objects.all()
         startDate = request.query_params.get('startDate')
         endDate = request.query_params.get('endDate')
-        idSchool = request.query_params.get('idSchool')
         if startDate is not None:
-            queryset.filter(period__gte=startDate)
+            queryset = queryset.filter(period__gte=startDate)
         if endDate is not None:
-            queryset.filter(period__lte=endDate)
-        # if idSchool is not None:
-        #     queryset.filter
+            queryset = queryset.filter(period__lte=endDate)
         serializer = TournamentInfoSerializers(queryset, many=True)
         return Response({"status": "OK", "data": serializer.data})
 
