@@ -16,3 +16,5 @@ class TournamentModel(models.Model):
 
     class Meta:
         db_table = "fl_tournament"
+        verbose_name = 'Турнир'
+        verbose_name_plural = 'Турниры'

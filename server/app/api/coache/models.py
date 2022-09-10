@@ -11,3 +11,5 @@ class CoacheModel(models.Model):
 
     class Meta:
         db_table = "fl_coache"
+        verbose_name = 'Тренера'
+        verbose_name_plural = 'Тренеры'

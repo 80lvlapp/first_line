@@ -21,3 +21,5 @@ class SportsmanModel(models.Model):
 
     class Meta:
         db_table = "fl_sportsman"
+        verbose_name = 'Спортсмена'
+        verbose_name_plural = 'Спортсмены'

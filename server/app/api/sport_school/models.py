@@ -11,3 +11,5 @@ class SportSchoolModel(models.Model):
 
     class Meta:
         db_table = "fl_sport_school"
+        verbose_name = 'Спортивную школу'
+        verbose_name_plural = 'Спортивные школы'
