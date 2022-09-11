@@ -22,7 +22,7 @@ class TournamentInfoViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(sportsman__name=sportsmanName)
         if tournamentName is not None:
             queryset = queryset.filter(tournament__name=tournamentName)
-            
+
         serializer = TournamentInfoSerializers(queryset, many=True)
         return Response({"status": "OK", "data": serializer.data})
 

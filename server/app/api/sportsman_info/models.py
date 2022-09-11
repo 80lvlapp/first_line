@@ -4,6 +4,7 @@ from api.sportsman.models import SportsmanModel
 from api.coache.models import CoacheModel
 
 
+
 class SportsmanInfoModel(models.Model):
     period = models.DateField()
     sport_school = models.ForeignKey(SportSchoolModel, on_delete=models.RESTRICT)
