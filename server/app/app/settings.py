@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     "api.score_scale.apps.ScoreScaleConfig",
     "api.sportsman_info.apps.SportsmanInfoConfig",
     "api.tournament_info.apps.TournamentInfoConfig",
+    "reports.apps.ReportsConfig",
 
 ]
 
