@@ -1,8 +1,7 @@
 from rest_framework import viewsets, status
 from rest_framework.response import Response
 from rest_framework.request import Request
-# from .models import SportsmanPointsReport
-# from .reports_serializers import SportsmanPointsReportSerializers
+
 from api.sportsman_info.models import SportsmanInfoModel
 from api.tournament_info.models import TournamentInfoModel
 from django.db.models import Sum
