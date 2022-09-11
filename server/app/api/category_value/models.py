@@ -15,5 +15,3 @@ class CategoryValueModel(models.Model):
 
     class Meta:
         db_table = "fl_category_value"
-        verbose_name = 'Тип категории'
-        verbose_name_plural = 'Типы категорий'

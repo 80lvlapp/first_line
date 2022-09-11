@@ -1,6 +1,5 @@
 from django.db import models
 
-
 class TypeOfTournamentModel(models.Model):
     name = models.CharField(max_length=50, db_index=True)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -12,5 +11,3 @@ class TypeOfTournamentModel(models.Model):
 
     class Meta:
         db_table = "fl_type_tournament"
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Типы турниров'

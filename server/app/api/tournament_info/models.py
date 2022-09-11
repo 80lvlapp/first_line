@@ -9,8 +9,7 @@ class TournamentInfoModel(models.Model):
     tournament = models.ForeignKey(TournamentModel, on_delete=models.RESTRICT)
     sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT)
     category_value = models.ForeignKey(CategoryValueModel, on_delete=models.RESTRICT)
-    points = models.FloatField()
-    place = models.IntegerField(default=0)
+    points = models.IntegerField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
@@ -21,5 +20,3 @@ class TournamentInfoModel(models.Model):
     class Meta:
         db_table = "fl_tournament_info"
         unique_together = ('period', 'tournament', 'sportsman', "category_value")
-        verbose_name = 'Запись'
-        verbose_name_plural = 'Информация о турнирах'

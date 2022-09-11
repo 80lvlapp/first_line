@@ -39,7 +39,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     "rest_framework",
-    'drf_yasg',
     "api.apps.ApiConfig",
     "api.category.apps.CategoryConfig",
     "api.coache.apps.CoacheConfig",
@@ -51,7 +50,6 @@ INSTALLED_APPS = [
     "api.score_scale.apps.ScoreScaleConfig",
     "api.sportsman_info.apps.SportsmanInfoConfig",
     "api.tournament_info.apps.TournamentInfoConfig",
-    "reports.apps.ReportsConfig",
 
 ]
 
@@ -94,6 +92,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 # DATABASES = {
 #     'default': {

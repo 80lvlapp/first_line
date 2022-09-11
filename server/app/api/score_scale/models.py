@@ -20,5 +20,3 @@ class ScoreScaleModel(models.Model):
     class Meta:
         db_table = "fl_score_scale"
         unique_together = ('period', 'sport_school', 'type_tournament')
-        verbose_name = 'Запись'
-        verbose_name_plural = 'Шкала'

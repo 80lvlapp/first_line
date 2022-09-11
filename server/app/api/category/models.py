@@ -12,5 +12,3 @@ class CategoryModel(models.Model):
 
     class Meta:
         db_table = "fl_category"
-        verbose_name = 'Категорию'
-        verbose_name_plural = 'Категории'

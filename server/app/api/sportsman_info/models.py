@@ -4,7 +4,6 @@ from api.sportsman.models import SportsmanModel
 from api.coache.models import CoacheModel
 
 
-
 class SportsmanInfoModel(models.Model):
     period = models.DateField()
     sport_school = models.ForeignKey(SportSchoolModel, on_delete=models.RESTRICT)
@@ -21,5 +20,3 @@ class SportsmanInfoModel(models.Model):
     class Meta:
         db_table = "fl_sportsman_info"
         unique_together = ('period', 'sport_school', 'sportsman', "coache")
-        verbose_name = 'Запись по спортсмену'
-        verbose_name_plural = 'Информация о спортсменах'

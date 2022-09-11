@@ -1,14 +1,11 @@
 from rest_framework import serializers
 from .models import CategoryValueModel
-from ..category.category_serializers import CategorySerializers
 
 
 class CategoryValueCreateSerializer(serializers.ModelSerializer):
-    category = CategorySerializers()
-
     class Meta:
         model = CategoryValueModel
-        exclude = ['created_at', "updated_at"]
+        fields = ["id", "name", "category"]
 
 
 class CategoryValueSerializer(serializers.ModelSerializer):
