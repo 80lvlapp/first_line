@@ -5,4 +5,4 @@ from .models import TypeOfTournamentModel
 class TypeOfTournametSerializers(serializers.ModelSerializer):
     class Meta:
         model = TypeOfTournamentModel
-        fields = ["id", "name"]
+        exclude = ['created_at', "updated_at"]

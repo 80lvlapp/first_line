@@ -5,4 +5,4 @@ from .models import SportsmanModel
 class SportsmanSerializers(serializers.ModelSerializer):
     class Meta:
         model = SportsmanModel
-        fields = "__all__"
+        exclude = ['created_at', "updated_at"]
