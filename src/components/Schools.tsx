@@ -12,22 +12,41 @@ import {
   Avatar,
   Paper,
   IconButton,
+  Autocomplete,
+  TextField
 } from "@mui/material";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
 import { useGetSchoolsQuery } from "../redux/apiSlice";
 
 export default function Home() {
+  
   const { data, error, isLoading } = useGetSchoolsQuery("");
   const [valueSearchSchool, setValueSearchSchool] = useState("");
   let navigate = useNavigate();
+
+  const [yearArray, setYearArray] = useState<number[]>([]);
+
+  useEffect(() => {
+    
+    let yArray = [];
+    yArray.push(2021);
+    yArray.push(2022);
+    yArray.push(2022);
+
+    setYearArray(yArray);
+
+  }, []);
 
   const changeValueSearch = (item: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearchSchool(item.target.value);
   };
 
   const itemIncludes = (item: any) => {
-    return item.name.trim().toLowerCase().includes(valueSearchSchool.toLowerCase());
+    return item.name
+      .trim()
+      .toLowerCase()
+      .includes(valueSearchSchool.toLowerCase());
   };
 
   const openRaitingSchool = (item: any) => {
@@ -35,12 +54,18 @@ export default function Home() {
 
     navigate("/AthletesRating", { state: { id: item.id } });
   };
-  
 
   return (
     <div style={mainStyles.main}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Paper component="form" sx={mainStyles.paperStyles}>
+          <Autocomplete
+            disablePortal
+            id="combo-box-demo"
+            options={yearArray}
+            sx={{ width: 300 }}
+            renderInput={(params) => <TextField {...params} label="Movie" />}
+          />
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Поиск школы"
@@ -74,7 +99,7 @@ export default function Home() {
           {data
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <div style = {{display: 'flex', justifyContent:'center'}}>
+              <div style={{ display: "flex", justifyContent: "center" }}>
                 <ListItemButton
                   key={item.id}
                   sx={mainStyles.listItem}
