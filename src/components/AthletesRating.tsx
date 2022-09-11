@@ -101,7 +101,7 @@ export default function AthletesRating() {
                     openRaitingSportsman(idS, item);
                   }}
                 >
-                  <div>
+                  <div style={{marginLeft: "10px"}}>
                     <Badge badgeContent={item.place} color="primary"></Badge>
                   </div>
 
@@ -190,7 +190,7 @@ const styles = {
     position: "absolute",
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "center",
   },
   points: {
     width: "40px",
@@ -199,8 +199,8 @@ const styles = {
     right: "10px",
     position: "absolute",
     display: "flex",
-    //alignItems: "flex-end",
-    justifyContent: "flex-end"
+    alignItems: "center",
+    justifyContent: "center"
   },
 } as const;
 
