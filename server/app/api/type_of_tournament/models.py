@@ -11,3 +11,5 @@ class TypeOfTournamentModel(models.Model):
 
     class Meta:
         db_table = "fl_type_tournament"
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Типы турниров'
