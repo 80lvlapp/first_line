@@ -20,5 +20,6 @@ export const mainStyles = {
     background: "#FFFFFF",
     borderRadius: "10px",
     maxWidth: "600px",
+    minHeight: "70px"
   }
 };

@@ -1,5 +1,10 @@
 import React, { useState } from "react";
-import { Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
+import {
+  Navigate,
+  useNavigate,
+  useLocation,
+  useParams,
+} from "react-router-dom";
 import { useGetRaitingQuery } from "../redux/apiSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
@@ -18,14 +23,26 @@ import {
   Paper,
   IconButton,
   Badge,
+  TextField,
+  Box,
 } from "@mui/material";
 import { flexbox } from "@mui/system";
+
+import { Dayjs } from "dayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 
 export default function AthletesRating() {
   let navigate = useNavigate();
   const location = useLocation();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
+
+  const [dateStart, setDateStart] = React.useState<Dayjs | null>(null);
+  const [dateEnd, setDateEnd] = React.useState<Dayjs | null>(null);
+
+  let { idSp } = useParams();
 
   const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -46,20 +63,77 @@ export default function AthletesRating() {
     endDate: "2022",
   });
 
-  const openRaitingSportsman = (idS:any, item: any) => {
-
+  const openRaitingSportsman = (idS: any, item: any) => {
     console.log(item);
 
-    navigate(`/AthletesRating/${idS}/Sportsman/${item.sportsman.id}`, { state: { id: item.id } });
+    navigate(`/AthletesRating/${idS}/Sportsman/${item.sportsman.id}`, {
+      state: { id: item.id },
+    });
   };
+
+  console.log(window.screen.width);
 
   const { idS } = useParams<{ idS: any }>();
 
   return (
-    <div
-      style={mainStyles.main}>
+    <div style={mainStyles.main}>
+      <div
+        style={{
+          justifyContent: "center",
+          display: "flex",
+          flexDirection: "row",
+          marginTop: "40px",
+          marginLeft: "20px",
+          marginRight: "20px",
+          flex: 1,
+
+          //maxWidth: "600px",
+          //alignItems: "center"
+        }}
+      >
+        <LocalizationProvider dateAdapter={AdapterDayjs}>
+          <div
+            style={
+              window.screen.width > 600
+                ? { width: "260px", marginRight: "40px", backgroundColor: "white" }
+                : { width: "260px", marginRight: "10px", backgroundColor: "white" }
+            }
+          >
+            <DatePicker
+              inputFormat="DD.MM.YYYY"
+              label="Дата начала"
+              value={dateStart}
+              onChange={(newValue) => {
+                setDateStart(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </div>
+          <div
+            style={
+              window.screen.width > 600
+                ? { width: "260px", marginLeft: "40px", backgroundColor: "white" }
+                : { width: "260px", marginLeft: "10px", backgroundColor: "white" }
+            }
+          >
+            <DatePicker
+              inputFormat="DD.MM.YYYY"
+              label="Дата окончания"
+              value={dateEnd}
+              onChange={(newValue) => {
+                setDateEnd(newValue);
+              }}
+              renderInput={(params) => <TextField {...params} />}
+            />
+          </div>
+        </LocalizationProvider>
+      </div>
+
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Paper component="form" sx={{ ...mainStyles.paperStyles }}>
+        <Paper
+          component="form"
+          sx={{ ...mainStyles.paperStyles, marginTop: "20px" }}
+        >
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Поиск спортсмена"
@@ -93,7 +167,10 @@ export default function AthletesRating() {
           {data
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{ display: "flex", justifyContent: "center" }}
+                key={item.sportsman.id}
+              >
                 <ListItemButton
                   key={item.sportsman.id}
                   sx={mainStyles.listItem}
@@ -101,7 +178,7 @@ export default function AthletesRating() {
                     openRaitingSportsman(idS, item);
                   }}
                 >
-                  <div style={{marginLeft: "10px"}}>
+                  <div style={{ marginLeft: "10px" }}>
                     <Badge badgeContent={item.place} color="primary"></Badge>
                   </div>
 
@@ -115,8 +192,8 @@ export default function AthletesRating() {
                         item.сhangingPosition === 0
                           ? {}
                           : item.сhangingPosition > 0
-                            ? { ...styles.triangle, ...styles.arrowUp }
-                            : { ...styles.triangle, ...styles.arrowDown }
+                          ? { ...styles.triangle, ...styles.arrowUp }
+                          : { ...styles.triangle, ...styles.arrowDown }
                       }
                     />
 
@@ -200,7 +277,7 @@ const styles = {
     position: "absolute",
     display: "flex",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
   },
 } as const;
 
