@@ -25,19 +25,6 @@ export default function Home() {
   const [valueSearchSchool, setValueSearchSchool] = useState("");
   let navigate = useNavigate();
 
-  const [yearArray, setYearArray] = useState<number[]>([]);
-
-  useEffect(() => {
-    
-    let yArray = [];
-    yArray.push(2021);
-    yArray.push(2022);
-    yArray.push(2022);
-
-    setYearArray(yArray);
-
-  }, []);
-
   const changeValueSearch = (item: React.ChangeEvent<HTMLInputElement>) => {
     setValueSearchSchool(item.target.value);
   };
@@ -57,13 +44,6 @@ export default function Home() {
     <div style={mainStyles.main}>
       <div style={{ display: "flex", justifyContent: "center" }}>
         <Paper component="form" sx={mainStyles.paperStyles}>
-          <Autocomplete
-            disablePortal
-            id="combo-box-demo"
-            options={yearArray}
-            sx={{ width: 300 }}
-            renderInput={(params) => <TextField {...params} label="Movie" />}
-          />
           <InputBase
             sx={{ ml: 1, flex: 1 }}
             placeholder="Поиск школы"
@@ -97,7 +77,7 @@ export default function Home() {
           {data
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div style={{ display: "flex", justifyContent: "center" }} key = {item.id}>
                 <ListItemButton
                   key={item.id}
                   sx={mainStyles.listItem}
@@ -105,12 +85,12 @@ export default function Home() {
                     openRaitingSchool(item);
                   }}
                 >
-                  <ListItemAvatar>
+                  <ListItemAvatar >
                     <Avatar>
                       <ImageIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary={item.name} secondary={item.adress} />
+                  <ListItemText key={item.id} primary={item.name} secondary={item.adress} />
                 </ListItemButton>
               </div>
             ))}
