@@ -1,17 +1,15 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate, useLocation } from "react-router-dom";
+import { Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
 import { useGetRaitingSportsmanQuery } from "../redux/apiSlice";
 import { mainStyles } from "../components/AppStyles";
-import {
-  ListItemButton,
-  List,
-  ListItemText,
-} from "@mui/material";
+import { ListItemButton, List, ListItemText } from "@mui/material";
+import { fontSize } from "@mui/system";
 
 export default function Sportsman() {
   const location = useLocation();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
+  const { idSp } = useParams<{ idSp: string }>();
 
   // const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -28,12 +26,12 @@ export default function Sportsman() {
   };
 
   const { data, error, isLoading } = useGetRaitingSportsmanQuery({
-    id: id,
+	id: idSp !== undefined ? idSp : "",
     startDate: "2022",
     endDate: "2022",
   });
 
-  console.log(data);
+  console.log(data?.sportsman.name);
 
   return (
     <div style={mainStyles.main}>
@@ -56,6 +54,78 @@ export default function Sportsman() {
             </IconButton>
           </Paper>
         </div> */}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          paddingLeft: "20px",
+          paddingRight: "20px",
+        }}
+      >
+        <div
+          style={{
+            maxWidth: "600px",
+            minHeight: "70px",
+            display: "flex",
+            justifyContent: "center",
+            width: "100%",
+          }}
+        >
+          <div
+            style={{
+              marginTop: "50px",
+              background: "#FFFFFF",
+              borderRadius: "10px",
+              width: "70%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                marginTop: "20px",
+                marginBottom: "20px",
+                marginLeft: 10,
+                marginRight: 10,
+                color: "#625D8E",
+                fontFamily: "inherit",
+                fontSize: 21,
+                fontWeight: "bold",
+              }}
+            >
+              {data?.sportsman.name}
+            </div>
+          </div>
+          <div
+            style={{
+              marginLeft: "10px",
+              marginTop: "50px",
+              background: "#FFFFFF",
+              borderRadius: "10px",
+              width: "30%",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                marginTop: "20px",
+                marginBottom: "20px",
+                marginLeft: 10,
+                marginRight: 10,
+                color: "#625D8E",
+                fontFamily: "inherit",
+                fontSize: 16,
+                fontWeight: "bold",
+              }}
+            >
+              {data?.place} место {"\n"} {data?.points} очков
+            </div>
+          </div>
+        </div>
+      </div>
 
       {error ? (
         <>Oh no, there was an error</>
@@ -80,8 +150,22 @@ export default function Sportsman() {
                     // openRaitingSchool(item);
                   }}
                 >
-                  <div style={{ marginLeft: 20, maxWidth: "200px" }}>
-                    <ListItemText primary={item.tournament.name} />
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "row",
+					  alignItems: "center"
+                      //maxWidth: "200px",
+                    }}
+                  >
+                    <div style={{ color: "#719A70",  fontWeight: "bold", fontSize: 15 }}>
+                      {item.tournament.date}
+                    </div>
+                    <div style = {{display: "flex", flexDirection: 'column', justifyContent: 'center', marginLeft: "20px"}}>
+                      <div style = {{color: "#625D8E", fontWeight: "bold", fontSize: 17}}>{item.tournament.name}</div>
+                      <div style = {{color: "#7F7F7F", fontSize: 12}}>{item.tournament.venue}</div>
+					  <div style = {{color: "#7F7F7F", fontWeight: "bold", fontSize: 12}}>Всего очков: {item.points}</div>
+                    </div>
                   </div>
                 </ListItemButton>
               </div>
