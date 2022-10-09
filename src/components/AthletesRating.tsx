@@ -42,7 +42,11 @@ export default function AthletesRating() {
   const [dateStart, setDateStart] = React.useState<Dayjs | null>(null);
   const [dateEnd, setDateEnd] = React.useState<Dayjs | null>(null);
 
-  let { idSp } = useParams();
+  const { idS } = useParams<{ idS: string }>();
+
+  // let { idS } = useParams<ParamTypes>();
+  // console.log(idS);
+  
 
   const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -58,7 +62,8 @@ export default function AthletesRating() {
   };
 
   const { data, error, isLoading } = useGetRaitingQuery({
-    id: id,
+    //id: id,
+    id: idS !== undefined ? idS : "",
     startDate: "2022",
     endDate: "2022",
   });
@@ -73,7 +78,9 @@ export default function AthletesRating() {
 
   console.log(window.screen.width);
 
-  const { idS } = useParams<{ idS: any }>();
+  
+  console.log("test", idS);
+  
 
   return (
     <div style={mainStyles.main}>
@@ -283,4 +290,7 @@ const styles = {
 
 interface CustomizedState {
   id: string;
+}
+interface ParamTypes {
+  idS: string;
 }

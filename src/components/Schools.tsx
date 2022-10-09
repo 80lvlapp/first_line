@@ -40,6 +40,10 @@ export default function Home() {
       navigate(`/AthletesRating/${item.id}`, { state: { id: item.id } });
   };
 
+
+  console.log(data);
+  
+
   return (
     <div style={mainStyles.main}>
       <div style={{ display: "flex", justifyContent: "center" }}>
