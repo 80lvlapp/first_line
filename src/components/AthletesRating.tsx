@@ -5,7 +5,7 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { useGetRaitingQuery } from "../redux/apiSlice";
+import { useGetRatingQuery } from "../redux/apiSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
 import { mainStyles } from "../components/AppStyles";
@@ -46,7 +46,6 @@ export default function AthletesRating() {
 
   // let { idS } = useParams<ParamTypes>();
   // console.log(idS);
-  
 
   const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -61,14 +60,14 @@ export default function AthletesRating() {
       .includes(valueSearchSportsman.toLowerCase());
   };
 
-  const { data, error, isLoading } = useGetRaitingQuery({
+  const { data, error, isLoading } = useGetRatingQuery({
     //id: id,
     id: idS !== undefined ? idS : "",
     startDate: "2022",
     endDate: "2022",
   });
 
-  const openRaitingSportsman = (idS: any, item: any) => {
+  const openRatingSportsman = (idS: any, item: any) => {
     console.log(item);
 
     navigate(`/AthletesRating/${idS}/Sportsman/${item.sportsman.id}`, {
@@ -78,9 +77,7 @@ export default function AthletesRating() {
 
   console.log(window.screen.width);
 
-  
   console.log("test", idS);
-  
 
   return (
     <div style={mainStyles.main}>
@@ -102,8 +99,16 @@ export default function AthletesRating() {
           <div
             style={
               window.screen.width > 600
-                ? { width: "260px", marginRight: "40px", backgroundColor: "white" }
-                : { width: "260px", marginRight: "10px", backgroundColor: "white" }
+                ? {
+                    width: "260px",
+                    marginRight: "40px",
+                    backgroundColor: "white",
+                  }
+                : {
+                    width: "260px",
+                    marginRight: "10px",
+                    backgroundColor: "white",
+                  }
             }
           >
             <DatePicker
@@ -119,8 +124,16 @@ export default function AthletesRating() {
           <div
             style={
               window.screen.width > 600
-                ? { width: "260px", marginLeft: "40px", backgroundColor: "white" }
-                : { width: "260px", marginLeft: "10px", backgroundColor: "white" }
+                ? {
+                    width: "260px",
+                    marginLeft: "40px",
+                    backgroundColor: "white",
+                  }
+                : {
+                    width: "260px",
+                    marginLeft: "10px",
+                    backgroundColor: "white",
+                  }
             }
           >
             <DatePicker
@@ -182,7 +195,7 @@ export default function AthletesRating() {
                   key={item.sportsman.id}
                   sx={mainStyles.listItem}
                   onClick={(event) => {
-                    openRaitingSportsman(idS, item);
+                    openRatingSportsman(idS, item);
                   }}
                 >
                   <div style={{ marginLeft: "10px" }}>
@@ -190,7 +203,16 @@ export default function AthletesRating() {
                   </div>
 
                   <div style={{ marginLeft: 20, maxWidth: "200px" }}>
-                    <ListItemText primary={item.sportsman.name} />
+                    <div
+                      style={{
+                        color: "#7F7F7F",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.sportsman.name}
+                    </div>
+                    {/* <ListItemText primary={item.sportsman.name} /> */}
                   </div>
 
                   <div style={styles.containerTriangle}>
