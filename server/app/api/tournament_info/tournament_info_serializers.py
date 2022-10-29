@@ -4,10 +4,12 @@ from ..category_value.category_value_serializers import CategoryValueCreateSeria
 from ..sportsman.sportsman_serializers import SportsmanSerializers
 from ..tournament.tournament_serializers import TournamentSerializers
 
+
 class TournamentInfoSerializers(serializers.ModelSerializer):
     tournament = TournamentSerializers()
     sportsman = SportsmanSerializers()
     category_value = CategoryValueCreateSerializer()
+
     class Meta:
         model = TournamentInfoModel
         exclude = ['created_at', "updated_at"]
@@ -17,11 +19,21 @@ class TournamentInfoSerializers(serializers.ModelSerializer):
 class TournamentInfoCreateSerializers(serializers.ModelSerializer):
     class Meta:
         model = TournamentInfoModel
-        fields = ['period', "tournament", "sportsman", "category_value", "points"]
+        fields = ['period', "tournament",
+                  "sportsman", "category_value", "points"]
 
 
 class TournamentInfoReportSerializers(serializers.ModelSerializer):
     sportsman = SportsmanSerializers()
+
     class Meta:
         model = TournamentInfoModel
         fields = ["period", "sportsman", "points"]
+
+
+class TournamentSportsmanReportInfoReportSerializers(serializers.ModelSerializer):
+    tournament = TournamentSerializers()
+    class Meta:
+        model = TournamentInfoModel
+        fields = ["period", "tournament"]
+        depth = 1

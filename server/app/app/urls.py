@@ -26,7 +26,7 @@ from api.tournament.views import TournamentViewSet
 from api.score_scale.views import ScoreScaleViewSet
 from api.sportsman_info.views import SportsmanInfoViewSet
 from api.tournament_info.views import TournamentInfoViewSet
-from reports.views import SportsmanPointsReportViewSet
+from reports.views import SportsmanPointsReportViewSet, TournamentsSportsmenReportViewSet
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -83,4 +83,7 @@ urlpatterns = [
 
     path("api/v1/reporst/sportsman-report",
          SportsmanPointsReportViewSet.as_view({'get': "list"})),
+
+     path("api/v1/reporst/tournaments-sportsman-report",
+         TournamentsSportsmenReportViewSet.as_view({'get': "list"})),    
 ]

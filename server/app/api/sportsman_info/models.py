@@ -20,3 +20,5 @@ class SportsmanInfoModel(models.Model):
     class Meta:
         db_table = "fl_sportsman_info"
         unique_together = ('period', 'sport_school', 'sportsman', "coache")
+        verbose_name = 'Запись по спортсмену'
+        verbose_name_plural = 'Информация о спортсменах'
