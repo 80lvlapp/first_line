@@ -8,6 +8,11 @@ from .tournament_serializers import TournamentSerializers, TournamentCreateSeria
 
 class TournamentViewSet(viewsets.ModelViewSet):
 
+    serializer_class = TournamentSerializers
+
+    def get_queryset(self):
+        return TournamentModel.objects.all()
+
     def list(self, request, *args, **kwargs) -> Response:
 
         queryset = TournamentModel.objects.all().order_by('name')

@@ -8,6 +8,11 @@ from .sportsman_serializers import SportsmanSerializers
 
 class SportsmanViewSet(viewsets.ModelViewSet):
 
+    serializer_class = SportsmanSerializers
+
+    def get_queryset(self):
+        return SportsmanModel.objects.all()
+
     def list(self, request, *args, **kwargs) -> Response:
 
         queryset = SportsmanModel.objects.all().order_by('name')

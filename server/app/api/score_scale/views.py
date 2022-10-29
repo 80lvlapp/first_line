@@ -8,6 +8,11 @@ from .score_scale_serializers import ScoreScaleSerializers, ScoreScaleCreateSeri
 
 class ScoreScaleViewSet(viewsets.ModelViewSet):
 
+    serializer_class = ScoreScaleSerializers
+
+    def get_queryset(self):
+        return ScoreScaleModel.objects.all()
+
     def list(self, request, *args, **kwargs) -> Response:
 
         queryset = ScoreScaleModel.objects.all()

@@ -9,6 +9,11 @@ from .category_value_serializers import CategoryValueSerializer,  CategoryValueC
 
 class CategoryValueViewSet(viewsets.ModelViewSet):
 
+    serializer_class = CategoryValueSerializer
+    
+
+    def get_queryset(self):
+        return CategoryValueModel.objects.all()
     def list(self, request, *args, **kwargs) -> Response:
 
         queryset = CategoryValueModel.objects.all()

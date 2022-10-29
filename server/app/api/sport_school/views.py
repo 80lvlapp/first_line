@@ -8,6 +8,11 @@ from .sport_school_serializers import SportSchoolSerializers
 
 class SportSchoolViewSet(viewsets.ModelViewSet):
 
+    serializer_class = SportSchoolSerializers
+
+    def get_queryset(self):
+        return SportSchoolModel.objects.all()
+
     def list(self, request, *args, **kwargs) -> Response:
 
         queryset = SportSchoolModel.objects.all().order_by('name')

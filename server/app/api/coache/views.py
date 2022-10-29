@@ -8,6 +8,11 @@ from .coache_serializers import CoacheSerializers
 
 class CoacheViewSet(viewsets.ModelViewSet):
 
+    serializer_class = CoacheSerializers
+
+    def get_queryset(self):
+        return CoacheModel.objects.all()
+
     def list(self, request, *args, **kwargs) -> Response:
 
         queryset = CoacheModel.objects.all().order_by('name')
