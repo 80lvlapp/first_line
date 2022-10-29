@@ -7,6 +7,11 @@ from .category_serializers import CategorySerializers
 
 
 class CategoryViewSet(viewsets.ModelViewSet):
+    serializer_class = CategorySerializers
+    search_fiedls = ['name', "code"]
+
+    def get_queryset(self):
+        return CategoryModel.objects.all()
 
     def list(self, request, *args, **kwargs) -> Response:
 
