@@ -4,19 +4,27 @@ export interface School {
     adress: string
   }
 
-export interface Raiting {
+export interface Rating {
   sportsman: Sportsman
   place: number
   points: number
   сhangingPosition: number
 }
 
-export interface RaitingSportsman {
+export interface RatingSportsman {
 
   sportsman: Sportsman
   place: number
   points: number
   tournaments: Tournaments
+}
+
+export interface RatingTournament {
+
+  sportsman: Sportsman
+  tournament: Tournament
+  points: number
+  categories: Categories
 }
 
 interface Tournament {
@@ -25,7 +33,20 @@ interface Tournament {
   name: string
   date: string
   venue: string
+  type: TypeTournament
 
+}
+
+interface Category {
+
+  id: string
+  name: string
+
+}
+
+interface TypeTournament {
+  id: string
+  name: string
 }
 
 interface ElementTournament {
@@ -35,7 +56,16 @@ interface ElementTournament {
 
 }
 
+interface ElementCategory {
+
+  category: Category
+  points: number
+  place: number
+
+}
+
 interface Tournaments extends Array<ElementTournament>{}
+interface Categories extends Array<ElementCategory>{}
   
 export interface Sportsman {
 

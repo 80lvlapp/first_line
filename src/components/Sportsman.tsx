@@ -1,15 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Navigate, useNavigate, useLocation, useParams } from "react-router-dom";
-import { useGetRaitingSportsmanQuery } from "../redux/apiSlice";
+import {
+  Navigate,
+  useNavigate,
+  useLocation,
+  useParams,
+} from "react-router-dom";
+import { useGetRatingSportsmanQuery } from "../redux/apiSlice";
 import { mainStyles } from "../components/AppStyles";
 import { ListItemButton, List, ListItemText } from "@mui/material";
-import { fontSize } from "@mui/system";
+import { keyboard } from "@testing-library/user-event/dist/keyboard";
 
 export default function Sportsman() {
   const location = useLocation();
+  let navigate = useNavigate();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
-  const { idSp } = useParams<{ idSp: string }>();
+  const { idSp, idS } = useParams<{ idSp: string; idS: string }>();
 
   // const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -25,11 +31,22 @@ export default function Sportsman() {
     //   .includes(valueSearchSportsman.toLowerCase());
   };
 
-  const { data, error, isLoading } = useGetRaitingSportsmanQuery({
-	id: idSp !== undefined ? idSp : "",
+  const { data, error, isLoading } = useGetRatingSportsmanQuery({
+    id: idSp !== undefined ? idSp : "",
     startDate: "2022",
     endDate: "2022",
   });
+
+  const openTournament = (item: any) => {
+    console.log(item);
+
+    navigate(
+      `/AthletesRating/${idS}/Sportsman/${idSp}/Tournament/${item.tournament.id}`,
+      {
+        state: { id: item.id },
+      }
+    );
+  };
 
   console.log(data?.sportsman.name);
 
@@ -142,29 +159,62 @@ export default function Sportsman() {
           {data.tournaments
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <div style={{ display: "flex", justifyContent: "center" }}>
+              <div
+                style={{ display: "flex", justifyContent: "center" }}
+                key={item.tournament.id}
+              >
                 <ListItemButton
                   key={item.tournament.id}
                   sx={mainStyles.listItem}
                   onClick={(event) => {
-                    // openRaitingSchool(item);
+                    openTournament(item);
                   }}
                 >
                   <div
                     style={{
                       display: "flex",
                       flexDirection: "row",
-					  alignItems: "center"
-                      //maxWidth: "200px",
+                      alignItems: "center",
                     }}
                   >
-                    <div style={{ color: "#719A70",  fontWeight: "bold", fontSize: 15 }}>
+                    <div
+                      style={{
+                        color: "#719A70",
+                        fontWeight: "bold",
+                        fontSize: 15,
+                      }}
+                    >
                       {item.tournament.date}
                     </div>
-                    <div style = {{display: "flex", flexDirection: 'column', justifyContent: 'center', marginLeft: "20px"}}>
-                      <div style = {{color: "#625D8E", fontWeight: "bold", fontSize: 17}}>{item.tournament.name}</div>
-                      <div style = {{color: "#7F7F7F", fontSize: 12}}>{item.tournament.venue}</div>
-					  <div style = {{color: "#7F7F7F", fontWeight: "bold", fontSize: 12}}>Всего очков: {item.points}</div>
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        justifyContent: "center",
+                        marginLeft: "20px",
+                      }}
+                    >
+                      <div
+                        style={{
+                          color: "#625D8E",
+                          fontWeight: "bold",
+                          fontSize: 17,
+                        }}
+                      >
+                        {item.tournament.name}
+                      </div>
+                      <div style={{ color: "#7F7F7F", fontSize: 12 }}>
+                        {item.tournament.venue}
+                      </div>
+                      <div
+                        style={{
+                          color: "#7F7F7F",
+                          fontWeight: "bold",
+                          fontSize: 12,
+                        }}
+                      >
+                        Всего очков: {item.points}
+                      </div>
                     </div>
                   </div>
                 </ListItemButton>

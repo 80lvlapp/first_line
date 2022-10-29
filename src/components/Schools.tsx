@@ -13,14 +13,13 @@ import {
   Paper,
   IconButton,
   Autocomplete,
-  TextField
+  TextField,
 } from "@mui/material";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
 import { useGetSchoolsQuery } from "../redux/apiSlice";
 
 export default function Home() {
-  
   const { data, error, isLoading } = useGetSchoolsQuery("");
   const [valueSearchSchool, setValueSearchSchool] = useState("");
   let navigate = useNavigate();
@@ -37,12 +36,10 @@ export default function Home() {
   };
 
   const openRaitingSchool = (item: any) => {
-      navigate(`/AthletesRating/${item.id}`, { state: { id: item.id } });
+    navigate(`/AthletesRating/${item.id}`, { state: { id: item.id } });
   };
 
-
   console.log(data);
-  
 
   return (
     <div style={mainStyles.main}>
@@ -81,7 +78,10 @@ export default function Home() {
           {data
             .filter((itemF) => itemIncludes(itemF))
             .map((item) => (
-              <div style={{ display: "flex", justifyContent: "center" }} key = {item.id}>
+              <div
+                style={{ display: "flex", justifyContent: "center" }}
+                key={item.id}
+              >
                 <ListItemButton
                   key={item.id}
                   sx={mainStyles.listItem}
@@ -89,12 +89,34 @@ export default function Home() {
                     openRaitingSchool(item);
                   }}
                 >
-                  <ListItemAvatar >
+                  <ListItemAvatar>
                     <Avatar>
                       <ImageIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText key={item.id} primary={item.name} secondary={item.adress} />
+
+                  <div style={{display: "flex", flexDirection: "column"}}>
+                    <div
+                      style={{
+                        color: "#7F7F7F",
+                        fontWeight: "bold",
+                        fontSize: 16,
+                      }}
+                    >
+                      {item.name}
+                    </div>
+
+                    <div
+                      style={{
+                        color: "#7F7F7F",
+                        //fontWeight: "bold",
+                        fontSize: 12,
+                      }}
+                    >
+                      {item.adress}
+                    </div>
+                  </div>
+
                 </ListItemButton>
               </div>
             ))}
