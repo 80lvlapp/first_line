@@ -14,76 +14,24 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 
-from api.category.views import CategoryViewSet
-from api.coache.views import CoacheViewSet
-from api.sport_school.views import SportSchoolViewSet
-from api.type_of_tournament.views import TypeOfTournamentViewSet
-from api.category_value.views import CategoryValueViewSet
-from api.sportsman.views import SportsmanViewSet
-from api.tournament.views import TournamentViewSet
-from api.score_scale.views import ScoreScaleViewSet
-from api.sportsman_info.views import SportsmanInfoViewSet
-from api.tournament_info.views import TournamentInfoViewSet
-from reports.views import SportsmanPointsReportViewSet, TournamentsSportsmenReportViewSet
+
+MAIN_URL = "fist-line/"
 
 urlpatterns = [
     path('admin/', admin.site.urls),
 
-    path("api/v1/category",
-         CategoryViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/category/<int:pk>',
-         CategoryViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/coach",
-         CoacheViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/coach/<int:pk>',
-         CoacheViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/schools",
-         SportSchoolViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/schools/<int:pk>',
-         SportSchoolViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/type-of-tournaments",
-         TypeOfTournamentViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/type-of-tournaments/<int:pk>',
-         TypeOfTournamentViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/value-category",
-         CategoryValueViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/value-category/<int:pk>',
-         CategoryValueViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/sportsmen",
-         SportsmanViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/sportsmen/<int:pk>',
-         SportsmanViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/tournaments",
-         TournamentViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/tournaments/<int:pk>',
-         TournamentViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/score-scale",
-         ScoreScaleViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/score-scale/<int:pk>',
-         ScoreScaleViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/sportsman-info",
-         SportsmanInfoViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/sportsman-info/<int:pk>',
-         SportsmanInfoViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/tournaments-info",
-         TournamentInfoViewSet.as_view({'get': "list", "post": "create"})),
-    path('api/v1/tournaments-info/<int:pk>',
-         TournamentInfoViewSet.as_view({"get": "retrieve", "put": 'update', "delete": "destroy"})),
-
-    path("api/v1/reporst/sportsman-report",
-         SportsmanPointsReportViewSet.as_view({'get': "list"})),
-
-     path("api/v1/reporst/tournaments-sportsman-report",
-         TournamentsSportsmenReportViewSet.as_view({'get': "list"})),    
+    path(MAIN_URL, include("api.category.urls")),
+    path(MAIN_URL, include("api.coache.urls")),
+    path(MAIN_URL, include("api.sport_school.urls")),
+    path(MAIN_URL, include("api.type_of_tournament.urls")),
+    path(MAIN_URL, include("api.category_value.urls")),
+    path(MAIN_URL, include("api.sportsman.urls")),
+    path(MAIN_URL, include("api.tournament.urls")),
+    path(MAIN_URL, include("api.score_scale.urls")),
+    path(MAIN_URL, include("api.sportsman_info.urls")),
+    path(MAIN_URL, include("api.tournament_info.urls")),
+    path(MAIN_URL, include("api.tournament_info.urls")),
+    path(MAIN_URL, include("reports.urls")),
 ]
