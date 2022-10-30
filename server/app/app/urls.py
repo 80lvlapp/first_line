@@ -33,5 +33,5 @@ urlpatterns = [
     path(MAIN_URL, include("api.sportsman_info.urls")),
     path(MAIN_URL, include("api.tournament_info.urls")),
     path(MAIN_URL, include("api.tournament_info.urls")),
-    path(MAIN_URL, include("reports.urls")),
+    path(MAIN_URL, include("reports.urls")), 
 ]
