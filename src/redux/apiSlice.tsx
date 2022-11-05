@@ -6,11 +6,13 @@ import { School, Rating, RatingSportsman, RatingTournament } from './types'
 // Define a service using a base URL and expected endpoints
 export const api = createApi({
   reducerPath: 'api',
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://virtserver.swaggerhub.com/80lvlapp/FirstLine/1.0.0/' }),
+  //baseQuery: fetchBaseQuery({ baseUrl: 'https://virtserver.swaggerhub.com/80lvlapp/FirstLine/1.0.0/' }),
+  baseQuery: fetchBaseQuery({ baseUrl: 'http://sportsrating.ru:8080/fist-line/api/v1/' }),
   
   endpoints: (builder) => ({
     getSchools: builder.query<School[], String>({
-      query: () => `rest-schools`,
+      //query: () => `rest-schools`,
+      query: () => `schools`
     }),
     getRating: builder.query<Rating[], { id: string, startDate: string; endDate: string }>({
       query: (arg) => {
