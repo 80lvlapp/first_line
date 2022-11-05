@@ -20,7 +20,8 @@ class SportSchoolViewSet(viewsets.ModelViewSet):
         if search_name is not None:
             queryset = queryset.filter(name__icontains=search_name)
         serializer = SportSchoolSerializers(queryset, many=True)
-        return Response({"status": "OK", "data": serializer.data})
+        # return Response({"status": "OK", "data": serializer.data}) 
+        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
 
     def create(self, request, *args, **kwargs)-> Response:
         serializer = SportSchoolSerializers(data=request.data)
