@@ -19,8 +19,8 @@ export const api = createApi({
       const { id, startDate, endDate } = arg;
       return {
         //url: 'rest-rating/',
-        url: 'sportsman-report/',
-        params: { id, startDate, endDate }}}
+        url: 'reports/sportsman-report/',
+        params: { sport_school_pk: id, startDate, endDate }}}
       ,
     }),
     getRatingSportsman: builder.query<RatingSportsman, { id: string, startDate: string; endDate: string }>({

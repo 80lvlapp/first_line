@@ -63,9 +63,12 @@ export default function AthletesRating() {
   const { data, error, isLoading } = useGetRatingQuery({
     //id: id,
     id: idS !== undefined ? idS : "",
-    startDate: "2022",
-    endDate: "2022",
+    startDate: dateStart !== null ? dateStart?.format('YYYY-MM-DD').toString(): "",
+    endDate: dateEnd !== null ? dateEnd?.format('YYYY-MM-DD').toString(): "",
   });
+
+  // console.log(dateStart?.format('YYYY-MM-DD'));
+  
 
   const openRatingSportsman = (idS: any, item: any) => {
     console.log(item);

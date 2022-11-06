@@ -4,9 +4,9 @@ from .views import SportsmanPointsReportViewSet, TournamentsSportsmenReportViewS
 
 
 urlpatterns = [
-   path("api/v1/reporst/sportsman-report",
+   path("api/v1/reports/sportsman-report",
          SportsmanPointsReportViewSet.as_view({'get': "list"})),
 
-    path("api/v1/reporst/tournaments-sportsman-report",
+    path("api/v1/reports/tournaments-sportsman-report",
          TournamentsSportsmenReportViewSet.as_view({'get': "list"})),
 ]
