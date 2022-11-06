@@ -30,7 +30,8 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
             queryset = queryset.filter(period__lte=endDate)
         print(f"{queryset}")
         serializer = TournamentInfoReportSerializers(queryset, many=True)
-        return Response({"status": "OK", "data": serializer.data})
+        # return Response({"status": "OK", "data": serializer.data})
+        return Response(serializer.data)
 
 
 class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):

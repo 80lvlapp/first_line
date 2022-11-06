@@ -18,7 +18,8 @@ export const api = createApi({
       query: (arg) => {
       const { id, startDate, endDate } = arg;
       return {
-        url: 'rest-rating/',
+        //url: 'rest-rating/',
+        url: 'sportsman-report/',
         params: { id, startDate, endDate }}}
       ,
     }),
