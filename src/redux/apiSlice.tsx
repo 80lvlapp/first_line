@@ -19,7 +19,7 @@ export const api = createApi({
       const { id, startDate, endDate } = arg;
       return {
         //url: 'rest-rating/',
-        url: 'reports/sportsman-report/',
+        url: 'reports/sportsman-report',
         params: { sport_school_pk: id, startDate, endDate }}}
       ,
     }),
