@@ -26,6 +26,6 @@ yarn-error.log*
 *.log
 *.pot
 *.pyc
-_pycache_
+/_pycache_
 db.sqlite3
 media
