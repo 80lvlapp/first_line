@@ -31,7 +31,7 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
         print(f"{queryset}")
         serializer = TournamentInfoReportSerializers(queryset, many=True)
         # return Response({"status": "OK", "data": serializer.data})
-        return Response(serializer.data)
+        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
 
 
 class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
