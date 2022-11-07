@@ -61,16 +61,10 @@ class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
         qs_json = serialize('json', queryset2)
         print(f"{qs_json}")
         print("=============================")
-        #serializer = TournamentSportsmanReportInfoReportSerializers(queryset1, many=True)
-        #return Response({"status": "OK", "data": serializer.data})
         my_list = []
         for element in queryset1:
             e2_s = TournamentSportsmanReportInfoReportSerializers(element)
             my_list.append(e2_s)
             print(e2_s)
-        # print("=============================")
-        # for element in queryset2:
-        #     e1_s = TypeOfTournametSerializers(element)
-        #     print(e1_s)
         return HttpResponse(qs_json, content_type='application/json', headers={"Access-Control-Allow-Origin": "*"})
-        #return HttpResponse(TournamentSportsmanReportInfoReportSerializers(queryset1[0]).data, content_type='application/json')
+        
