@@ -1,29 +1,31 @@
-from dataclasses import fields
-from rest_framework import viewsets, status
+
+from rest_framework import viewsets
 from rest_framework.response import Response
 from rest_framework.request import Request
-from django.http import JsonResponse, HttpResponse
+from django.http import  HttpResponse
 from django.core.serializers import serialize
+from django.http import JsonResponse
 
 from api.sportsman_info.models import SportsmanInfoModel
 from api.tournament_info.models import TournamentInfoModel
 from django.db.models import Sum
 
-from api.tournament_info.tournament_info_serializers import TournamentInfoReportSerializers, TournamentSportsmanReportInfoReportSerializers
+from api.tournament_info.tournament_info_serializers import TournamentSportsmanReportInfoReportSerializers
 
 
 class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
-    def list(self, request: Request, *args, **kwargs) -> Response:
+    def list(self, request: Request, *args, **kwargs):
         print(f"{request.query_params}")
         start_date = request.query_params.get('startDate')
         end_date = request.query_params.get('endDate')
         sport_school_pk = request.query_params.get("sport_school_pk")
-        queryset = TournamentInfoModel.objects.filter(
-            sportsman__pk__in=SportsmanInfoModel.objects.values("sportsman").filter(
-                sport_school__pk=sport_school_pk)).annotate(
-            Sum("points")).order_by(
-            "-points__sum")
-
+        # queryset = TournamentInfoModel.objects.filter(
+        #     sportsman__pk__in=SportsmanInfoModel.objects.values("sportsman").filter(
+        #         sport_school__pk=sport_school_pk)).annotate(
+        #     Sum("points")).order_by(
+        #     "-points__sum")
+        queryset = TournamentInfoModel.objects.values_list("period", "sportsman", "sportsman__name", "sportsman__gender", "sportsman__date_birth").filter(sportsman__pk__in=SportsmanInfoModel.objects.filter(sport_school__pk__exact=sport_school_pk)).annotate(points=Sum("points")).order_by("-points")
+        print(f"[QS] ${queryset}")
         if start_date is not None:
             if start_date != "":
                 queryset = queryset.filter(period__gte=start_date)
@@ -31,8 +33,22 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
             if end_date != "":
                 queryset = queryset.filter(period__lte=end_date)
         print(f"{queryset}")
-        serializer = TournamentInfoReportSerializers(queryset, many=True)
-        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
+        json_qs = []
+        for item in list(queryset):
+            period = item[0]
+            id = item[1]
+            name = item[2]
+            gender = item[3]
+            date_birth = item[4]
+            points = float(item[5])
+            json_element = {
+                "period": period,
+                "points": points,
+                "sportsman": {"id": id, "name": name, "gender": gender, "date_birth": date_birth}
+            }
+            json_qs.append(json_element)
+        
+        return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
 
 
 class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
