@@ -20,22 +20,22 @@ class CoacheViewSet(viewsets.ModelViewSet):
         if search_name is not None:
             queryset = queryset.filter(name__icontains=search_name)
         serializer = CoacheSerializers(queryset, many=True)
-        return Response({"status": "OK", "data": serializer.data})
+        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
 
     def create(self, request, *args, **kwargs):
         serializer = CoacheSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"}, status=status.HTTP_200_OK)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST, headers={"Access-Control-Allow-Origin": "*"})
 
     def retrieve(self, request, pk=None, *args, **kwargs) -> Response:
 
         queryset = CoacheModel.objects.all()
         element = get_object_or_404(queryset, pk=pk)
         serializer = CoacheSerializers(element)
-        return Response({"status": "ok", "data": serializer.data})
+        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
 
     def update(self, request, pk=None, *args, **kwargs) -> Response:
 
@@ -43,11 +43,11 @@ class CoacheViewSet(viewsets.ModelViewSet):
         serializer = CoacheSerializers(element, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "OK", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"}, status=status.HTTP_200_OK)
         else:
-            return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": False}, headers={"Access-Control-Allow-Origin": "*"}, status=status.HTTP_400_BAD_REQUEST)
 
     def destroy(self, request, pk=None, *args, **kwargs) -> Response:
         element = get_object_or_404(CoacheModel.objects.all(), pk=pk)
         element.delete()
-        return Response({"message": 'OK'})
+        return Response({"message": True})
