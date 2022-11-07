@@ -50,4 +50,4 @@ class CategoryValueViewSet(viewsets.ModelViewSet):
 
         element = get_object_or_404(CategoryValueModel.objects.all(), pk=pk)
         element.delete()
-        return Response({"message": True})
+        return Response({"message": True}, headers={"Access-Control-Allow-Origin": "*"})

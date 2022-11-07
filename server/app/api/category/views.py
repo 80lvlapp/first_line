@@ -50,4 +50,4 @@ class CategoryViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk=None, *args, **kwargs) -> Response:
         element = get_object_or_404(CategoryModel.objects.all(), pk=pk)
         element.delete()
-        return Response({"status": True})
+        return Response({"status": True}, headers={"Access-Control-Allow-Origin": "*"})

@@ -48,4 +48,4 @@ class SportsmanInfoViewSet(viewsets.ModelViewSet):
     def destroy(self, request, pk=None, *args, **kwargs) -> Response:
         element = get_object_or_404(SportsmanInfoModel.objects.all(), pk=pk)
         element.delete()
-        return Response({"message": True})
+        return Response({"message": True}, headers={"Access-Control-Allow-Origin": "*"})
