@@ -19,11 +19,6 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
         start_date = request.query_params.get('startDate')
         end_date = request.query_params.get('endDate')
         sport_school_pk = request.query_params.get("sport_school_pk")
-        # queryset = TournamentInfoModel.objects.filter(
-        #     sportsman__pk__in=SportsmanInfoModel.objects.values("sportsman").filter(
-        #         sport_school__pk=sport_school_pk)).annotate(
-        #     Sum("points")).order_by(
-        #     "-points__sum")
         queryset = TournamentInfoModel.objects.values_list("period", "sportsman", "sportsman__name", "sportsman__gender", "sportsman__date_birth").filter(sportsman__pk__in=SportsmanInfoModel.objects.filter(sport_school__pk__exact=sport_school_pk)).annotate(points=Sum("points")).order_by("-points")
         print(f"[QS] ${queryset}")
         if start_date is not None:
