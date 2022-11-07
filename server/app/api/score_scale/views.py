@@ -18,22 +18,22 @@ class ScoreScaleViewSet(viewsets.ModelViewSet):
         queryset = ScoreScaleModel.objects.all()
 
         serializer = ScoreScaleSerializers(queryset, many=True)
-        return Response({"status": "OK", "data": serializer.data})
+        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
 
     def create(self, request, *args, **kwargs):
         serializer = ScoreScaleCreateSerializers(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "success", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"}, status=status.HTTP_200_OK)
         else:
-            return Response({"status": "error", "data": serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(serializer.errors, headers={"Access-Control-Allow-Origin": "*"}, status=status.HTTP_400_BAD_REQUEST)
 
     def retrieve(self, request, pk=None, *args, **kwargs) -> Response:
 
         queryset = ScoreScaleModel.objects.all()
         element = get_object_or_404(queryset, pk=pk)
         serializer = ScoreScaleSerializers(element)
-        return Response({"status": "ok", "data": serializer.data})
+        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
 
     def update(self, request, pk=None, *args, **kwargs) -> Response:
 
@@ -41,11 +41,11 @@ class ScoreScaleViewSet(viewsets.ModelViewSet):
         serializer = ScoreScaleCreateSerializers(element, data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"status": "OK", "data": serializer.data}, status=status.HTTP_200_OK)
+            return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"}, status=status.HTTP_200_OK)
         else:
-            return Response({"status": "error"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({"status": False}, status=status.HTTP_400_BAD_REQUEST, headers={"Access-Control-Allow-Origin": "*"})
 
     def destroy(self, request, pk=None, *args, **kwargs) -> Response:
         element = get_object_or_404(ScoreScaleModel.objects.all(), pk=pk)
         element.delete()
-        return Response({"message": 'OK'})
+        return Response({"message": True}, headers={"Access-Control-Allow-Origin": "*"})
