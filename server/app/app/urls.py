@@ -21,6 +21,7 @@ MAIN_URL = "first-line/"
 
 urlpatterns = [
     path(MAIN_URL + 'admin/', admin.site.urls),
+
     path(MAIN_URL, include("api.category.urls")),
     path(MAIN_URL, include("api.coache.urls")),
     path(MAIN_URL, include("api.sport_school.urls")),

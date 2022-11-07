@@ -15,8 +15,8 @@ from api.tournament_info.tournament_info_serializers import TournamentInfoReport
 class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
     def list(self, request: Request, *args, **kwargs) -> Response:
         print(f"{request.query_params}")
-        startDate = request.query_params.get('startDate')
-        endDate = request.query_params.get('endDate')
+        start_date = request.query_params.get('startDate')
+        end_date = request.query_params.get('endDate')
         sport_school_pk = request.query_params.get("sport_school_pk")
         queryset = TournamentInfoModel.objects.filter(
             sportsman__pk__in=SportsmanInfoModel.objects.values("sportsman").filter(
@@ -24,14 +24,15 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
             Sum("points")).order_by(
             "-points__sum")
 
-        if startDate is not None:
-            queryset = queryset.filter(period__gte=startDate)
-        if endDate is not None:
-            queryset = queryset.filter(period__lte=endDate)
+        if start_date is not None:
+            if start_date != "":
+                queryset = queryset.filter(period__gte=start_date)
+        if end_date is not None:
+            if end_date != "":
+                queryset = queryset.filter(period__lte=end_date)
         print(f"{queryset}")
         serializer = TournamentInfoReportSerializers(queryset, many=True)
-        # return Response({"status": "OK", "data": serializer.data})
-        return Response(serializer.data, headers={"Access-Control-Allow-Origin": "*"})
+        return Response({"status": "OK", "data": serializer.data})
 
 
 class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
@@ -55,5 +56,5 @@ class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
         # for element in queryset2:
         #     e1_s = TypeOfTournametSerializers(element)
         #     print(e1_s)
-        return HttpResponse(qs_json, content_type='application/json')
+        return HttpResponse(qs_json, content_type='application/json', headers={"Access-Control-Allow-Origin": "*"})
         #return HttpResponse(TournamentSportsmanReportInfoReportSerializers(queryset1[0]).data, content_type='application/json')
