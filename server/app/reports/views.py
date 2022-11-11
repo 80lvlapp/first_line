@@ -145,9 +145,9 @@ class TournamentsSportsmenCategoryReportViewSet(viewsets.ModelViewSet):
                     tournament_serializer = TournamentSerializers(item.tournament)
                     category_serializer = CategoryValueCreateSerializer(item.category_value)
                     tournament_json.append({"tournament": tournament_serializer.data})
-                    category_json.append({"category": category_serializer.data, "point": item.point, "place": item.place})
+                    category_json.append({"category": category_serializer.data, "point": item.points, "place": item.place})
                     points += item.points
-            json_element = {"sportsman": sportsman_serializer.data,"place": n, "points": points, "tournaments": tournament_json, "categories": category_json}        
+            json_element = {"sportsman": sportsman_serializer.data,"points": points, "tournaments": tournament_json, "categories": category_json}        
             json_qs.append(json_element)
             n += 1
         return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
