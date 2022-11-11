@@ -10,12 +10,13 @@ class TournamentInfoModel(models.Model):
     sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT)
     category_value = models.ForeignKey(CategoryValueModel, on_delete=models.RESTRICT)
     points = models.IntegerField()
+    place = models.PositiveSmallIntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
 
     def __str__(self) -> str:
-        return f"{self.period} {self.tournament} {self.sportsman} {self.category_value}"
+        return f"{self.period} {self.tournament} {self.sportsman} {self.category_value} {self.place}"
 
     class Meta:
         db_table = "fl_tournament_info"

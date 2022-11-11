@@ -1,16 +1,17 @@
 
 from rest_framework import viewsets
-from rest_framework.response import Response
+
 from rest_framework.request import Request
-from django.http import  HttpResponse
-from django.core.serializers import serialize
+
+
 from django.http import JsonResponse
 
 from api.sportsman_info.models import SportsmanInfoModel
 from api.tournament_info.models import TournamentInfoModel
 from django.db.models import Sum
 
-from api.tournament_info.tournament_info_serializers import TournamentSportsmanReportInfoReportSerializers
+from api.sportsman.sportsman_serializers import SportsmanSerializers
+from api.tournament.tournament_serializers import TournamentSerializers
 
 
 class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
@@ -50,19 +51,43 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
 
 
 class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
-    def list(self, request: Request, *args, **kwargs) -> HttpResponse:
+    def list(self, request: Request, *args, **kwargs) -> JsonResponse:
         print(f"{request.query_params}")
-        queryset1 = TournamentInfoModel.objects.values("period", "tournament")
-        queryset2 = TournamentInfoModel.objects.all()
-        print(f"{queryset1}")
-        print(f"{queryset2}")
-        qs_json = serialize('json', queryset2)
-        print(f"{qs_json}")
-        print("=============================")
-        my_list = []
-        for element in queryset1:
-            e2_s = TournamentSportsmanReportInfoReportSerializers(element)
-            my_list.append(e2_s)
-            print(e2_s)
-        return HttpResponse(qs_json, content_type='application/json', headers={"Access-Control-Allow-Origin": "*"})
+        start_date = request.query_params.get('startDate')
+        end_date = request.query_params.get('endDate')
+        sportsman_id = request.query_params.get("sportsman_id")
+
+        queryset = TournamentInfoModel.objects.all()
+        if start_date is not None:
+            if start_date != "":
+                queryset = queryset.filter(period__gte=start_date)
+        if end_date is not None:
+            if end_date != "":
+                queryset = queryset.filter(period__lte=end_date)
+
+        if sportsman_id is not None:
+            if sportsman_id != "":
+                sportsman_id = int(sportsman_id)
+                queryset = queryset.filter(sportsman__id__exact=sportsman_id) 
+
+        #Получаем уникальных спортсменов
+        sportsman_set = set()
+        for item in list(queryset):
+            sportsman_set.add(item.sportsman) 
+        print(f"[TournamentsSportsmenReportViewSet]: ${sportsman_set}")
+
+        json_qs = []
+        n = 1 
+        for sportsman_item in sportsman_set:
+            sportsman_serializer = SportsmanSerializers(sportsman_item)
+            tournament_json = []
+            points = 0
+            for item in list(queryset):
+                if (sportsman_item.id == item.sportsman.id):
+                    tournament_serializer = TournamentSerializers(item.tournament)
+                    tournament_json.append({"tournament": tournament_serializer.data, "point": item.points})
+                    points += item.points
+            json_element = {"sportsman": sportsman_serializer.data, "points": points, "tournaments": tournament_json}        
+            json_qs.append(json_element)
+        return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
         

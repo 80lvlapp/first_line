@@ -20,7 +20,7 @@ class TournamentInfoCreateSerializers(serializers.ModelSerializer):
     class Meta:
         model = TournamentInfoModel
         fields = ['period', "tournament",
-                  "sportsman", "category_value", "points"]
+                  "sportsman", "category_value", "points", "place"]
 
 
 class TournamentInfoReportSerializers(serializers.ModelSerializer):
