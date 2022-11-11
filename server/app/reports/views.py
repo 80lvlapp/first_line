@@ -109,6 +109,8 @@ class TournamentsSportsmenCategoryReportViewSet(viewsets.ModelViewSet):
         tournament_id = request.query_params.get("tournament_id")
         queryset = TournamentInfoModel.objects.all()
         qs1 = TournamentInfoModel.objects.values("sportsman").annotate(points=Sum("points")).order_by("-points")
+        qs2 = TournamentInfoModel.objects.values("sportsman", 'tournament').annotate(points=Sum("points")).order_by("-points")
+        print(f"[TournamentsSportsmenCategoryReportViewSet]: QS2 ${list(qs2)}")
         if start_date is not None:
             if start_date != "":
                 queryset = queryset.filter(period__gte=start_date)
@@ -137,17 +139,18 @@ class TournamentsSportsmenCategoryReportViewSet(viewsets.ModelViewSet):
         n = 1 
         for sportsman_item in list(sportsman_set):
             sportsman_serializer = SportsmanSerializers(sportsman_item)
-            tournament_json = []
+            #tournament_json = []
             category_json = []
             points = 0
             for item in list(queryset):
                 if (sportsman_item.id == item.sportsman.id):
                     tournament_serializer = TournamentSerializers(item.tournament)
                     category_serializer = CategoryValueCreateSerializer(item.category_value)
-                    tournament_json.append({"tournament": tournament_serializer.data})
+                    #tournament_json.append({"tournament": tournament_serializer.data})
                     category_json.append({"category": category_serializer.data, "point": item.points, "place": item.place})
                     points += item.points
-            json_element = {"sportsman": sportsman_serializer.data,"points": points, "tournaments": tournament_json, "categories": category_json}        
+
+            json_element = {"sportsman": sportsman_serializer.data,"points": points, "tournament": tournament_serializer.data, "categories": category_json}        
             json_qs.append(json_element)
             n += 1
         return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
