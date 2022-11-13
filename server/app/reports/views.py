@@ -108,9 +108,7 @@ class TournamentsSportsmenCategoryReportViewSet(viewsets.ModelViewSet):
         sportsman_id = request.query_params.get("sportsman_id")
         tournament_id = request.query_params.get("tournament_id")
         queryset = TournamentInfoModel.objects.all()
-        qs1 = TournamentInfoModel.objects.values("sportsman").annotate(points=Sum("points")).order_by("-points")
-        qs2 = TournamentInfoModel.objects.values("sportsman", 'tournament').annotate(points=Sum("points")).order_by("-points")
-        print(f"[TournamentsSportsmenCategoryReportViewSet]: QS2 ${list(qs2)}")
+      
         if start_date is not None:
             if start_date != "":
                 queryset = queryset.filter(period__gte=start_date)
@@ -128,32 +126,46 @@ class TournamentsSportsmenCategoryReportViewSet(viewsets.ModelViewSet):
                 tournament_id = int(tournament_id)
                 queryset = queryset.filter(tournament__id__exact=tournament_id)
 
-        sportsman_set = set()
-        for item in list(qs1):
-            for item1 in list(queryset):
-                if(item1.sportsman.id == item["sportsman"]):
-                    sportsman_set.add(item1.sportsman) 
+        qs1 = queryset.values("sportsman").annotate(points=Sum("points")).order_by("-points")
+        qs2 = queryset.values("sportsman", 'tournament').annotate(points=Sum("points")).order_by("-points")        
+        qs3 = queryset.values("sportsman", 'tournament', "category_value").annotate(points=Sum("points")).order_by("-points")
 
-        print(f"[TournamentsSportsmenCategoryReportViewSet]: ${sportsman_set}")
+        
         json_qs = []
-        n = 1 
-        for sportsman_item in list(sportsman_set):
-            sportsman_serializer = SportsmanSerializers(sportsman_item)
-            #tournament_json = []
-            category_json = []
-            points = 0
-            for item in list(queryset):
-                if (sportsman_item.id == item.sportsman.id):
-                    tournament_serializer = TournamentSerializers(item.tournament)
-                    category_serializer = CategoryValueCreateSerializer(item.category_value)
-                    #tournament_json.append({"tournament": tournament_serializer.data})
-                    category_json.append({"category": category_serializer.data, "point": item.points, "place": item.place})
-                    points += item.points
+        for group1 in list(qs1):
+            queryset1 = queryset.filter(sportsman__id__exact=group1['sportsman'])
+            if (queryset1.count() > 0):
+                sportsman_serializer = SportsmanSerializers(queryset1[0].sportsman)
+                tournament_json = []
+                
+                for group2 in list(qs2):
+                    if group2["sportsman"] == group1["sportsman"]:
+                        queryset2 = queryset.filter(Q(sportsman__id__exact=group1['sportsman']) & Q(tournament__id__exact=group2['tournament']))
+                        if queryset2.count() > 0:
+                            tournament_serializer = TournamentSerializers(queryset2[0].tournament)
+                            category_value_json = []
+                            tournament_point = 0;
+                            for group3 in list(qs3):
+                                if group3["sportsman"] == group1["sportsman"] and group2['tournament'] == group3['tournament']:
+                                    queryset3 = queryset.filter(Q(sportsman__id__exact=group1['sportsman']) & Q(tournament__id__exact=group2['tournament']) & Q(category_value__id__exact=group3['category_value']))    
+                                    if queryset3.count() > 0:
+                                        
+                                        point_category_value = 0;
+                                        for item in list(queryset3):
+                                            point_category_value += item.points
+                                            tournament_point +=item.points
+                                        category_value_json.append({"category": CategoryValueCreateSerializer(queryset3[0].category_value).data, "point": point_category_value})                                        
+                            
+                            tournament_json.append({"tournament":tournament_serializer.data, "point": tournament_point, "categores": category_value_json})
+                        
+                        
+                json_element = {"sportsman": sportsman_serializer.data, "points": group1['points'], "tournaments": tournament_json}
+                json_qs.append(json_element)
 
-            json_element = {"sportsman": sportsman_serializer.data,"points": points, "tournament": tournament_serializer.data, "categories": category_json}        
-            json_qs.append(json_element)
-            n += 1
         return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
+           
+
+        
 
 
 
