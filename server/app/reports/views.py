@@ -21,7 +21,7 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
         start_date = request.query_params.get('startDate')
         end_date = request.query_params.get('endDate')
         sport_school_pk = request.query_params.get("sport_school_pk")
-        queryset = TournamentInfoModel.objects.values_list("period", "sportsman", "sportsman__name", "sportsman__gender", "sportsman__date_birth").filter(sportsman__pk__in=SportsmanInfoModel.objects.filter(sport_school__pk__exact=sport_school_pk)).annotate(points=Sum("points")).order_by("-points")
+        queryset = TournamentInfoModel.objects.values_list("sportsman", "sportsman__name", "sportsman__gender", "sportsman__date_birth").filter(sportsman__pk__in=SportsmanInfoModel.objects.filter(sport_school__pk__exact=sport_school_pk)).annotate(points=Sum("points")).order_by("-points")
         print(f"[QS] ${queryset}")
         if start_date is not None:
             if start_date != "":
@@ -31,22 +31,17 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(period__lte=end_date)
         print(f"{queryset}")
         json_qs = []
-        n = 1
         for item in list(queryset):
-            period = item[0]
-            id = item[1]
-            name = item[2]
-            gender = item[3]
-            date_birth = item[4]
-            points = float(item[5])
+            id = item[0]
+            name = item[1]
+            gender = item[2]
+            date_birth = item[3]
+            points = float(item[4])
             json_element = {
-                "period": period,
                 "points": points,
-                "place": n,
                 "sportsman": {"id": id, "name": name, "gender": gender, "date_birth": date_birth}
             }
             json_qs.append(json_element)
-            n +=1
         
         return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
 
