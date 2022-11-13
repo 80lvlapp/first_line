@@ -8,7 +8,7 @@ from django.http import JsonResponse
 
 from api.sportsman_info.models import SportsmanInfoModel
 from api.tournament_info.models import TournamentInfoModel
-from django.db.models import Sum
+from django.db.models import Sum, Q
 
 from api.sportsman.sportsman_serializers import SportsmanSerializers
 from api.tournament.tournament_serializers import TournamentSerializers
@@ -54,7 +54,7 @@ class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
         sportsman_id = request.query_params.get("sportsman_id")
 
         queryset = TournamentInfoModel.objects.all()
-        qs1 = TournamentInfoModel.objects.values("sportsman").annotate(points=Sum("points")).order_by("-points")
+       
         if start_date is not None:
             if start_date != "":
                 queryset = queryset.filter(period__gte=start_date)
@@ -67,31 +67,36 @@ class TournamentsSportsmenReportViewSet(viewsets.ModelViewSet):
                 sportsman_id = int(sportsman_id)
                 queryset = queryset.filter(sportsman__id__exact=sportsman_id)
 
-        
+        if start_date is not None and end_date is None and sportsman_id is None:
+            pass        
+
+        qs1 = queryset.values("sportsman").annotate(points=Sum("points")).order_by("-points")
+        qs_tournament = queryset.values("sportsman", "tournament").annotate(points=Sum("points")).order_by("-points")
         print(f"[TournamentsSportsmenReportViewSet]: QA1 {list(qs1)}")
         print(f"[TournamentsSportsmenReportViewSet]: QS {list(queryset)}")
-        #Получаем уникальных спортсменов
-        sportsman_set = set()
-        for item in list(qs1):
-            for item1 in list(queryset):
-                if(item1.sportsman.id == item["sportsman"]):
-                    sportsman_set.add(item1.sportsman) 
-        print(f"[TournamentsSportsmenReportViewSet]: ${sportsman_set}")
-
+        print(f"[TournamentsSportsmenReportViewSet]: qs_tournament {list(qs_tournament)}")
+       
         json_qs = []
-        n = 1 
-        for sportsman_item in list(sportsman_set):
-            sportsman_serializer = SportsmanSerializers(sportsman_item)
-            tournament_json = []
-            points = 0
-            for item in list(queryset):
-                if (sportsman_item.id == item.sportsman.id):
-                    tournament_serializer = TournamentSerializers(item.tournament)
-                    tournament_json.append({"tournament": tournament_serializer.data, "point": item.points})
-                    points += item.points
-            json_element = {"sportsman": sportsman_serializer.data,"place": n, "points": points, "tournaments": tournament_json}        
-            json_qs.append(json_element)
-            n += 1
+
+        for group1 in list(qs1):
+            queryset1 = queryset.filter(sportsman__id__exact=group1['sportsman'])
+            if (queryset1.count() > 0):
+                sportsman_serializer = SportsmanSerializers(queryset1[0].sportsman)
+                tournament_json = []
+                for group2 in list(qs_tournament):
+                    if group2["sportsman"] == group1["sportsman"]:
+                        queryset2 = queryset.filter(Q(sportsman__id__exact=group1['sportsman']) & Q(tournament__id__exact=group2['tournament']))
+                        if queryset2.count() > 0:
+                            tournament_serializer = TournamentSerializers(queryset2[0].tournament)
+                            points = 0
+                            for item in list(queryset2):
+                                points += item.points
+                            tournament_json.append({"tournament":tournament_serializer.data, "point": points})
+                        
+                        
+                json_element = {"sportsman": sportsman_serializer.data, "points": group1['points'], "tournaments": tournament_json}
+                json_qs.append(json_element)
+
         return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
 
 
