@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Navigate,
   useNavigate,
@@ -28,7 +28,7 @@ import {
 } from "@mui/material";
 import { flexbox } from "@mui/system";
 
-import { Dayjs } from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
@@ -39,13 +39,21 @@ export default function AthletesRating() {
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
 
-  const [dateStart, setDateStart] = React.useState<Dayjs | null>(null);
-  const [dateEnd, setDateEnd] = React.useState<Dayjs | null>(null);
+  const [dateStart, setDateStart] = React.useState<Dayjs | null>(dayjs().startOf('year'));
+  const [dateEnd, setDateEnd] = React.useState<Dayjs | null>(dayjs().endOf('year'));
+
+  const [dateStartFormat, setDateStartFormat] = React.useState<string>("0001-01-01");
+  const [dateEndFormat, setDateEndFormat] = React.useState<string>("0001-01-01");
 
   const { idS } = useParams<{ idS: string }>();
 
   // let { idS } = useParams<ParamTypes>();
-  // console.log(idS);
+  console.log(idS);
+
+  useEffect(()=> {
+    onChangeStartDate(dateStart);
+    onChangeEndDate(dateEnd);
+  }, []);
 
   const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -60,27 +68,32 @@ export default function AthletesRating() {
       .includes(valueSearchSportsman.toLowerCase());
   };
 
+  const onChangeStartDate = (newValue: Dayjs|null) => {
+    setDateStart(newValue);
+    setDateStartFormat(newValue !== null ? newValue?.format('YYYY-MM-DD').toString(): "0001-01-01");
+  }
+
+  const onChangeEndDate = (newValue: Dayjs|null) => {
+    setDateEnd(newValue);
+    setDateEndFormat(newValue !== null ? newValue?.format('YYYY-MM-DD').toString(): "0001-01-01");
+  }
+
   const { data, error, isLoading } = useGetRatingQuery({
     //id: id,
     id: idS !== undefined ? idS : "",
-    startDate: dateStart !== null ? dateStart?.format('YYYY-MM-DD').toString(): "",
-    endDate: dateEnd !== null ? dateEnd?.format('YYYY-MM-DD').toString(): "",
+    startDate: dateStartFormat,
+    endDate: dateEndFormat,
   });
 
-  // console.log(dateStart?.format('YYYY-MM-DD'));
-  
+  console.log(data);  
 
   const openRatingSportsman = (idS: any, item: any) => {
     console.log(item);
 
-    navigate(`/AthletesRating/${idS}/Sportsman/${item.sportsman.id}`, {
+    navigate(`/AthletesRating/${idS}/Sportsman/${item.sportsman.id}/${dateStartFormat}/${dateEndFormat}`, {
       state: { id: item.id },
     });
   };
-
-  console.log(window.screen.width);
-
-  console.log("test", idS);
 
   return (
     <div style={mainStyles.main}>
@@ -118,9 +131,7 @@ export default function AthletesRating() {
               inputFormat="DD.MM.YYYY"
               label="Дата начала"
               value={dateStart}
-              onChange={(newValue) => {
-                setDateStart(newValue);
-              }}
+              onChange={(newValue) => onChangeStartDate(newValue)}
               renderInput={(params) => <TextField {...params} />}
             />
           </div>
@@ -143,9 +154,7 @@ export default function AthletesRating() {
               inputFormat="DD.MM.YYYY"
               label="Дата окончания"
               value={dateEnd}
-              onChange={(newValue) => {
-                setDateEnd(newValue);
-              }}
+              onChange={(newValue) => {onChangeEndDate(newValue)}}
               renderInput={(params) => <TextField {...params} />}
             />
           </div>

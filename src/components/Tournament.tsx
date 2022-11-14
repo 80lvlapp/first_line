@@ -25,216 +25,209 @@ export default function Tournament() {
 
   return (
     <div style={mainStyles.main}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingLeft: "20px",
-          paddingRight: "20px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "600px",
-            minHeight: "70px",
-            display: "flex",
-            flexDirection: "column",
-            width: "100%",
-            marginTop: "50px",
-            background: "#FFFFFF",
-            borderRadius: "10px",
-            //alignItems: "center",
-          }}
-        >
-          <div
-            style={{
-              marginTop: "20px",
-              marginBottom: "5px",
-              marginLeft: 20,
-              marginRight: 10,
-              color: "#625D8E",
-              fontFamily: "inherit",
-              fontSize: 21,
-              fontWeight: "bold",
-            }}
-          >
-            {data?.tournament.name}
-          </div>
-
-          <div
-            style={{
-              marginLeft: 20,
-              marginRight: 10,
-              color: "#7F7F7F",
-              fontFamily: "inherit",
-              fontSize: 18,
-              //fontWeight: "bold",
-            }}
-          >
-            {data?.tournament.venue}
-          </div>
-
-          <div
-            style={{
-              //marginTop: "20px",
-              marginBottom: "20px",
-              marginLeft: 20,
-              marginRight: 10,
-              color: "#7F7F7F",
-              fontFamily: "inherit",
-              fontSize: 18,
-              //fontWeight: "bold",
-            }}
-          >
-            Тип турнира: {data?.tournament.type.name}
-          </div>
-        </div>
-      </div>
-
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : data ? (
-        <List
-          sx={{
-            background: "#E5E5E5",
-            marginTop: 1,
-            marginRight: "20px",
-          }}
-        >
-          {data.categories
-            .filter((itemF) => itemIncludes(itemF))
-            .map((item) => (
-              <div
-                style={{ display: "flex", justifyContent: "center" }}
-                key={item.category.id}
-              >
-                <ListItemButton key={item.category.id} sx={mainStyles.listItem}>
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
-                    }}
-                  >
-                    <div
-                      style={{
-                        display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        marginLeft: "20px",
-                      }}
-                    >
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div
-                          style={{
-                            color: "#7F7F7F",
-                            fontWeight: "bold",
-                            fontSize: 15,
-                          }}
-                        >
-                          Категория:
-                        </div>
-                        <div
-                          style={{
-                            color: "#719A70",
-                            fontWeight: "bold",
-                            fontSize: 15,
-                            marginLeft: 5,
-                          }}
-                        >
-                          {item.category.name}
-                        </div>
-                      </div>
-
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div
-                          style={{
-                            color: "#7F7F7F",
-                            fontWeight: "bold",
-                            fontSize: 15,
-                          }}
-                        >
-                          Место:
-                        </div>
-                        <div
-                          style={{
-                            color: "#719A70",
-                            fontWeight: "bold",
-                            fontSize: 15,
-                            marginLeft: 5,
-                          }}
-                        >
-                          {item.place}
-                        </div>
-                      </div>
-
-                      <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div
-                          style={{
-                            color: "#7F7F7F",
-                            fontWeight: "bold",
-                            fontSize: 15,
-                          }}
-                        >
-                          Присвоено очков:
-                        </div>
-                        <div
-                          style={{
-                            color: "#719A70",
-                            fontWeight: "bold",
-                            fontSize: 15,
-                            marginLeft: 5,
-                          }}
-                        >
-                          {item.points}
-                        </div>
-                      </div>
-                      {/* <div style={{ color: "#7F7F7F", fontSize: 12 }}>
-                        {item.category.name}
-                      </div>
-                      <div
-                        style={{
-                          color: "#7F7F7F",
-                          fontWeight: "bold",
-                          fontSize: 12,
-                        }}
-                      >
-                        Всего очков: {item.points}
-                      </div> */}
-                    </div>
+      {data?.map((rootItem) => (
+        <div>
+          {rootItem.tournaments.map((tournamentItem) => (
+            <>
+              <div style={styles.tournamentMain}>
+                <div style={styles.tournamentColumn}>
+                  <div style={styles.tournamentName}>
+                    {tournamentItem.tournament.name}
                   </div>
-                </ListItemButton>
-              </div>
-            ))}
-        </List>
-      ) : null}
 
-      <div style = {{display: "flex", flexDirection: "row"}}>
-        <div
-          style={{
-            marginLeft: 40,
-            color: "#625D8E",
-            fontFamily: "inherit",
-            fontSize: 21,
-            fontWeight: "bold",
-          }}
-        >
-          Итого очков:
+                  <div style={styles.tournamentVenue}>
+                    {tournamentItem.tournament.venue}
+                  </div>
+
+                  <div style={styles.tournamentType}>
+                    Тип турнира:{" "}
+                    {tournamentItem.tournament.type_of_tornament.name}
+                  </div>
+                </div>
+              </div>
+
+              <List
+                sx={{
+                  background: "#E5E5E5",
+                  marginTop: 1,
+                  marginRight: "20px",
+                }}
+              >
+                {tournamentItem.categores
+                  .filter((itemF) => itemIncludes(itemF))
+                  .map((categoresItem) => (
+                    <div
+                      style={{ display: "flex", justifyContent: "center" }}
+                      //style={{ display: "flex"}}
+                      key={categoresItem.category.id}
+                    >
+                      <ListItemButton
+                        key={categoresItem.category.id}
+                        sx={mainStyles.listItem}
+                      >
+                        <div style={styles.categoryRow}>
+                          <div style={styles.categoryColumn}>
+                            <div
+                              style={{ display: "flex", flexDirection: "row" }}
+                            >
+                              <div style={styles.categoryTitle}>Категория:</div>
+
+                              <div style={styles.categoryName}>
+                                {categoresItem.category.name}
+                              </div>
+                            </div>
+
+                            <div
+                              style={{ display: "flex", flexDirection: "row" }}
+                            >
+                              <div style={styles.categoryPlaceTitle}>
+                                Место:
+                              </div>
+                              <div style={styles.categoryPlace}>
+                                {categoresItem.place}
+                              </div>
+                            </div>
+
+                            <div
+                              style={{ display: "flex", flexDirection: "row" }}
+                            >
+                              <div style={styles.categoryPointsTitle}>
+                                Присвоено очков:
+                              </div>
+                              <div style={styles.categoryPoints}>
+                                {categoresItem.point}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </ListItemButton>
+                    </div>
+                  ))}
+              </List>
+            </>
+          ))}
+
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+            }}
+          >
+            <div style={{ maxWidth: "600px", width: "100%",  display: "flex", flexDirection: "row" }}>
+              <div style={styles.totalTitle}>Итого очков:</div>
+
+              <div style={styles.total}>{rootItem.points}</div>
+            </div>
+          </div>
         </div>
-        <div
-          style={{
-            marginLeft: 5,
-            color: "#719A70",
-            fontFamily: "inherit",
-            fontSize: 21,
-            fontWeight: "bold",
-          }}
-        >
-          {data?.points}
-        </div>
-      </div>
+      ))}
     </div>
   );
 }
+
+const styles = {
+  tournamentMain: {
+    display: "flex",
+    justifyContent: "center",
+    paddingLeft: "20px",
+    paddingRight: "20px",
+  },
+  tournamentColumn: {
+    maxWidth: "600px",
+    minHeight: "70px",
+    display: "flex",
+    flexDirection: "column",
+    width: "100%",
+    marginTop: "50px",
+    background: "#FFFFFF",
+    borderRadius: "10px",
+    //alignItems: "center",
+  },
+  tournamentName: {
+    marginTop: "20px",
+    marginBottom: "5px",
+    marginLeft: 20,
+    marginRight: 10,
+    color: "#625D8E",
+    fontFamily: "inherit",
+    fontSize: 21,
+    fontWeight: "bold",
+  },
+  tournamentVenue: {
+    marginLeft: 20,
+    marginRight: 10,
+    color: "#7F7F7F",
+    fontFamily: "inherit",
+    fontSize: 18,
+    //fontWeight: "bold",
+  },
+  tournamentType: {
+    //marginTop: "20px",
+    marginBottom: "20px",
+    marginLeft: 20,
+    marginRight: 10,
+    color: "#7F7F7F",
+    fontFamily: "inherit",
+    fontSize: 18,
+    //fontWeight: "bold",
+  },
+  categoryRow: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  categoryColumn: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    marginLeft: "20px",
+  },
+  categoryTitle: {
+    color: "#7F7F7F",
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  categoryName: {
+    color: "#719A70",
+    fontWeight: "bold",
+    fontSize: 15,
+    marginLeft: 5,
+  },
+  categoryPlaceTitle: {
+    color: "#7F7F7F",
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  categoryPlace: {
+    color: "#719A70",
+    fontWeight: "bold",
+    fontSize: 15,
+    marginLeft: 5,
+  },
+  categoryPointsTitle: {
+    color: "#7F7F7F",
+    fontWeight: "bold",
+    fontSize: 15,
+  },
+  categoryPoints: {
+    color: "#719A70",
+    fontWeight: "bold",
+    fontSize: 15,
+    marginLeft: 5,
+  },
+  totalTitle: {
+    paddingLeft: 20,
+    color: "#625D8E",
+    fontFamily: "inherit",
+    fontSize: 21,
+    fontWeight: "bold",
+  },
+  total: {
+    marginLeft: 5,
+    color: "#719A70",
+    fontFamily: "inherit",
+    fontSize: 21,
+    fontWeight: "bold",
+  },
+} as const;

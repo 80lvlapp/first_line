@@ -17,8 +17,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Schools />} />
         <Route path="/AthletesRating/:idS" element={<AthletesRating />} />
-        <Route path="/AthletesRating/:idS/Sportsman/:idSp" element={<Sportsman />}/>
-        <Route path="/AthletesRating/:idS/Sportsman/:idSp/Tournament/:idT" element={<Tournament />} />
+        <Route path="/AthletesRating/:idS/Sportsman/:idSp/:startDate/:endDate" element={<Sportsman />}/>
+        <Route path="/AthletesRating/:idS/Sportsman/:idSp/:startDate/:endDate/Tournament/:idT" element={<Tournament />} />
         {/* <Route path="/TournamentСategories" element={<TournamentСategories />}/> */}
       </Routes>
     </>

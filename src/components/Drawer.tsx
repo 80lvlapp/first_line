@@ -70,7 +70,7 @@ export default function PersistentDrawerLeft() {
                         noWrap
                         sx={{ flexGrow: 1 }}
                     >
-                        First line
+                        Sports rating
                     </Typography>
                 
 
