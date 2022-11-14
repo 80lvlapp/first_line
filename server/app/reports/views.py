@@ -31,6 +31,7 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
                 queryset = queryset.filter(period__lte=end_date)
         print(f"{queryset}")
         json_qs = []
+        n = 1
         for item in list(queryset):
             id = item[0]
             name = item[1]
@@ -39,9 +40,11 @@ class SportsmanPointsReportViewSet(viewsets.ModelViewSet):
             points = float(item[4])
             json_element = {
                 "points": points,
+                "place": n,
                 "sportsman": {"id": id, "name": name, "gender": gender, "date_birth": date_birth}
             }
             json_qs.append(json_element)
+            n += 1
         
         return JsonResponse(json_qs, safe = False , headers={"Access-Control-Allow-Origin": "*"})
 
