@@ -42,13 +42,13 @@ export default function Sportsman() {
     endDate: endDate !== undefined ? endDate : "",
   });
 
-  const openTournament = (item: any) => {
-    console.log(item);
+  const openTournament = (sportsman: any, tournament: any) => {
+    // console.log(item);
 
     navigate(
-      `/AthletesRating/${idS}/Sportsman/${idSp}/Tournament/${item.tournament.id}`,
+      `/AthletesRating/${idS}/Sportsman/${sportsman.id}/${startDate}/${endDate}/Tournament/${tournament.id}`,
       {
-        state: { id: item.id },
+        state: { id: sportsman.id },
       }
     );
   };
@@ -174,14 +174,15 @@ export default function Sportsman() {
               .filter((itemF) => itemIncludes(itemF))
               .map((item) => (
                 <div
-                  style={{ display: "flex", justifyContent: "center" }}
+                 style={{ display: "flex", justifyContent: "center" }}
+                  // style={{ display: "flex"}}
                   key={item.tournament.id}
                 >
                   <ListItemButton
                     key={item.tournament.id}
                     sx={mainStyles.listItem}
                     onClick={(event) => {
-                      openTournament(item);
+                      openTournament(rootItem.sportsman, item.tournament);
                     }}
                   >
                     <div

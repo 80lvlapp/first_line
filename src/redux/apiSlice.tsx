@@ -32,12 +32,13 @@ export const api = createApi({
         params: { sportsman_id:id, startDate, endDate }}}
       ,
     }),
-    getRatingTournament: builder.query<RatingTournament, { id: string, idTournament : string }>({
+    getRatingTournament: builder.query<RatingTournament[], { id: string, idTournament : string }>({
       query: (arg) => {
       const { id, idTournament } = arg;
       return {
-        url: 'rest-rating-tournament/',
-        params: { id, idTournament }}}
+        //url: 'rest-rating-tournament/',
+        url: 'reports/tournaments-sportsman-category-report',
+        params: { sportsman_id: id, tournament_id: idTournament }}}
       ,
     }),
   }),

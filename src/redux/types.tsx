@@ -22,9 +22,8 @@ export interface RatingSportsman {
 export interface RatingTournament {
 
   sportsman: Sportsman
-  tournament: Tournament
+  tournaments: Tournaments
   points: number
-  categories: Categories
 }
 
 interface Tournament {
@@ -33,7 +32,7 @@ interface Tournament {
   name: string
   date_tournament: string
   venue: string
-  type: TypeTournament
+  type_of_tornament: TypeTournament
 
 }
 
@@ -52,6 +51,7 @@ interface TypeTournament {
 interface ElementTournament {
 
   tournament: Tournament
+  categores: Categores
   point: number
 
 }
@@ -59,13 +59,13 @@ interface ElementTournament {
 interface ElementCategory {
 
   category: Category
-  points: number
+  point: number
   place: number
 
 }
 
 interface Tournaments extends Array<ElementTournament>{}
-interface Categories extends Array<ElementCategory>{}
+interface Categores extends Array<ElementCategory>{}
   
 export interface Sportsman {
 
