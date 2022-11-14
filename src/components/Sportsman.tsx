@@ -15,7 +15,12 @@ export default function Sportsman() {
   let navigate = useNavigate();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
   const { id } = state;
-  const { idSp, idS } = useParams<{ idSp: string; idS: string }>();
+  const { idSp, idS, startDate, endDate } = useParams<{
+    idSp: string;
+    idS: string;
+    startDate: string;
+    endDate: string;
+  }>();
 
   // const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
 
@@ -33,8 +38,8 @@ export default function Sportsman() {
 
   const { data, error, isLoading } = useGetRatingSportsmanQuery({
     id: idSp !== undefined ? idSp : "",
-    startDate: "2022",
-    endDate: "2022",
+    startDate: startDate !== undefined ? startDate : "",
+    endDate: endDate !== undefined ? endDate : "",
   });
 
   const openTournament = (item: any) => {
@@ -48,7 +53,18 @@ export default function Sportsman() {
     );
   };
 
-  console.log(data?.sportsman.name);
+  if (error) {
+    return (
+      <div style={mainStyles.main}>
+        <>Oh no, there was an error</>
+      </div>
+    );
+  } else if (isLoading) {
+    return (
+      <div style={mainStyles.main}>
+        <>Loading...</>
+      </div>);
+  }
 
   return (
     <div style={mainStyles.main}>
@@ -71,157 +87,156 @@ export default function Sportsman() {
             </IconButton>
           </Paper>
         </div> */}
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          paddingLeft: "20px",
-          paddingRight: "20px",
-        }}
-      >
-        <div
-          style={{
-            maxWidth: "600px",
-            minHeight: "70px",
-            display: "flex",
-            justifyContent: "center",
-            width: "100%",
-          }}
-        >
-          <div
-            style={{
-              marginTop: "50px",
-              background: "#FFFFFF",
-              borderRadius: "10px",
-              width: "70%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                marginTop: "20px",
-                marginBottom: "20px",
-                marginLeft: 10,
-                marginRight: 10,
-                color: "#625D8E",
-                fontFamily: "inherit",
-                fontSize: 21,
-                fontWeight: "bold",
-              }}
-            >
-              {data?.sportsman.name}
-            </div>
-          </div>
-          <div
-            style={{
-              marginLeft: "10px",
-              marginTop: "50px",
-              background: "#FFFFFF",
-              borderRadius: "10px",
-              width: "30%",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
-            <div
-              style={{
-                marginTop: "20px",
-                marginBottom: "20px",
-                marginLeft: 10,
-                marginRight: 10,
-                color: "#625D8E",
-                fontFamily: "inherit",
-                fontSize: 16,
-                fontWeight: "bold",
-              }}
-            >
-              {data?.place} место {"\n"} {data?.points} очков
-            </div>
-          </div>
-        </div>
-      </div>
 
-      {error ? (
-        <>Oh no, there was an error</>
-      ) : isLoading ? (
-        <>Loading...</>
-      ) : data ? (
-        <List
-          sx={{
-            background: "#E5E5E5",
-            marginTop: 1,
-            marginRight: "20px",
-          }}
-        >
-          {data.tournaments
-            .filter((itemF) => itemIncludes(itemF))
-            .map((item) => (
+      {data?.map((rootItem) => (
+        <div key={rootItem.sportsman.id}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              paddingLeft: "20px",
+              paddingRight: "20px",
+            }}
+          >
+            <div
+              style={{
+                maxWidth: "600px",
+                minHeight: "70px",
+                display: "flex",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
               <div
-                style={{ display: "flex", justifyContent: "center" }}
-                key={item.tournament.id}
+                style={{
+                  marginTop: "50px",
+                  background: "#FFFFFF",
+                  borderRadius: "10px",
+                  width: "70%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
               >
-                <ListItemButton
-                  key={item.tournament.id}
-                  sx={mainStyles.listItem}
-                  onClick={(event) => {
-                    openTournament(item);
+                <div
+                  style={{
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                    marginLeft: 10,
+                    marginRight: 10,
+                    color: "#625D8E",
+                    fontFamily: "inherit",
+                    fontSize: 21,
+                    fontWeight: "bold",
                   }}
                 >
-                  <div
-                    style={{
-                      display: "flex",
-                      flexDirection: "row",
-                      alignItems: "center",
+                  {rootItem.sportsman.name}
+                </div>
+              </div>
+              <div
+                style={{
+                  marginLeft: "10px",
+                  marginTop: "50px",
+                  background: "#FFFFFF",
+                  borderRadius: "10px",
+                  width: "30%",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <div
+                  style={{
+                    marginTop: "20px",
+                    marginBottom: "20px",
+                    marginLeft: 10,
+                    marginRight: 10,
+                    color: "#625D8E",
+                    fontFamily: "inherit",
+                    fontSize: 16,
+                    fontWeight: "bold",
+                  }}
+                >
+                  {rootItem.place} место {"\n"} {rootItem.points} очков
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <List
+            sx={{
+              background: "#E5E5E5",
+              marginTop: 1,
+              marginRight: "20px",
+            }}
+          >
+            {rootItem.tournaments
+              .filter((itemF) => itemIncludes(itemF))
+              .map((item) => (
+                <div
+                  style={{ display: "flex", justifyContent: "center" }}
+                  key={item.tournament.id}
+                >
+                  <ListItemButton
+                    key={item.tournament.id}
+                    sx={mainStyles.listItem}
+                    onClick={(event) => {
+                      openTournament(item);
                     }}
                   >
                     <div
                       style={{
-                        color: "#719A70",
-                        fontWeight: "bold",
-                        fontSize: 15,
-                      }}
-                    >
-                      {item.tournament.date}
-                    </div>
-                    <div
-                      style={{
                         display: "flex",
-                        flexDirection: "column",
-                        justifyContent: "center",
-                        marginLeft: "20px",
+                        flexDirection: "row",
+                        alignItems: "center",
                       }}
                     >
                       <div
                         style={{
-                          color: "#625D8E",
+                          color: "#719A70",
                           fontWeight: "bold",
-                          fontSize: 17,
+                          fontSize: 15,
                         }}
                       >
-                        {item.tournament.name}
-                      </div>
-                      <div style={{ color: "#7F7F7F", fontSize: 12 }}>
-                        {item.tournament.venue}
+                        {item.tournament.date_tournament}
                       </div>
                       <div
                         style={{
-                          color: "#7F7F7F",
-                          fontWeight: "bold",
-                          fontSize: 12,
+                          display: "flex",
+                          flexDirection: "column",
+                          justifyContent: "center",
+                          marginLeft: "20px",
                         }}
                       >
-                        Всего очков: {item.points}
+                        <div
+                          style={{
+                            color: "#625D8E",
+                            fontWeight: "bold",
+                            fontSize: 17,
+                          }}
+                        >
+                          {item.tournament.name}
+                        </div>
+                        <div style={{ color: "#7F7F7F", fontSize: 12 }}>
+                          {item.tournament.venue}
+                        </div>
+                        <div
+                          style={{
+                            color: "#7F7F7F",
+                            fontWeight: "bold",
+                            fontSize: 12,
+                          }}
+                        >
+                          Всего очков: {item.point}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </ListItemButton>
-              </div>
-            ))}
-        </List>
-      ) : null}
+                  </ListItemButton>
+                </div>
+              ))}
+          </List>
+        </div>
+      ))}
     </div>
   );
 }

@@ -31,7 +31,7 @@ interface Tournament {
 
   id: string
   name: string
-  date: string
+  date_tournament: string
   venue: string
   type: TypeTournament
 
@@ -52,7 +52,7 @@ interface TypeTournament {
 interface ElementTournament {
 
   tournament: Tournament
-  points: number
+  point: number
 
 }
 

@@ -23,12 +23,13 @@ export const api = createApi({
         params: { sport_school_pk: id, startDate, endDate }}}
       ,
     }),
-    getRatingSportsman: builder.query<RatingSportsman, { id: string, startDate: string; endDate: string }>({
+    getRatingSportsman: builder.query<RatingSportsman[], { id: string, startDate: string; endDate: string }>({
       query: (arg) => {
       const { id, startDate, endDate } = arg;
       return {
-        url: 'rest-rating-sportsman/',
-        params: { id, startDate, endDate }}}
+        // url: 'rest-rating-sportsman/',
+        url: 'reports/tournaments-sportsman-report',
+        params: { sportsman_id:id, startDate, endDate }}}
       ,
     }),
     getRatingTournament: builder.query<RatingTournament, { id: string, idTournament : string }>({
