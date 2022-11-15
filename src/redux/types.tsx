@@ -22,18 +22,17 @@ export interface RatingSportsman {
 export interface RatingTournament {
 
   sportsman: Sportsman
-  tournament: Tournament
+  tournaments: Tournaments
   points: number
-  categories: Categories
 }
 
 interface Tournament {
 
   id: string
   name: string
-  date: string
+  date_tournament: string
   venue: string
-  type: TypeTournament
+  type_of_tornament: TypeTournament
 
 }
 
@@ -52,20 +51,21 @@ interface TypeTournament {
 interface ElementTournament {
 
   tournament: Tournament
-  points: number
+  categores: Categores
+  point: number
 
 }
 
 interface ElementCategory {
 
   category: Category
-  points: number
+  point: number
   place: number
 
 }
 
 interface Tournaments extends Array<ElementTournament>{}
-interface Categories extends Array<ElementCategory>{}
+interface Categores extends Array<ElementCategory>{}
   
 export interface Sportsman {
 
