@@ -157,7 +157,8 @@ class TournamentsSportsmenCategoryReportViewSet(viewsets.ModelViewSet):
                                         for item in list(queryset3):
                                             point_category_value += item.points
                                             tournament_point +=item.points
-                                        category_value_json.append({"category": CategoryValueCreateSerializer(queryset3[0].category_value).data, "point": point_category_value})                                        
+                                            place = item.place
+                                        category_value_json.append({"category": CategoryValueCreateSerializer(queryset3[0].category_value).data, "place": place, "point": point_category_value})                                        
                             
                             tournament_json.append({"tournament":tournament_serializer.data, "point": tournament_point, "categores": category_value_json})
                         
