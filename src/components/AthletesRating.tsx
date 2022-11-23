@@ -227,7 +227,7 @@ export default function AthletesRating() {
                     {/* <ListItemText primary={item.sportsman.name} /> */}
                   </div>
 
-                  <div style={styles.containerTriangle}>
+                  {/* <div style={styles.containerTriangle}>
                     <div
                       style={
                         item.сhangingPosition === 0
@@ -247,8 +247,7 @@ export default function AthletesRating() {
                     >
                       <span>{item.сhangingPosition}</span>
                     </div>
-                    {/* <div> {item.сhangingPosition} </div> */}
-                  </div>
+                  </div> */}
 
                   <div style={styles.points}>
                     <div

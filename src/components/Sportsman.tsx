@@ -157,7 +157,8 @@ export default function Sportsman() {
                     fontWeight: "bold",
                   }}
                 >
-                  {rootItem.place} место {"\n"} {rootItem.points} очков
+                  {/* {rootItem.place} место {"\n"} {rootItem.points} очков */}
+                  {rootItem.points} очков
                 </div>
               </div>
             </div>
