@@ -1,0 +1,110 @@
+.tournamentMain{
+  display: flex;
+  justify-Content: center;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.tournamentColumn {
+  max-width: 600px;
+  min-Height: 70px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 50px;
+  background: #FFFFFF;
+  border-radius: 10px;
+}
+.tournamentName{
+  margin-top: 20px;
+  margin-bottom: 5px;
+  margin-left: 20;
+  margin-right: 10;
+  color: #625D8E;
+  font-family: inherit;
+  font-size: 21;
+  font-weight: bold;
+}
+.tournamentVenue {
+  margin-left: 20;
+  margin-right: 10;
+  color: "#7F7F7F";
+  font-family: "inherit";
+  font-size: 18;
+}
+
+.tournamentType {
+  margin-bottom: "20px";
+  margin-left: 20;
+  margin-right: 10;
+  color: "#7F7F7F";
+  font-family: "inherit";
+  font-size: 18;
+}
+
+.categoryRow{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.categoryColumn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center; 
+  margin-left: 20px;
+}
+
+.categoryTitle{
+  color: #7F7F7F;
+  font-weight: "bold";
+  font-size: 15;
+}
+
+.categoryName{
+  color: #719A70;
+  font-weight: bold;
+  font-size: 15;
+  margin-left: 5;
+}
+
+.categoryPlaceTitle{
+  color: #7F7F7F;
+  font-weight: bold;
+  font-size: 15;
+}
+
+.categoryPlace{
+  color: #719A70;
+  font-weight: bold;
+  font-size: 15;
+  margin-left: 5;
+}
+
+.categoryPointsTitle{
+  color: #7F7F7F;
+  font-weight: bold;
+  font-size: 15;
+}
+
+.categoryPoints{
+  color: #719A70;
+  font-weight: bold;
+  font-size: 15;
+  margin-left: 5;
+}
+
+.totalTitle{
+  padding-left: 20;
+  color: #625D8E;
+  font-family: inherit;
+  font-size: 21;
+  font-weight: bold;
+}
+
+.total {
+  margin-left: 5;
+  color: #719A70;
+  font-family: inherit;
+  font-size: 21;
+  font-weight: bold;
+}
