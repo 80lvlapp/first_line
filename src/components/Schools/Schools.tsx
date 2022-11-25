@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Navigate, useNavigate } from "react-router-dom";
-import { mainStyles } from "../components/AppStyles";
+import { mainStyles } from "../../components/AppStyles";
 //import { useAppContext } from "../context/AppContext";
 import {
   InputBase,
@@ -17,7 +17,9 @@ import {
 } from "@mui/material";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
-import { useGetSchoolsQuery } from "../redux/apiSlice";
+import { useGetSchoolsQuery } from "../../redux/apiSlice";
+import styles from "./Schools.module.css";
+
 
 export default function Home() {
   const { data, error, isLoading } = useGetSchoolsQuery("");
@@ -39,11 +41,10 @@ export default function Home() {
     navigate(`/AthletesRating/${item.id}`, { state: { id: item.id } });
   };
 
-  console.log(data);
 
   return (
     <div style={mainStyles.main}>
-      <div style={{ display: "flex", justifyContent: "center" }}>
+      <div className= {styles.content}>
         <Paper component="form" sx={mainStyles.paperStyles}>
           <InputBase
             sx={{ ml: 1, flex: 1 }}

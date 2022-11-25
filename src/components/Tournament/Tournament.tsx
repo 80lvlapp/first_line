@@ -5,9 +5,10 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { useGetRatingTournamentQuery } from "../redux/apiSlice";
-import { mainStyles } from "../components/AppStyles";
+import { useGetRatingTournamentQuery } from "../../redux/apiSlice";
+import { mainStyles } from "../../components/AppStyles";
 import { ListItemButton, List, ListItemText } from "@mui/material";
+import styles from "./Tournament.module.css";
 
 export default function Tournament() {
   const { idSp, idT } = useParams<{ idSp: string; idT: string }>();
@@ -21,7 +22,6 @@ export default function Tournament() {
     return true;
   };
 
-  console.log(data);
 
   return (
     <div style={mainStyles.main}>
@@ -29,17 +29,17 @@ export default function Tournament() {
         <div>
           {rootItem.tournaments.map((tournamentItem) => (
             <>
-              <div style={styles.tournamentMain}>
-                <div style={styles.tournamentColumn}>
-                  <div style={styles.tournamentName}>
+              <div className={styles.tournamentMain}>
+                <div className={styles.tournamentColumn}>
+                  <div className={styles.tournamentName}>
                     {tournamentItem.tournament.name}
                   </div>
 
-                  <div style={styles.tournamentVenue}>
+                  <div className={styles.tournamentVenue}>
                     {tournamentItem.tournament.venue}
                   </div>
 
-                  <div style={styles.tournamentType}>
+                  <div className={styles.tournamentType}>
                     Тип турнира:{" "}
                     {tournamentItem.tournament.type_of_tornament.name}
                   </div>
@@ -65,14 +65,14 @@ export default function Tournament() {
                         key={categoresItem.category.id}
                         sx={mainStyles.listItem}
                       >
-                        <div style={styles.categoryRow}>
-                          <div style={styles.categoryColumn}>
+                        <div className={styles.categoryRow}>
+                          <div className={styles.categoryColumn}>
                             <div
                               style={{ display: "flex", flexDirection: "row" }}
                             >
-                              <div style={styles.categoryTitle}>Категория:</div>
+                              <div className={styles.categoryTitle}>Категория:</div>
 
-                              <div style={styles.categoryName}>
+                              <div className={styles.categoryName}>
                                 {categoresItem.category.name}
                               </div>
                             </div>
@@ -80,10 +80,10 @@ export default function Tournament() {
                             <div
                               style={{ display: "flex", flexDirection: "row" }}
                             >
-                              <div style={styles.categoryPlaceTitle}>
+                              <div className={styles.categoryPlaceTitle}>
                                 Место:
                               </div>
-                              <div style={styles.categoryPlace}>
+                              <div className={styles.categoryPlace}>
                                 {categoresItem.place}
                               </div>
                             </div>
@@ -91,10 +91,10 @@ export default function Tournament() {
                             <div
                               style={{ display: "flex", flexDirection: "row" }}
                             >
-                              <div style={styles.categoryPointsTitle}>
+                              <div className={styles.categoryPointsTitle}>
                                 Присвоено очков:
                               </div>
-                              <div style={styles.categoryPoints}>
+                              <div className={styles.categoryPoints}>
                                 {categoresItem.point}
                               </div>
                             </div>
@@ -115,9 +115,9 @@ export default function Tournament() {
             }}
           >
             <div style={{ maxWidth: "600px", width: "100%",  display: "flex", flexDirection: "row" }}>
-              <div style={styles.totalTitle}>Итого очков:</div>
+              <div className={styles.totalTitle}>Итого очков:</div>
 
-              <div style={styles.total}>{rootItem.points}</div>
+              <div className={styles.total}>{rootItem.points}</div>
             </div>
           </div>
         </div>
@@ -126,108 +126,3 @@ export default function Tournament() {
   );
 }
 
-const styles = {
-  tournamentMain: {
-    display: "flex",
-    justifyContent: "center",
-    paddingLeft: "20px",
-    paddingRight: "20px",
-  },
-  tournamentColumn: {
-    maxWidth: "600px",
-    minHeight: "70px",
-    display: "flex",
-    flexDirection: "column",
-    width: "100%",
-    marginTop: "50px",
-    background: "#FFFFFF",
-    borderRadius: "10px",
-    //alignItems: "center",
-  },
-  tournamentName: {
-    marginTop: "20px",
-    marginBottom: "5px",
-    marginLeft: 20,
-    marginRight: 10,
-    color: "#625D8E",
-    fontFamily: "inherit",
-    fontSize: 21,
-    fontWeight: "bold",
-  },
-  tournamentVenue: {
-    marginLeft: 20,
-    marginRight: 10,
-    color: "#7F7F7F",
-    fontFamily: "inherit",
-    fontSize: 18,
-    //fontWeight: "bold",
-  },
-  tournamentType: {
-    //marginTop: "20px",
-    marginBottom: "20px",
-    marginLeft: 20,
-    marginRight: 10,
-    color: "#7F7F7F",
-    fontFamily: "inherit",
-    fontSize: 18,
-    //fontWeight: "bold",
-  },
-  categoryRow: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  categoryColumn: {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    marginLeft: "20px",
-  },
-  categoryTitle: {
-    color: "#7F7F7F",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  categoryName: {
-    color: "#719A70",
-    fontWeight: "bold",
-    fontSize: 15,
-    marginLeft: 5,
-  },
-  categoryPlaceTitle: {
-    color: "#7F7F7F",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  categoryPlace: {
-    color: "#719A70",
-    fontWeight: "bold",
-    fontSize: 15,
-    marginLeft: 5,
-  },
-  categoryPointsTitle: {
-    color: "#7F7F7F",
-    fontWeight: "bold",
-    fontSize: 15,
-  },
-  categoryPoints: {
-    color: "#719A70",
-    fontWeight: "bold",
-    fontSize: 15,
-    marginLeft: 5,
-  },
-  totalTitle: {
-    paddingLeft: 20,
-    color: "#625D8E",
-    fontFamily: "inherit",
-    fontSize: 21,
-    fontWeight: "bold",
-  },
-  total: {
-    marginLeft: 5,
-    color: "#719A70",
-    fontFamily: "inherit",
-    fontSize: 21,
-    fontWeight: "bold",
-  },
-} as const;
