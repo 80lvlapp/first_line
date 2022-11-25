@@ -5,12 +5,12 @@ from api.category_value.models import CategoryValueModel
 
 
 class TournamentInfoModel(models.Model):
-    period = models.DateField()
-    tournament = models.ForeignKey(TournamentModel, on_delete=models.RESTRICT)
-    sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT)
-    category_value = models.ForeignKey(CategoryValueModel, on_delete=models.RESTRICT)
-    points = models.IntegerField()
-    place = models.PositiveSmallIntegerField(blank=True, null=True)
+    period = models.DateField(verbose_name="Период")
+    tournament = models.ForeignKey(TournamentModel, on_delete=models.RESTRICT, verbose_name="Турнир")
+    sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT, verbose_name="Спортсмен")
+    category_value = models.ForeignKey(CategoryValueModel, on_delete=models.RESTRICT, verbose_name="Категория")
+    points = models.IntegerField(verbose_name="Очки")
+    place = models.PositiveSmallIntegerField(blank=True, null=True, verbose_name="Место")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()

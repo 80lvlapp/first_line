@@ -9,9 +9,9 @@ class SportsmanModel(models.Model):
         (FEMALE, "FEMALE"),
     ]
 
-    name = models.CharField(max_length=50, db_index=True)
-    gender = models.CharField(max_length=6, choices=GENDERS, default=MALE)
-    date_birth = models.DateField(blank=True, null=True)
+    name = models.CharField(max_length=50, db_index=True, verbose_name="Наименование")
+    gender = models.CharField(max_length=6, choices=GENDERS, default=MALE, verbose_name="Пол спортсмена")
+    date_birth = models.DateField(blank=True, null=True, verbose_name="Дата рождения")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()

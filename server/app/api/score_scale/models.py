@@ -4,12 +4,12 @@ from api.type_of_tournament.models import TypeOfTournamentModel
 
 
 class ScoreScaleModel(models.Model):
-    period = models.DateField()
-    sport_school = models.ForeignKey(SportSchoolModel, on_delete=models.RESTRICT)
-    type_tournament = models.ForeignKey(TypeOfTournamentModel, on_delete=models.RESTRICT)
-    place_from = models.IntegerField()
-    place_to = models.IntegerField()
-    numbers_of_points = models.IntegerField()
+    period = models.DateField(verbose_name="Период")
+    sport_school = models.ForeignKey(SportSchoolModel, on_delete=models.RESTRICT, verbose_name="Спортивная школа")
+    type_tournament = models.ForeignKey(TypeOfTournamentModel, on_delete=models.RESTRICT, verbose_name="Тип турнира")
+    place_from = models.IntegerField(verbose_name="От")
+    place_to = models.IntegerField(verbose_name="До")
+    numbers_of_points = models.IntegerField(verbose_name="Очки")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
