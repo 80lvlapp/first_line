@@ -6,4 +6,4 @@ from .models import CategoryModel
 
 @admin.register(CategoryModel)
 class CategoryAdmin(admin.ModelAdmin):
-    list_display = ["id", 'name']
+    list_display = ['name']

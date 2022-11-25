@@ -3,4 +3,4 @@ from .models import SportSchoolModel
 
 @admin.register(SportSchoolModel)
 class CoacheAdmin(admin.ModelAdmin):
-    list_display = ["id", 'name']
+    list_display = ['name']

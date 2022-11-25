@@ -4,4 +4,4 @@ from .models import SportsmanModel
 
 @admin.register(SportsmanModel)
 class SportsmanAdmin(admin.ModelAdmin):
-    list_display = ['id', 'name', 'gender', 'date_birth']
+    list_display = ['name', 'gender', 'date_birth']

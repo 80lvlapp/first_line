@@ -4,4 +4,4 @@ from .models import CoacheModel
 
 @admin.register(CoacheModel)
 class CoacheAdmin(admin.ModelAdmin):
-    list_display = ["id", 'name']
+    list_display = ['name']
