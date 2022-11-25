@@ -5,11 +5,11 @@ from api.coache.models import CoacheModel
 
 
 class SportsmanInfoModel(models.Model):
-    period = models.DateField()
-    sport_school = models.ForeignKey(SportSchoolModel, on_delete=models.RESTRICT)
-    sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT)
-    coache = models.ForeignKey(CoacheModel, on_delete=models.RESTRICT)
-    insuranse = models.BooleanField(default=False)
+    period = models.DateField(verbose_name="Период")
+    sport_school = models.ForeignKey(SportSchoolModel, on_delete=models.RESTRICT, verbose_name="Спортивная школа")
+    sportsman = models.ForeignKey(SportsmanModel, on_delete=models.RESTRICT, verbose_name="Спортсмен")
+    coache = models.ForeignKey(CoacheModel, on_delete=models.RESTRICT, verbose_name="Тренер")
+    insuranse = models.BooleanField(default=False, verbose_name="Застрахован")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()

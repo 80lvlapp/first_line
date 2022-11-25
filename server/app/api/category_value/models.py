@@ -4,8 +4,8 @@ from api.category.models import CategoryModel
 
 
 class CategoryValueModel(models.Model):
-    name = models.CharField(max_length=50, db_index=True)
-    category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE)
+    name = models.CharField(max_length=50, db_index=True, verbose_name="Наименование")
+    category = models.ForeignKey(CategoryModel, on_delete=models.CASCADE, verbose_name="Категория")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     objects = models.Manager()
