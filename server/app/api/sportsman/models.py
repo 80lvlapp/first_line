@@ -5,8 +5,8 @@ class SportsmanModel(models.Model):
     MALE = "MALE"
     FEMALE = "FEMALE"
     GENDERS = [
-        (MALE, "MALE"),
-        (FEMALE, "FEMALE"),
+        (MALE, "Мужской"),
+        (FEMALE, "Женский"),
     ]
 
     name = models.CharField(max_length=50, db_index=True, verbose_name="Наименование")
