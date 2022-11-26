@@ -1,5 +1,4 @@
 
-import Drawer from "./components/Drawer";
 import { Routes, Route } from "react-router-dom";
 import Schools from "./components/Schools";
 import Tournament from "./components/Tournament";
