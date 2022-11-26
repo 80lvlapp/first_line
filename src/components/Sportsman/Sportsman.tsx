@@ -13,7 +13,6 @@ export default function Sportsman() {
   const location = useLocation();
   let navigate = useNavigate();
   const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
-  const { id } = state;
   const { idSp, idS, startDate, endDate } = useParams<{
     idSp: string;
     idS: string;

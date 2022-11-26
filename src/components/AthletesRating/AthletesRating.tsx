@@ -39,9 +39,6 @@ import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 export default function AthletesRating() {
   let navigate = useNavigate();
   const location = useLocation();
-  const state = location.state as CustomizedState; // Type Casting, then you can get the params passed via router
-  const { id } = state;
-
   const [dateStart, setDateStart] = React.useState<Dayjs | null>(dayjs().startOf('year'));
   const [dateEnd, setDateEnd] = React.useState<Dayjs | null>(dayjs().endOf('year'));
 
@@ -50,8 +47,6 @@ export default function AthletesRating() {
 
   const { idS } = useParams<{ idS: string }>();
 
-  // let { idS } = useParams<ParamTypes>();
-  console.log(idS);
 
   useEffect(()=> {
     onChangeStartDate(dateStart);
