@@ -9,7 +9,7 @@ export const mainStyles = {
     marginTop: "40px",
   },
 
-  listItem: {
+    listItem: {
     marginTop: "10px",
     background: "#FFFFFF",
     borderRadius: "10px",

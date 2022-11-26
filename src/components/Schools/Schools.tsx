@@ -94,9 +94,8 @@ export default function Home() {
                   <div style={{display: "flex", flexDirection: "column"}}>
                     <div
                       style={{
-                        color: "#7F7F7F",
-                        fontWeight: "bold",
-                        fontSize: 16,
+                        color: "black",
+                        fontSize: 22,
                       }}
                     >
                       {item.name}
