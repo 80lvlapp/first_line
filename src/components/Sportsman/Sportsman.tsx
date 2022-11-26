@@ -84,9 +84,10 @@ export default function Sportsman() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  fontSize: "30px",
+                  fontSize: "28px",
                   textAlign: "center",
-                  height:    "70px",
+                  minHeight:    "70px",
+                  padding:"3px"
                 
                 }}
               >
@@ -103,9 +104,10 @@ export default function Sportsman() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
-                  fontSize: "30px",
+                  fontSize: "28px",
                   textAlign: "center",
-                  height:    "70px",
+                  minHeight:    "70px",
+                  padding:"3px"
                 }}
               >
               
