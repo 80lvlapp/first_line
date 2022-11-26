@@ -77,7 +77,7 @@ export default function Sportsman() {
             >
               <div
                 style={{
-                  marginTop: "50px",
+              
                   background: "#FFFFFF",
                   borderRadius: "10px",
                   width: "70%",
@@ -97,7 +97,6 @@ export default function Sportsman() {
               </div>
               <div
                 style={{
-                  marginTop: "50px",
                   background: "#FFFFFF",
                   borderRadius: "10px",
                   width: "30%",
