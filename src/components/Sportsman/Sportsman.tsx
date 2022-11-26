@@ -85,25 +85,18 @@ export default function Sportsman() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  fontSize: "30px",
+                  textAlign: "center",
+                  height:    "70px",
+                
                 }}
               >
-                <div
-                  style={{
-                    marginTop: "20px",
-                    marginBottom: "20px",
-             
-                    color: "#625D8E",
-                    fontFamily: "inherit",
-                    fontSize: 21,
-                    fontWeight: "bold",
-                  }}
-                >
+              
                   {rootItem.sportsman.name}
-                </div>
+               
               </div>
               <div
                 style={{
-        
                   marginTop: "50px",
                   background: "#FFFFFF",
                   borderRadius: "10px",
@@ -111,21 +104,14 @@ export default function Sportsman() {
                   display: "flex",
                   justifyContent: "center",
                   alignItems: "center",
+                  fontSize: "30px",
+                  textAlign: "center",
+                  height:    "70px",
                 }}
               >
-                <div
-                  style={{
-                    marginTop: "20px",
-                    marginBottom: "20px",
-                    color: "#625D8E",
-                    fontFamily: "inherit",
-                    fontSize: 16,
-                    fontWeight: "bold",
-                  }}
-                >
-                  {/* {rootItem.place} место {"\n"} {rootItem.points} очков */}
+              
                   {rootItem.points} очков
-                </div>
+              
               </div>
             </div>
           </div>
@@ -177,9 +163,9 @@ export default function Sportsman() {
                       >
                         <div
                           style={{
-                            color: "#625D8E",
-                            fontWeight: "bold",
-                            fontSize: 17,
+                            color: "black",
+                        
+                            fontSize: 22,
                           }}
                         >
                           {item.tournament.name}

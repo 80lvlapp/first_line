@@ -88,8 +88,6 @@ export default function AthletesRating() {
     endDate: dateEndFormat,
   });
 
-  console.log(data);  
-
   const openRatingSportsman = (idS: any, item: any) => {
     console.log(item);
 
@@ -183,12 +181,12 @@ export default function AthletesRating() {
                     <Badge badgeContent={item.place} color="primary"></Badge>
                   </div>
 
-                  <div style={{ marginLeft: 20, maxWidth: "200px" }}>
+                  <div style={{ marginLeft: 20 }}>
                     <div
                       style={{
-                        color: "#7F7F7F",
-                        fontWeight: "bold",
-                        fontSize: 16,
+                        color: "black",
+                  
+                        fontSize: 22,
                       }}
                     >
                       {item.sportsman.name}

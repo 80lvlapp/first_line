@@ -36,7 +36,6 @@
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   width: 100%;
-  max-width: 600px;
 }
 
 .characteristicsTournament{
@@ -57,16 +56,10 @@
   border-radius: 10px;
 }
 .tournamentName{
- 
   text-align: center;
-  color: #625D8E;
+  color: black;
   font-family: inherit;
-  font-size: 21;
-  font-weight: bold;
-  color: rgb(98, 93, 142);
-  font-family: inherit;
-    font-size: 21px;
-    font-weight: bold;
+  font-size: 30px;
 }
 
 .tournamentVenue {
@@ -169,19 +162,17 @@
   padding: 15px;
   border-radius: 15px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  align-items: center;
 }
 
 .totalTitle{
-  padding-left: 20;
-  color: #625D8E;
+  color: black;
   font-family: inherit;
-  font-size: 21;
-  font-weight: bold;
+  font-size: 30px;
 }
 
 .totalValue {
   color: #719A70;
   font-family: inherit;
-  font-size: 21;
-  font-weight: bold;
+  font-size: 30px;
 }
