@@ -1,19 +1,14 @@
-
 .page{
   display: flex; 
   justify-Content: center; 
 }
-
 .content {
   width: 100%;
   max-width: 600px;
 }
-
-
 .tournamentContent{
   display: flex;
   flex-direction: column;
-  margin-top: 40px;
   width: 100%;
   }
 

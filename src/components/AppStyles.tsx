@@ -6,7 +6,6 @@ export const mainStyles = {
     alignItems: "center",
     width: "100%",
     maxWidth: "600px",
-    marginTop: "40px",
   },
 
     listItem: {
