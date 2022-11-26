@@ -5,12 +5,13 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { useGetRatingQuery } from "../redux/apiSlice";
+import { useGetRatingQuery } from "../../redux/apiSlice";
 import ImageIcon from "@mui/icons-material/Image";
 import SearchIcon from "@mui/icons-material/Search";
-import { mainStyles } from "../components/AppStyles";
+import { mainStyles } from "../../components/AppStyles";
 import MailIcon from "@mui/icons-material/Image";
 import CircleIcon from "@mui/icons-material/Circle";
+import styles_ from "./AthletesRating.module.css";
 
 import {
   InputBase,
@@ -32,6 +33,8 @@ import dayjs, { Dayjs } from "dayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
+
+
 
 export default function AthletesRating() {
   let navigate = useNavigate();
@@ -96,36 +99,15 @@ export default function AthletesRating() {
   };
 
   return (
-    <div style={mainStyles.main}>
+    <div className={styles_.page}>
+    <div className={styles_.content}>
+      
       <div
-        style={{
-          justifyContent: "center",
-          display: "flex",
-          flexDirection: "row",
-          marginTop: "40px",
-          marginLeft: "20px",
-          marginRight: "20px",
-          flex: 1,
-
-          //maxWidth: "600px",
-          //alignItems: "center"
-        }}
+        className={styles_.DatePicker}
       >
         <LocalizationProvider dateAdapter={AdapterDayjs}>
           <div
-            style={
-              window.screen.width > 600
-                ? {
-                    width: "260px",
-                    marginRight: "40px",
-                    backgroundColor: "white",
-                  }
-                : {
-                    width: "260px",
-                    marginRight: "10px",
-                    backgroundColor: "white",
-                  }
-            }
+            style={{ backgroundColor: "white"}}
           >
             <DatePicker
               inputFormat="DD.MM.YYYY"
@@ -136,19 +118,7 @@ export default function AthletesRating() {
             />
           </div>
           <div
-            style={
-              window.screen.width > 600
-                ? {
-                    width: "260px",
-                    marginLeft: "40px",
-                    backgroundColor: "white",
-                  }
-                : {
-                    width: "260px",
-                    marginLeft: "10px",
-                    backgroundColor: "white",
-                  }
-            }
+           style={{backgroundColor: "white"}}
           >
             <DatePicker
               inputFormat="DD.MM.YYYY"
@@ -191,9 +161,8 @@ export default function AthletesRating() {
       ) : data ? (
         <List
           sx={{
-            background: "#E5E5E5",
             marginTop: 1,
-            marginRight: "20px",
+         //   marginRight: "20px",
           }}
         >
           {data
@@ -266,6 +235,7 @@ export default function AthletesRating() {
             ))}
         </List>
       ) : null}
+    </div>
     </div>
   );
 }

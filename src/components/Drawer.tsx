@@ -41,9 +41,9 @@ export default function PersistentDrawerLeft() {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex", height:'64px', minHeight: '64px'}}>
       <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
+        styles={{  height:'64px', ul: { margin: 0, padding: 0, listStyle: "none" } }}
       />
       <CssBaseline />
       <AppBar
@@ -66,7 +66,7 @@ export default function PersistentDrawerLeft() {
             noWrap
             sx={{ flexGrow: 1, textDecoration: 'none' }}
           >
-            Sports rating
+            SPORTS RATING
           </Typography>
           {/* <Button component={Link} to={ window.location.href = 'http://sportsrating.ru:8080/first-line/admin/'} > */}
           <Button onClick={()=> window.location.href = 'http://sportsrating.ru:8080/first-line/admin/'}> 

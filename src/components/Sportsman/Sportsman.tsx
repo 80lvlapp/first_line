@@ -5,10 +5,9 @@ import {
   useLocation,
   useParams,
 } from "react-router-dom";
-import { useGetRatingSportsmanQuery } from "../redux/apiSlice";
-import { mainStyles } from "../components/AppStyles";
-import { ListItemButton, List, ListItemText } from "@mui/material";
-import { keyboard } from "@testing-library/user-event/dist/keyboard";
+import { useGetRatingSportsmanQuery } from "../../redux/apiSlice";
+import { ListItemButton, List, ListItemText} from "@mui/material";
+import { mainStyles } from "../../components/AppStyles";
 
 export default function Sportsman() {
   const location = useLocation();
@@ -22,18 +21,9 @@ export default function Sportsman() {
     endDate: string;
   }>();
 
-  // const [valueSearchSportsman, setvalueSearchSportsman] = useState("");
-
-  // const changeValueSearch = (item: React.ChangeEvent<HTMLInputElement>) => {
-  //   setvalueSearchSportsman(item.target.value);
-  // };
-
+  
   const itemIncludes = (item: any) => {
     return true;
-    // return item.sportsman.name
-    //   .trim()
-    //   .toLowerCase()
-    //   .includes(valueSearchSportsman.toLowerCase());
   };
 
   const { data, error, isLoading } = useGetRatingSportsmanQuery({
@@ -43,8 +33,7 @@ export default function Sportsman() {
   });
 
   const openTournament = (sportsman: any, tournament: any) => {
-    // console.log(item);
-
+  
     navigate(
       `/AthletesRating/${idS}/Sportsman/${sportsman.id}/${startDate}/${endDate}/Tournament/${tournament.id}`,
       {
@@ -55,39 +44,20 @@ export default function Sportsman() {
 
   if (error) {
     return (
-      <div style={mainStyles.main}>
+      <div >
         <>Oh no, there was an error</>
       </div>
     );
   } else if (isLoading) {
     return (
-      <div style={mainStyles.main}>
+      <div>
         <>Loading...</>
       </div>);
   }
 
   return (
-    <div style={mainStyles.main}>
-      {/* <div style={{ display: "flex", justifyContent: "center" }}>
-          <Paper component="form" sx={{ ...mainStyles.paperStyles }}>
-            <InputBase
-              sx={{ ml: 1, flex: 1 }}
-              placeholder="Поиск спортсмена"
-              // value = {valueSearchSchool}
-              onChange={changeValueSearch}
-              inputProps={{ "aria-label": "search google maps" }}
-            />
-            <IconButton
-              type="submit"
-              sx={{ p: "10px" }}
-              aria-label="search"
-              disabled={true}
-            >
-              <SearchIcon />
-            </IconButton>
-          </Paper>
-        </div> */}
-
+    <>
+  
       {data?.map((rootItem) => (
         <div key={rootItem.sportsman.id}>
           <div
@@ -166,9 +136,7 @@ export default function Sportsman() {
 
           <List
             sx={{
-              background: "#E5E5E5",
-              marginTop: 1,
-              marginRight: "20px",
+              marginTop: 1
             }}
           >
             {rootItem.tournaments
@@ -181,10 +149,11 @@ export default function Sportsman() {
                 >
                   <ListItemButton
                     key={item.tournament.id}
-                    sx={mainStyles.listItem}
-                    onClick={(event) => {
+                     onClick={(event) => {
                       openTournament(rootItem.sportsman, item.tournament);
                     }}
+
+                    sx={mainStyles.listItem}
                   >
                     <div
                       style={{
@@ -239,7 +208,7 @@ export default function Sportsman() {
           </List>
         </div>
       ))}
-    </div>
+    </>
   );
 }
 
