@@ -64,8 +64,6 @@ export default function Sportsman() {
             style={{
               display: "flex",
               justifyContent: "center",
-              paddingLeft: "20px",
-              paddingRight: "20px",
             }}
           >
             <div
@@ -73,8 +71,9 @@ export default function Sportsman() {
                 maxWidth: "600px",
                 minHeight: "70px",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "space-between",
                 width: "100%",
+                columnGap: "5px"
               }}
             >
               <div
@@ -92,8 +91,7 @@ export default function Sportsman() {
                   style={{
                     marginTop: "20px",
                     marginBottom: "20px",
-                    marginLeft: 10,
-                    marginRight: 10,
+             
                     color: "#625D8E",
                     fontFamily: "inherit",
                     fontSize: 21,
@@ -105,7 +103,7 @@ export default function Sportsman() {
               </div>
               <div
                 style={{
-                  marginLeft: "10px",
+        
                   marginTop: "50px",
                   background: "#FFFFFF",
                   borderRadius: "10px",
@@ -119,8 +117,6 @@ export default function Sportsman() {
                   style={{
                     marginTop: "20px",
                     marginBottom: "20px",
-                    marginLeft: 10,
-                    marginRight: 10,
                     color: "#625D8E",
                     fontFamily: "inherit",
                     fontSize: 16,
