@@ -43,7 +43,7 @@ export default function Home() {
 
 
   return (
-    <div style={mainStyles.main}>
+    <div >
       <div className= {styles.content}>
         <Paper component="form" sx={mainStyles.paperStyles}>
           <InputBase
@@ -70,11 +70,6 @@ export default function Home() {
         <>Loading...</>
       ) : data ? (
         <List
-          sx={{
-            background: "#E5E5E5",
-            marginTop: 1,
-            marginRight: "20px",
-          }}
         >
           {data
             .filter((itemF) => itemIncludes(itemF))

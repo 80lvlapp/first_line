@@ -1,13 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
 import {
-  Navigate,
-  useNavigate,
-  useLocation,
   useParams,
 } from "react-router-dom";
 import { useGetRatingTournamentQuery } from "../../redux/apiSlice";
 import { mainStyles } from "../../components/AppStyles";
-import { ListItemButton, List, ListItemText } from "@mui/material";
+import { List, ListItem } from "@mui/material";
 import styles from "./Tournament.module.css";
 
 export default function Tournament() {
@@ -24,33 +21,53 @@ export default function Tournament() {
 
 
   return (
-    <div style={mainStyles.main}>
+    <div className={styles.page}>
+      <div className={styles.content}>
       {data?.map((rootItem) => (
-        <div>
+        <div className={styles.tournamentContent}>
           {rootItem.tournaments.map((tournamentItem) => (
             <>
-              <div className={styles.tournamentMain}>
-                <div className={styles.tournamentColumn}>
+           
+
+                <div className={styles.tournamentCardContent}>
+
                   <div className={styles.tournamentName}>
                     {tournamentItem.tournament.name}
                   </div>
 
-                  <div className={styles.tournamentVenue}>
-                    {tournamentItem.tournament.venue}
-                  </div>
+                  <div className={styles.characteristicsTournament}>
 
-                  <div className={styles.tournamentType}>
-                    Тип турнира:{" "}
-                    {tournamentItem.tournament.type_of_tornament.name}
+                    <div className={styles.tournamentVenue}>
+
+                      <div className={styles.tournamentVenueTitle}>
+                        город:
+                      </div>
+
+                      <div className={styles.tournamentVenueValue}>
+                        {tournamentItem.tournament.venue}
+                      </div>
+
+                    </div>
+
+                    <div className={styles.tournamentType}>
+
+                      <div className={styles.tournamentTypeTitle}>
+                        тип турнира:
+                      </div>
+
+                      <div className={styles.tournamentTypeValue}>
+                        {tournamentItem.tournament.type_of_tornament.name}
+                      </div>
+                    </div>
+
                   </div>
-                </div>
+             
+
               </div>
 
               <List
                 sx={{
-                  background: "#E5E5E5",
-                  marginTop: 1,
-                  marginRight: "20px",
+                  marginTop: 1
                 }}
               >
                 {tournamentItem.categores
@@ -61,7 +78,7 @@ export default function Tournament() {
                       //style={{ display: "flex"}}
                       key={categoresItem.category.id}
                     >
-                      <ListItemButton
+                      <ListItem
                         key={categoresItem.category.id}
                         sx={mainStyles.listItem}
                       >
@@ -70,11 +87,14 @@ export default function Tournament() {
                             <div
                               style={{ display: "flex", flexDirection: "row" }}
                             >
-                              <div className={styles.categoryTitle}>Категория:</div>
+                              <div className={styles.categoryTitle}>
+                                Категория:
+                              </div>
 
                               <div className={styles.categoryName}>
                                 {categoresItem.category.name}
                               </div>
+
                             </div>
 
                             <div
@@ -100,7 +120,7 @@ export default function Tournament() {
                             </div>
                           </div>
                         </div>
-                      </ListItemButton>
+                      </ListItem>
                     </div>
                   ))}
               </List>
@@ -114,14 +134,14 @@ export default function Tournament() {
               justifyContent: "center",
             }}
           >
-            <div style={{ maxWidth: "600px", width: "100%",  display: "flex", flexDirection: "row" }}>
+            <div className={styles.total}>
               <div className={styles.totalTitle}>Итого очков:</div>
-
-              <div className={styles.total}>{rootItem.points}</div>
+              <div className={styles.totalValue}>{rootItem.points}</div>
             </div>
           </div>
         </div>
       ))}
+        </div>
     </div>
   );
 }
