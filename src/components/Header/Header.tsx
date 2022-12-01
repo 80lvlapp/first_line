@@ -35,7 +35,7 @@ export default function Sportsman() {
         
 
         <div>
-          <Button onClick={() => window.location.href = 'http://sportsrating.ru:8080/first-line/admin/'}>
+          <Button onClick={() => window.location.href = 'https://sportsrating.ru:8443/first-line/admin/'}>
             <Avatar src="/broken-image.jpg" />
           </Button>
         </div>

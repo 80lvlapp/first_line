@@ -19,6 +19,9 @@ export default function Tournament() {
     return true;
   };
 
+  console.log(data);
+  
+
 
   return (
     <div className={styles.page}>
@@ -32,7 +35,7 @@ export default function Tournament() {
                 <div className={styles.tournamentCardContent}>
 
                   <div className={styles.tournamentName}>
-                    {tournamentItem.tournament.name}
+                    {tournamentItem.name}
                   </div>
 
                   <div className={styles.characteristicsTournament}>
@@ -44,7 +47,7 @@ export default function Tournament() {
                       </div>
 
                       <div className={styles.tournamentVenueValue}>
-                        {tournamentItem.tournament.venue}
+                        {tournamentItem.venue}
                       </div>
 
                     </div>
@@ -56,7 +59,7 @@ export default function Tournament() {
                       </div>
 
                       <div className={styles.tournamentTypeValue}>
-                        {tournamentItem.tournament.type_of_tornament.name}
+                        {tournamentItem.type_of_tornament.name}
                       </div>
                     </div>
 

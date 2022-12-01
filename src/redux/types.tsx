@@ -51,9 +51,15 @@ interface TypeTournament {
 
 interface ElementTournament {
 
-  tournament: Tournament
+  // tournament: Tournament
   categores: Categores
   point: number
+  id: string
+  name: string
+  begin_date_tournament: string
+  end_date_tournament: string
+  venue: string
+  type_of_tornament: TypeTournament
 
 }
 
