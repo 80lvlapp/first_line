@@ -30,7 +30,8 @@ interface Tournament {
 
   id: string
   name: string
-  date_tournament: string
+  begin_date_tournament: string
+  end_date_tournament: string
   venue: string
   type_of_tornament: TypeTournament
 
