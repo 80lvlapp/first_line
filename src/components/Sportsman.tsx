@@ -200,7 +200,7 @@ export default function Sportsman() {
                           fontSize: 15,
                         }}
                       >
-                        {item.tournament.date_tournament}
+                        {item.tournament.begin_date_tournament}
                       </div>
                       <div
                         style={{
