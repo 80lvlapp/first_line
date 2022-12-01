@@ -1,9 +1,45 @@
-.tournamentMain{
-  display: flex;
-  justify-Content: center;
-  padding-left: 20px;
-  padding-right: 20px;
+.page{
+  display: flex; 
+  justify-Content: center; 
 }
+.content {
+  width: 100%;
+  max-width: 600px;
+}
+.tournamentContent{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  }
+
+.tournamentCard{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.tournamentCardContent{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #FFFFFF;
+  padding:  3px;
+  min-height: 70px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  width: 100%;
+}
+
+.characteristicsTournament{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 100%;
+}
+
 .tournamentColumn {
   max-width: 600px;
   min-Height: 70px;
@@ -15,96 +51,123 @@
   border-radius: 10px;
 }
 .tournamentName{
-  margin-top: 20px;
-  margin-bottom: 5px;
-  margin-left: 20;
-  margin-right: 10;
-  color: #625D8E;
+  text-align: center;
+  color: black;
   font-family: inherit;
-  font-size: 21;
-  font-weight: bold;
+  font-size: 30px;
 }
+
 .tournamentVenue {
-  margin-left: 20;
-  margin-right: 10;
-  color: "#7F7F7F";
-  font-family: "inherit";
-  font-size: 18;
+  color: #719A70;
+  font-size: 15;
+  margin-left: 5;
 }
 
 .tournamentType {
-  margin-bottom: "20px";
-  margin-left: 20;
-  margin-right: 10;
-  color: "#7F7F7F";
-  font-family: "inherit";
-  font-size: 18;
+  display: flex;
+  flex-direction: row;
+  column-gap: 2px;
+}
+
+.tournamentVenue {
+  display: flex;
+  flex-direction: row;
+  column-gap: 2px;
+}
+
+.tournamentTypeTitle {
+  color: #7F7F7F;
+  font-size: 15;
+}
+
+.tournamentTypeValue {
+  color: #719A70;
+  font-size: 15;
+}
+
+.tournamentVenueTitle {
+  color: #7F7F7F;
+  font-size: 15;
+}
+
+.tournamentVenueValue {
+  color: #719A70;
+  font-size: 15;
 }
 
 .categoryRow{
   display: flex;
   flex-direction: row;
   align-items: center;
+  width: 100%;
 }
 
 .categoryColumn {
   display: flex;
   flex-direction: column;
   justify-content: center; 
-  margin-left: 20px;
+  width: inherit;
 }
 
 .categoryTitle{
+  width: 30%;
   color: #7F7F7F;
   font-weight: "bold";
   font-size: 15;
 }
 
 .categoryName{
+  width: 60%;
   color: #719A70;
-  font-weight: bold;
   font-size: 15;
-  margin-left: 5;
 }
 
 .categoryPlaceTitle{
+  width: 30%;
   color: #7F7F7F;
-  font-weight: bold;
   font-size: 15;
 }
 
 .categoryPlace{
   color: #719A70;
-  font-weight: bold;
   font-size: 15;
-  margin-left: 5;
+  width: 30%;
 }
 
 .categoryPointsTitle{
   color: #7F7F7F;
   font-weight: bold;
   font-size: 15;
+  width: 30%;
 }
 
 .categoryPoints{
   color: #719A70;
   font-weight: bold;
   font-size: 15;
-  margin-left: 5;
+  width: 70%;
+}
+
+.total{
+  margin-top: 20px;
+  max-width: 600px;
+  display: flex;
+  flex-direction: row;
+  background: #FFFFFF;
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  align-items: center;
 }
 
 .totalTitle{
-  padding-left: 20;
-  color: #625D8E;
+  color: black;
   font-family: inherit;
-  font-size: 21;
-  font-weight: bold;
+  font-size: 30px;
 }
 
-.total {
-  margin-left: 5;
+.totalValue {
   color: #719A70;
   font-family: inherit;
-  font-size: 21;
-  font-weight: bold;
+  font-size: 30px;
 }

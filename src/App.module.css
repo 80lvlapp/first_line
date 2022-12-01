@@ -1,0 +1,12 @@
+.app {
+  background-color: #f7f8fc;
+  height: 110vh; 
+  overflow: hidden;
+  padding-left: 7px;
+  padding-right: 7px;
+  background-image: url(./photo.png);
+  padding-top: 20px;
+ 
+  background-size: cover; /* Фон занимает всю доступную площадь */
+
+}
