@@ -54,6 +54,9 @@ export default function Sportsman() {
       </div>);
   }
 
+  console.log(data);
+  
+
   return (
     <>
   
@@ -127,12 +130,12 @@ export default function Sportsman() {
                 <div
                  style={{ display: "flex", justifyContent: "center" }}
                   // style={{ display: "flex"}}
-                  key={item.tournament.id}
+                  key={item.id}
                 >
                   <ListItemButton
-                    key={item.tournament.id}
+                    key={item.id}
                      onClick={(event) => {
-                      openTournament(rootItem.sportsman, item.tournament);
+                      openTournament(rootItem.sportsman, item);
                     }}
 
                     sx={mainStyles.listItem}
@@ -151,7 +154,7 @@ export default function Sportsman() {
                           fontSize: 15,
                         }}
                       >
-                        {item.tournament.begin_date_tournament}
+                        {item.begin_date_tournament}
                       </div>
                       <div
                         style={{
@@ -168,10 +171,10 @@ export default function Sportsman() {
                             fontSize: 22,
                           }}
                         >
-                          {item.tournament.name}
+                          {item.name}
                         </div>
                         <div style={{ color: "#7F7F7F", fontSize: 12 }}>
-                          {item.tournament.venue}
+                          {item.venue}
                         </div>
                         <div
                           style={{
