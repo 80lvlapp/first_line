@@ -11,10 +11,12 @@ import styles from "./App.module.css";
 function App() {
 
   return (
-    <>
+    <div className={styles.app}>
    {/* <Drawer />*/}
     <Header/>
-    <div className={styles.app}>
+    
+    <div className={styles.content}>
+    
         <Routes>
       
           <Route path="/" element={<Schools />} />
@@ -23,9 +25,10 @@ function App() {
           <Route path="/AthletesRating/:idS/Sportsman/:idSp/:startDate/:endDate/Tournament/:idT" element={<Tournament />} />
         </Routes>
         </div>
-        </>
 
-  
+        </div>
+
+
 
 
   );
