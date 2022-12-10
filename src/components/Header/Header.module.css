@@ -1,11 +1,13 @@
 .header {
     background: #FF3333;
-    position: relative;
+    min-width: 100vh;
     color: white;
-    font-size: 24px;
-    height: 64px;
-    padding-left: 20px;
-    padding-right: 20px;
+    position: fixed;  
+    top: 0;  
+    z-index: 100; 
+    width: 100%;  
+    padding: 5px;
+    
   }
 
   .headerContent {
