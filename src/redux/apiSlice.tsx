@@ -7,7 +7,10 @@ import { School, Rating, RatingSportsman, RatingTournament } from './types'
 export const api = createApi({
   reducerPath: 'api',
   //baseQuery: fetchBaseQuery({ baseUrl: 'https://virtserver.swaggerhub.com/80lvlapp/FirstLine/1.0.0/' }),
-  baseQuery: fetchBaseQuery({ baseUrl: 'https://sportsrating.ru:8443/first-line/api/v1/' }),
+  //baseQuery: fetchBaseQuery({ baseUrl: 'https://sportsrating.ru:8443/first-line/api/v1/' }),
+  //baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:8000/api/v1/' }),
+  //baseQuery: fetchBaseQuery({ baseUrl: 'http://sportsrating.ru:8888/index_api.php/api/v1/'}),
+  baseQuery: fetchBaseQuery({ baseUrl: 'https://sportsrating.ru:8889/index_api.php/api/v1/'}),
   
   endpoints: (builder) => ({
     getSchools: builder.query<School[], String>({
